@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Respiratory</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion:
+            "The following is positive in a healthy individual breathing spontaneously:",
+          answers: {
+            answer1: "Alveolar pressure during expiration ",
+            answer2: "Alveolar pressure during inspiration ",
+            answer3: "Intrapleural pressure during expiration ",
+            answer4: "Intrapleural pressure during inspiration",
+          },
+        },
+        qustionHolder2: {
+          qustion:
+            "The maximal amount of gas that can be exhaled after a full inspiration is:",
+          answers: {
+            answer1: "Vital capacity ",
+            answer2: "Expiratory reserve volume ",
+            answer3: "Functional residual capacity ",
+            answer4: "Total lung capacity ",
+          },
+        },
+        qustionHolder3: {
+          qustion:
+            "The volume moved in and out of the lungs in 1 minute by voluntary effort is:",
+          answers: {
+            answer1: "Maximal voluntary ventilation ",
+            answer2: "Respiratory minute volume ",
+            answer3: "Minute ventilation",
+            answer4: "Vital capacity ",
+          },
+        },
+        qustionHolder4: {
+          qustion:
+            "The following muscle does not contract during forced expiration:",
+          answers: {
+            answer1: "External intercostals ",
+            answer2: "Internal intercostals ",
+            answer3: "Rectus abdominis ",
+            answer4: "Transversus abdominus ",
+          },
+        },
+        qustionHolder5: {
+          qustion: "During resuscitation, the oxygen concentration is:",
+          answers: {
+            answer1: "28% ",
+            answer2: "21% ",
+            answer3: "35% ",
+            answer4: "16% ",
+          },
+        },
+        qustionHolder6: {
+          qustion: "The following can not be determined by spirometry:",
+          answers: {
+            answer1: "Functional residual capacity",
+            answer2: "Vital capacity ",
+            answer3: "Inspiratory capacity ",
+            answer4: "Expiratory reserve volume ",
+          },
+        },
+        qustionHolder7: {
+          qustion: "Functional residual capacity can be determined using:",
+          answers: {
+            answer1: "Helium dilution method",
+            answer2: "Routine spirometry ",
+            answer3: "Computerized spirometry ",
+            answer4: "All of the above ",
+          },
+        },
+        qustionHolder8: {
+          qustion: "Anatomical dead space is determined using:",
+          answers: {
+            answer1: "Singlebreath nitrogen curve ",
+            answer2: "Whole body plethysmography ",
+            answer3: "Spirometry ",
+            answer4: "Single-breath CO method ",
+          },
+        },
+        qustionHolder9: {
+          qustion:
+            "Physiological dead space ventilation is decreased in during:",
+          answers: {
+            answer1: "Neck flexion",
+            answer2: "Upright position compared to supine position ",
+            answer3: "Positive pressure ventilation ",
+            answer4: "Emphysema ",
+          },
+        },
+        qustionHolder10: {
+          qustion: "During tidal inspiration , air flow velocity is least in:",
+          answers: {
+            answer1: "Bronchioles",
+            answer2: "Nasopharynx ",
+            answer3: "Trachea ",
+            answer4: "Major bronchi ",
+          },
+        },
+        qustionHolder11: {
+          qustion: "The major area of airway resistance during breathing is:",
+          answers: {
+            answer1: "Intermediatesized bronchi",
+            answer2: "Oropharynx ",
+            answer3: "Trachea and large bronchi ",
+            answer4: "Bronchioles < 2mm in diameter",
+          },
+        },
+        qustionHolder12: {
+          qustion: "Intrapleural pressure is normally negative because:",
+          answers: {
+            answer1: "Chest wall and lungs recoil in opposite directions ",
+            answer2: "Intrapulmonary pressure is always negative ",
+            answer3: "Surfactant prevents lung collapse",
+            answer4: "Transpulmonary pressure determines the negativity ",
+          },
+        },
+        qustionHolder13: {
+          qustion: "Intrapleural pressure is positive during:",
+          answers: {
+            answer1: "Forced expiration",
+            answer2: "Deep inspiration ",
+            answer3: "Tidal expiration",
+            answer4: "Tidal inspiration ",
+          },
+        },
+        qustionHolder14: {
+          qustion: "The major constituent of surfactant is:",
+          answers: {
+            answer1: "Dipalmitoyl phosphatidyl choline ",
+            answer2: "Neutral lipid ",
+            answer3: "Phosphatidylglycerol ",
+            answer4: "Surfactant proteins A & D. ",
+          },
+        },
+        qustionHolder15: {
+          qustion: "Alveolar surfactant:",
+          answers: {
+            answer1: "Reduces surface tension of alveoli ",
+            answer2: "Enhances alveolar collapse ",
+            answer3:
+              "Increases the movement of fluid from pulmonary capillaries into interstitium ",
+            answer4:
+              "Increases the movement of fluid from interstitium into pulmonary capillaries ",
+          },
+        },
+        qustionHolder16: {
+          qustion: "The following produces bronchodilation:",
+          answers: {
+            answer1: "Epinephrine ",
+            answer2: "Histamine ",
+            answer3: "Leukotriene C₁ ",
+            answer4: "Platelet activating factor ",
+          },
+        },
+        qustionHolder17: {
+          qustion: "Bronchodilation is mediated by activation of:",
+          answers: {
+            answer1: "B₂ adrenoceptors ",
+            answer2: "a₂ receptors ",
+            answer3: "a1 receptors ",
+            answer4: "M₂ receptors",
+          },
+        },
+        qustionHolder18: {
+          qustion: "The following produces bronchoconstriction? ",
+          answers: {
+            answer1: "Platelet activating factor ",
+            answer2: "Vasoactive intestinal peptide (VIP) ",
+            answer3: "B₂ adrenoceptors ",
+            answer4: "Epinephrine ",
+          },
+        },
+        qustionHolder19: {
+          qustion:
+            "In bronchial asthma, the most sensitive index of small airways resistance is:",
+          answers: {
+            answer1: "Maximum miexpiratory flow rate ",
+            answer2: "Vital capacity ",
+            answer3: "C – FEV1/ FVC ",
+            answer4: "Peak expiratory flow rate ",
+          },
+        },
+        qustionHolder20: {
+          qustion: "In advanced emphysema, there is:",
+          answers: {
+            answer1: "Increased FRC ",
+            answer2: "Decreased RV ",
+            answer3: "Increased VC ",
+            answer4: "Decreased TLC ",
+          },
+        },
+        qustionHolder21: {
+          qustion: "In restrictive lung disease , breathing type is typically:",
+          answers: {
+            answer1: "Rapid and shallow ",
+            answer2: "Slow and shallow ",
+            answer3: "Slow and deep ",
+            answer4: "Rapid and deep ",
+          },
+        },
+        qustionHolder22: {
+          qustion:
+            "Activated to potent vasoconstrictor during its passage through the lungs:",
+          answers: {
+            answer1: "Angiotensin I.",
+            answer2: "Prostaglandin I.",
+            answer3: "Serotonin ",
+            answer4: "Histamine ",
+          },
+        },
+        qustionHolder23: {
+          qustion: "Apneusis occurs typically after:",
+          answers: {
+            answer1: "Damage to phrenic motor neurons ",
+            answer2: "Damage to pneumotaxic center",
+            answer3: "Lesions of pneumotaxic center and vagotomy ",
+            answer4: "Denervation of peripheral chemoreceptors ",
+          },
+        },
+        qustionHolder24: {
+          qustion:
+            "Normally, the major stimulus for spontaneous respiration is: ",
+          answers: {
+            answer1: "A. CO₂",
+            answer2: "D. HCO",
+            answer3: "C. Lactate ",
+            answer4: "Fall of PO₂ ",
+          },
+        },
+        qustionHolder25: {
+          qustion: "Medullary chemoreceptors are chiefly stimulated by:",
+          answers: {
+            answer1: "Increased H+ in the brain interstitial fluid ",
+            answer2: "Decreased PCO₂ ",
+            answer3: "All of the above ",
+            answer4: "Fall of PO2",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Following removal of both carotid bodies:",
+          answers: {
+            answer1: "Breath holding time is increased",
+            answer2: "Ventilatory response to hypoxia is increased ",
+            answer3: "Ventilatory response to CO₂ is increased ",
+            answer4: "Breath holding time is decreased ",
+          },
+        },
+        qustionHolder27: {
+          qustion: "J receptors are located in:",
+          answers: {
+            answer1: "Pulmonary interstitium",
+            answer2: "Alveoli ",
+            answer3: "Bronchial mucosa ",
+            answer4: "Roof of the fourth ventricle ",
+          },
+        },
+        qustionHolder28: {
+          qustion: "Stimulation of J receptors results in:",
+          answers: {
+            answer1: "Hyperpnea ",
+            answer2: "Apnea ",
+            answer3: "Tachypnea ",
+            answer4: "Apenea followed by tachypnea",
+          },
+        },
+        qustionHolder29: {
+          qustion:
+            "The following is the least important in the regulation of breathing at rest:",
+          answers: {
+            answer1: "Hering-Breuer reflexes",
+            answer2: "Medullary chemoreceptors ",
+            answer3: "Carotid and aortic bodies ",
+            answer4: "None of the above",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 27) {
+        var r = Math.floor(Math.random() * 27) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            nextBtn.click();
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

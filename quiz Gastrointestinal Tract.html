@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Gastrointestinal Tract</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion:
+            "Has the highest concentration in saliva under basal conditions?",
+          answers: {
+            answer1: "Bicarbonate  ",
+            answer2: "Chloride ",
+            answer3: "Sodium ",
+            answer4: "Potassium pancreas ",
+          },
+        },
+        qustionHolder2: {
+          qustion: "The proenzyme pepsinogen is secreted mainly from:",
+          answers: {
+            answer1: "Gastric glands of the stomach  ",
+            answer2: "Ductal cells of the",
+            answer3: "Acinar cells of the pancreas ",
+            answer4: "Epithelial cells of the duodenum ",
+          },
+        },
+        qustionHolder3: {
+          qustion:
+            "Compared with plasma , saliva has the highest relative concentration of:",
+          answers: {
+            answer1: "Potassium  ",
+            answer2: "Chloride ",
+            answer3: "Bicarbonate",
+            answer4: "Sodium ",
+          },
+        },
+        qustionHolder4: {
+          qustion:
+            "Digestion of the following is impaired in patients with achlorhydria:",
+          answers: {
+            answer1: "Protein  ",
+            answer2: "Carbohydrate ",
+            answer3: "Fat ",
+            answer4: "All of the above ",
+          },
+        },
+        qustionHolder5: {
+          qustion:
+            "The following completely eliminate the cephalic phase of gastric secretion:",
+          answers: {
+            answer1: "Vagotomy ",
+            answer2: "Antigastrin antibody ",
+            answer3: "Antacids ",
+            answer4: "Histamine H₂ blocker  ",
+          },
+        },
+        qustionHolder6: {
+          qustion:
+            "The following is critical for determining size of the swallowed bolus of food:",
+          answers: {
+            answer1: "Palatopharyngeal folds  ",
+            answer2: "Larynx ",
+            answer3: "Epiglottis ",
+            answer4: "Soft palate ",
+          },
+        },
+        qustionHolder7: {
+          qustion:
+            "The substance causes relaxation of the LES and stomach fundus is:",
+          answers: {
+            answer1: "Nitric oxide  ",
+            answer2: "Gastrin ",
+            answer3: "Histamine ",
+            answer4: "Motilin ",
+          },
+        },
+        qustionHolder8: {
+          qustion:
+            "Intravenous feeding leads to atrophy of the gastrointestinal mucosa , due to:",
+          answers: {
+            answer1: "Deficient gastrin only  ",
+            answer2: "Deficient cholecystokinin only ",
+            answer3: "Deficient secretin only ",
+            answer4: "Deficient gastrin and cholecystokinin ",
+          },
+        },
+        qustionHolder9: {
+          qustion:
+            "Causes damage of the mucosal barrier and stimulate gastric acid secretion:",
+          answers: {
+            answer1: "H. pylori  ",
+            answer2: "Bile salts ",
+            answer3: "Gastrin ",
+            answer4: "Epidermal growth factor",
+          },
+        },
+        qustionHolder10: {
+          qustion: "The following has the highest pH:",
+          answers: {
+            answer1: "Pancreatic juice  ",
+            answer2: "Gastric juice ",
+            answer3: "Colonic luminal contents ",
+            answer4: "Saliva ",
+          },
+        },
+        qustionHolder11: {
+          qustion: "Regarding salivary secretion and swallowing:",
+          answers: {
+            answer1:
+              "The pH of saliva rises as its rate of secretion increases  ",
+            answer2:
+              "The food bolus is propelled down to the esophagus by segmentation movements ",
+            answer3: "Swallowing is a purely voluntary activity ",
+            answer4:
+              "Hormones are more important than nerves in the regulation of salivary secretion",
+          },
+        },
+        qustionHolder12: {
+          qustion: "Regarding the control of gastric secretion:",
+          answers: {
+            answer1:
+              "Gastric acid is secreted by parietal cells in response to hormonal stimulation  ",
+            answer2:
+              "Most of the secretion of acid and pepsinogen occurs during the intestinal phase ",
+            answer3:
+              "Gastric secretion does not begin until food enters the stomach",
+            answer4:
+              "Secretin secreted by the duodenum stimulates gastric secretion ",
+          },
+        },
+        qustionHolder13: {
+          qustion: "Regarding gastric motility:",
+          answers: {
+            answer1:
+              "Gastric emptying is inhibited by the enterogastric reflex  ",
+            answer2:
+              "The antral region of the stomach is important for the storage of food ",
+            answer3:
+              "Contractions of the stomach wall do not begin until food enters the stomach ",
+            answer4:
+              "The contractions of the stomach depend on activity in the vagus nerve ",
+          },
+        },
+        qustionHolder14: {
+          qustion: "Regarding gastro-intestinal function:",
+          answers: {
+            answer1: "Total gastrectomy leads to malabsorption of vitamin B12",
+            answer2:
+              "Presence of large amounts of fat in the chyme will accelerate gastric emptying ",
+            answer3: "Distension of the ileum stimulates gastric motility ",
+            answer4:
+              "Aldosterone inhibits the absorption of sodium and water by the large intestine ",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "Parasympathetic supply of the GIT smooth muscle are located in:",
+          answers: {
+            answer1: "Myenteric plexus ",
+            answer2: "Submucosal plexus ",
+            answer3: "Prevertebral ganglia ",
+            answer4: "Paravertebral ganglia ",
+          },
+        },
+        qustionHolder16: {
+          qustion: 'The term " brain of the gut " is refer to: ',
+          answers: {
+            answer1: "Enteric nervous system ",
+            answer2: "Autonomic ganglia ",
+            answer3: "Interstitial cells of Cajal ",
+            answer4: "Migratory motor complex ",
+          },
+        },
+        qustionHolder17: {
+          qustion:
+            "The following inhibits gastric acid secretion by acting on the parietal cell:",
+          answers: {
+            answer1: "Prostaglandin E.  ",
+            answer2: "Acetylcholine ",
+            answer3: "Histamine ",
+            answer4: "Gastrin ",
+          },
+        },
+        qustionHolder18: {
+          qustion:
+            "Vagus enhances gastric acid secretion is partly mediated by:",
+          answers: {
+            answer1: "Gastrin releasing peptide ( GRP )  ",
+            answer2: "Vasoactive intestinal polypeptide ( VIP )",
+            answer3: "Somatostatin",
+            answer4: "Gastrin inhibitory peptide ( GIP )",
+          },
+        },
+        qustionHolder19: {
+          qustion: "The ' postprandial alkaline tide ' is abolished by:",
+          answers: {
+            answer1: "Total inhibition of gastric H +K + ATPase  ",
+            answer2: "Gastrin",
+            answer3: "Antrectomy ",
+            answer4: "Parietal cell vagotomy ",
+          },
+        },
+        qustionHolder20: {
+          qustion: "The optimum pH for the activity of pepsin is:",
+          answers: {
+            answer1: "Less than 1",
+            answer2: "Between 3 and 5",
+            answer3: "Between 6 and 7",
+            answer4: "Between 1.6 and 3.2",
+          },
+        },
+        qustionHolder21: {
+          qustion: "Released by the stomach into the systemic circulation:",
+          answers: {
+            answer1: "Gastrin  ",
+            answer2: "Ghrelin ",
+            answer3: "Pepsinogen",
+            answer4: "Secretin",
+          },
+        },
+        qustionHolder22: {
+          qustion: "Gastric emptying is slowest after a meal containing:",
+          answers: {
+            answer1: "Fat  ",
+            answer2: "Protein ",
+            answer3: "Carbohydrate",
+            answer4: "Indigestible fiber ",
+          },
+        },
+        qustionHolder23: {
+          qustion:
+            "The following is a bile acid synthesized by the hepatocyte:",
+          answers: {
+            answer1: "Chenodeoxycholic acid ",
+            answer2: "Sodium taurocholate",
+            answer3: "Lithocholic acid ",
+            answer4: "Deoxycholic acid ",
+          },
+        },
+        qustionHolder24: {
+          qustion: "Bile acids are synthesized from:",
+          answers: {
+            answer1: "Cholesterol ",
+            answer2: "Fatty acids ",
+            answer3: "Lecithin",
+            answer4: "Bile salts",
+          },
+        },
+        qustionHolder25: {
+          qustion:
+            "Bile salts are essential for absorption of fat because they:",
+          answers: {
+            answer1: "Solubilize dietary lipids in micelles ",
+            answer2: "Increase surface tension ",
+            answer3: "Contain pancreatic enzymes ",
+            answer4: "Are hydrophobic ",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Physiologically, the most important choleretic is:",
+          answers: {
+            answer1: "Bile salts  ",
+            answer2: "Secretin ",
+            answer3: "Gastrin ",
+            answer4: "CCK ",
+          },
+        },
+        qustionHolder27: {
+          qustion: "Removal of the liver is fatal because:",
+          answers: {
+            answer1: "Clotting time is prolonged ",
+            answer2: "Jaundice develops ",
+            answer3: "Blood urea rises ",
+            answer4: "Progressive hypoglycemia occurs ",
+          },
+        },
+        qustionHolder28: {
+          qustion:
+            "The major mediator of gall bladder contraction in response to a fat is:",
+          answers: {
+            answer1: "CCK ",
+            answer2: "Gastrin ",
+            answer3: "Secretin ",
+            answer4: "Somatostatin ",
+          },
+        },
+        qustionHolder29: {
+          qustion: "Activation of the salivary sympathetic nerves:",
+          answers: {
+            answer1: "Squeeze the myoepithelial cells  ",
+            answer2: "Stimulates true salivary secretion ",
+            answer3: "Inhibits trophic salivary secretion ",
+            answer4: "None of the above ",
+          },
+        },
+        qustionHolder30: {
+          qustion: "The myenteric plexus:",
+          answers: {
+            answer1: "Lies between muscle fibers and controls GIT motility ",
+            answer2: "Lies in-between submucosa and controls GIT motility ",
+            answer3: "Lies between muscle fibers and controls GIT secretions ",
+            answer4: "Lies in-between submucosa and controls GIT secretions",
+          },
+        },
+        qustionHolder31: {
+          qustion: "The enteric nervous system is innervated by:",
+          answers: {
+            answer1: "Postganglionic parasympathetic fibers",
+            answer2: "Preganglionic sympathetic fibers ",
+            answer3: "Preganglionic parasympathetic fibers",
+            answer4: "Post ganglion sympathetic fibers  ",
+          },
+        },
+        qustionHolder32: {
+          qustion: "Parietal cells of the gastric glands secrete:",
+          answers: {
+            answer1: "HCI and intrinsic factor ",
+            answer2: "HCI and mucus ",
+            answer3: "HCl and proreolytic enzymes ",
+            answer4: "Intrinsic factor and mucus ",
+          },
+        },
+        qustionHolder33: {
+          qustion: "Enzymes that digest fats are known as:",
+          answers: {
+            answer1: "Lipase ",
+            answer2: "Trypsin ",
+            answer3: "Maltase",
+            answer4: "Fatase",
+          },
+        },
+        qustionHolder34: {
+          qustion: "An enzyme formed in the mouth:",
+          answers: {
+            answer1: "Amylase  ",
+            answer2: "Maltase ",
+            answer3: "Fatase ",
+            answer4: "Starch ",
+          },
+        },
+        qustionHolder35: {
+          qustion: "Mechanical breakdown of food occurs by:",
+          answers: {
+            answer1: "Chewing  ",
+            answer2: "peristalsis",
+            answer3: "Hydrochloric acid ",
+            answer4: "Pepsin ",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 35) {
+        var r = Math.floor(Math.random() * 35) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            nextBtn.click();
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

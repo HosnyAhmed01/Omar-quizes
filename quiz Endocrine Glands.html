@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Endocrine Glands</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion: "The term ' neurohormone ' is applied to:",
+          answers: {
+            answer1: "Oxytocin and vasopressin ",
+            answer2: "NO and CO  ",
+            answer3: "FSH and LH ",
+            answer4: "Glycine and glutamate ",
+          },
+        },
+        qustionHolder2: {
+          qustion:
+            "The following hormones does not act through Gprotein coupled receptors:",
+          answers: {
+            answer1: "Epinephrine ",
+            answer2: "Thyroxine ",
+            answer3: "ACTH ",
+            answer4: "Angiotensin II ",
+          },
+        },
+        qustionHolder3: {
+          qustion: "Their actions are mediated by receptor tyrosine kinases:",
+          answers: {
+            answer1: "Angiotensin II, ANP and ETI ",
+            answer2: "EDRF, ANP and AVP ",
+            answer3: "Insulin, EGF, IGF1, PDGF",
+            answer4: "FSH, LH and GHRH ",
+          },
+        },
+        qustionHolder4: {
+          qustion: "JAK-STAT pathways mediate the effects of:",
+          answers: {
+            answer1: "Growth hormone  ",
+            answer2: "Aquaporins ",
+            answer3: "Transducin",
+            answer4: "Gusducins ",
+          },
+        },
+        qustionHolder5: {
+          qustion: ". The following hormones is not a glycoprotein?",
+          answers: {
+            answer1: "TRH  ",
+            answer2: "FSH ",
+            answer3: "HCG ",
+            answer4: "LH ",
+          },
+        },
+        qustionHolder6: {
+          qustion:
+            "Glycoprotein hormones has a and ß subunit and produced by the pituitary:",
+          answers: {
+            answer1: "TSH , LH and FSH ",
+            answer2: "FSH , LH and TRH ",
+            answer3: "TRH , ACTH and LH ",
+            answer4: "GH , TSH and LH ",
+          },
+        },
+        qustionHolder7: {
+          qustion:
+            "Histamine stimulates the secretion of HCI by parietal cells through:",
+          answers: {
+            answer1: "Paracrine signals  ",
+            answer2: "Endocrine signals ",
+            answer3: "Autocrine signals ",
+            answer4: "Juxtacrine signals ",
+          },
+        },
+        qustionHolder8: {
+          qustion: "The following has the longest biologic half-life:",
+          answers: {
+            answer1: "Thyroxine  ",
+            answer2: "Insulin ",
+            answer3: "Angiotensin II ",
+            answer4: "Glucagon ",
+          },
+        },
+        qustionHolder9: {
+          qustion:
+            "The most abundant cell type in the islets of Langerhans is:",
+          answers: {
+            answer1: "B cells ",
+            answer2: "A cells ",
+            answer3: "D cells ",
+            answer4: "F cells ",
+          },
+        },
+        qustionHolder10: {
+          qustion:
+            "Insulin secretion from β cells of the pancreas is inhibited by:",
+          answers: {
+            answer1: "Activation of alpha-adrenergic receptors ",
+            answer2: "Activation of bet",
+            answer3: "adrenergic receptors ",
+            answer4: "Acetylcholine ",
+          },
+        },
+        qustionHolder11: {
+          qustion: "The following is a potent stimulator of insulin secretion:",
+          answers: {
+            answer1: "Glucagon like polypeptide-1 (GLP-1) ",
+            answer2: "Glucagon ",
+            answer3: "VIP  ",
+            answer4: "Leptin ",
+          },
+        },
+        qustionHolder12: {
+          qustion:
+            "Insulin dependent glucose uptake into skeletal muscle and adipose tissue is:",
+          answers: {
+            answer1: "Mainly mediated by GLUT 4  ",
+            answer2: "Mainly mediated by GLUT 2",
+            answer3: "Mainly mediated by GLUT 3 ",
+            answer4: "Mainly mediated by GLUT 1",
+          },
+        },
+        qustionHolder13: {
+          qustion:
+            "Insulin secretion in response to a glucose load is mediated by:",
+          answers: {
+            answer1: "GLUT 2",
+            answer2: "GLUT 3  ",
+            answer3: "GLUT 1",
+            answer4: "GLUT 4",
+          },
+        },
+        qustionHolder14: {
+          qustion:
+            "Dealing with diabetic ketoacidosis, glucose is administered with insulin to:",
+          answers: {
+            answer1: "complete oxidation of ketone bodies  ",
+            answer2: "Allow replenishing muscle glycogen ",
+            answer3: "Allow normalization of plasma K. ",
+            answer4: "Allow reduction of plasma osmolality ",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "The following condition increases the risk of fasting hypoglycemia:",
+          answers: {
+            answer1: "Adrenocortical insufficiency  ",
+            answer2: "Hyperglucagonemia ",
+            answer3: "Acromegaly ",
+            answer4: "Severe hypoparathyroidism ",
+          },
+        },
+        qustionHolder16: {
+          qustion:
+            "The following tissue does not requires insulin for glucose uptake:",
+          answers: {
+            answer1: "RBCs  ",
+            answer2: "WBCs ",
+            answer3: "Adipose tissue ",
+            answer4: "Skeletal muscle ",
+          },
+        },
+        qustionHolder17: {
+          qustion: "The hormone of energy storage is:",
+          answers: {
+            answer1: "Insulin ",
+            answer2: "Growth hormone ",
+            answer3: "Thyroxine ",
+            answer4: "Glucagon ",
+          },
+        },
+        qustionHolder18: {
+          qustion: "The following is a diabetogenic hormone:",
+          answers: {
+            answer1: "Glucagon ",
+            answer2: "Insulin ",
+            answer3: "Oxytocin ",
+            answer4: "ADH",
+          },
+        },
+        qustionHolder19: {
+          qustion: "Glucagon in high concentrations facilitates:",
+          answers: {
+            answer1: "Muscle glycogenolysis  ",
+            answer2: "Lipogenesis ",
+            answer3: "Pancreatic digestive juice ",
+            answer4: "Hepatic glycogenesis ",
+          },
+        },
+        qustionHolder20: {
+          qustion: "The serum calcium level:",
+          answers: {
+            answer1: "Greatly affects neuromuscular excitability  ",
+            answer2: "Becomes less ionized when the blood pH falls ",
+            answer3: "Normally about 30mg %",
+            answer4: "Enhances PTH secretion by acting on the hypothalamus ",
+          },
+        },
+        qustionHolder21: {
+          qustion:
+            "The most sensitive test of pancreatic ß-cell insulin secretory reserve is:",
+          answers: {
+            answer1: "Oral glucose tolerance test  ",
+            answer2: "Fasting plasma glucose ",
+            answer3: "Random blood glucose ",
+            answer4: "Urine glucose excretion ",
+          },
+        },
+        qustionHolder22: {
+          qustion: "The following increases insulin / glucagon molar ratio:",
+          answers: {
+            answer1: "A large carbohydrate meal  ",
+            answer2: "Intravenous glucose",
+            answer3: "A small protein meal ",
+            answer4: "Overnight fast Ende ",
+          },
+        },
+        qustionHolder23: {
+          qustion: "Hypoglycemia does not stimulate the secretion of:",
+          answers: {
+            answer1: "Insulin  ",
+            answer2: "Cortisol ",
+            answer3: "Epinephrine ",
+            answer4: "Growth hormone ",
+          },
+        },
+        qustionHolder24: {
+          qustion: "The satiety-producing hormone is:",
+          answers: {
+            answer1: "Resistin  ",
+            answer2: "Orexin ",
+            answer3: "Leptin ",
+            answer4: "Adiponectin ",
+          },
+        },
+        qustionHolder25: {
+          qustion: "One of the following increases insulin resistance:",
+          answers: {
+            answer1: "GH secreting tumor  ",
+            answer2: "Leptin ",
+            answer3: "Adiponectin ",
+            answer4: "Low body fat ",
+          },
+        },
+        qustionHolder26: {
+          qustion:
+            "Delivery of 5 kg baby in diabetic woman , is most closely related to:",
+          answers: {
+            answer1: "Elevated levels of fetal insulin ",
+            answer2: "Passage of maternal insulin into the fetus ",
+            answer3: "Uteroplacental insufficiency ",
+            answer4: "Hyperglycemia in the mother ",
+          },
+        },
+        qustionHolder27: {
+          qustion: "Potassium uptake is enhanced by:",
+          answers: {
+            answer1: "Insulin  ",
+            answer2: "Parathyroid hormones ",
+            answer3: "Parasympathetic stimulation ",
+            answer4: "adrenergic receptor activation ",
+          },
+        },
+        qustionHolder28: {
+          qustion: "Somatostatin inhibits the secretion of:",
+          answers: {
+            answer1: "Glucagon  ",
+            answer2: "Prolactin ",
+            answer3: "Vasopressin ",
+            answer4: "Oxytocin ",
+          },
+        },
+        qustionHolder29: {
+          qustion:
+            "The following organelles is a major site of steroidogenesis?",
+          answers: {
+            answer1: "Smooth endoplasmic reticulum  ",
+            answer2: "Peroxisomes ",
+            answer3: "Ribosomes ",
+            answer4: "Rough endoplasmic reticulum ",
+          },
+        },
+        qustionHolder30: {
+          qustion:
+            "A critical hormone for acute regulation of falling ionized calcium level:",
+          answers: {
+            answer1: "Parathyroid hormone  ",
+            answer2: "Calbindin ",
+            answer3: "Calcitonin ",
+            answer4: "Calcitriol",
+          },
+        },
+        qustionHolder31: {
+          qustion: "The major stimulator of parathyroid hormone release is:",
+          answers: {
+            answer1: "Reduced ionized Ca+²  ",
+            answer2: "Vitamin D. ",
+            answer3: "Calcitonin ",
+            answer4: "Reduced phosphate concentration ",
+          },
+        },
+        qustionHolder32: {
+          qustion: "Its deficiency is not known affect ionized calcium level:",
+          answers: {
+            answer1: "Calcitonin  ",
+            answer2: "Parathyroid hormone ",
+            answer3: "Calcitriol ",
+            answer4: "Calcium sensing receptor",
+          },
+        },
+        qustionHolder33: {
+          qustion:
+            "Before surgery, the following should be checked when calcium level is low:",
+          answers: {
+            answer1: "Serum albumin  ",
+            answer2: "Blood glucose ",
+            answer3: "Serum bilirubin ",
+            answer4: "Oxygen saturation",
+          },
+        },
+        qustionHolder34: {
+          qustion: "Calcitonin inhibits the activity of:",
+          answers: {
+            answer1: "Osteoclasts  ",
+            answer2: "Osteoblasts ",
+            answer3: "Parafollicular cells",
+            answer4: "thyroid ",
+          },
+        },
+        qustionHolder35: {
+          qustion:
+            "Bone resorption is induced by abnormally elevated levels of:",
+          answers: {
+            answer1: "Glucocorticoids ",
+            answer2: "IGF",
+            answer3: "Insulin ",
+            answer4: "Estrogens",
+          },
+        },
+        qustionHolder36: {
+          qustion:
+            "When insulin binds to its receptor, it inhibits the increase of:",
+          answers: {
+            answer1: "Gluconeogenesis in the liver ",
+            answer2: "Fat synthesis in adipose tissue ",
+            answer3: "Glycogen synthesis ",
+            answer4: "Protein synthesis in muscle",
+          },
+        },
+        qustionHolder37: {
+          qustion: "Occurs in the early stages of type 2 diabetes:",
+          answers: {
+            answer1: "Increased plasma levels of peptide  ",
+            answer2: "Increased insulin sensitivity ",
+            answer3: "Decreased hepatic glucose output ",
+            answer4: "Increased plasma ß-hydroxybutyric acid ",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 37) {
+        var r = Math.floor(Math.random() * 37) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            nextBtn.click();
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

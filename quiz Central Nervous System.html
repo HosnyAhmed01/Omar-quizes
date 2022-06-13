@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Central Nervous System</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion: "The central nervous system includes:",
+          answers: {
+            answer1: "Medulla oblongata  ",
+            answer2: "Adrenal medulla ",
+            answer3: "Autonomic ganglia ",
+            answer4: "Peripheral nerves ",
+          },
+        },
+        qustionHolder2: {
+          qustion:
+            "The CNS is connected with the peripheral nervous system by:",
+          answers: {
+            answer1: "Preganglionic autonomic fibers ",
+            answer2: "postganglionic autonomic fibers ",
+            answer3: "Motor fibers only ",
+            answer4: "Sensory fibers only ",
+          },
+        },
+        qustionHolder3: {
+          qustion: "The sensory system is involved in:",
+          answers: {
+            answer1: "Initiation of reflex movements  ",
+            answer2: "PTH secretion ",
+            answer3: "Initiation of voluntary movements ",
+            answer4: "Regulation of calcium level other types of receptors in ",
+          },
+        },
+        qustionHolder4: {
+          qustion: "The two-element sensory receptors differ from ",
+          answers: {
+            answer1: "Specialized cells at sensory nerve terminals  ",
+            answer2: "Being more numerous ",
+            answer3: "More widely spread in the body ",
+            answer4: "Being more sensitive ",
+          },
+        },
+        qustionHolder5: {
+          qustion:
+            "Sensory receptors are classified functionally according to:",
+          answers: {
+            answer1: "The nature of tissues in which they are found  ",
+            answer2: "Their location in the body ",
+            answer3: "The nature of response produced by its activation",
+            answer4: "Their connection with the effector organ ",
+          },
+        },
+        qustionHolder6: {
+          qustion: "Most sensory receptors:",
+          answers: {
+            answer1: "Are stimulated only by specific stimuli  ",
+            answer2: "Are stimulated by different types of stimuli ",
+            answer3: "Possess a high threshold for their specific stimuli",
+            answer4: "Are stimulated by overstimulation of other receptors ",
+          },
+        },
+        qustionHolder7: {
+          qustion: "A specific stimulus produces a receptor potential by:",
+          answers: {
+            answer1: "Inhibiting Na + influx into receptor ",
+            answer2: "Enhancing Na + influx into receptor ",
+            answer3: "Inhibiting K + efflux from receptor ",
+            answer4: "Enhancing K + efflux from receptor  ",
+          },
+        },
+        qustionHolder8: {
+          qustion: "Receptor potential initiated by an adequate stimulus:",
+          answers: {
+            answer1: "Could initiate an action potential  ",
+            answer2: "Develops always at it full magnitudes ",
+            answer3: "Undergoes spatial summation only ",
+            answer4: "Undergoes temporal summation only",
+          },
+        },
+        qustionHolder9: {
+          qustion: "Once initiated, the receptor potential:",
+          answers: {
+            answer1:
+              "Stays for a variable period depending on the type c Central Nervous System of the receptor",
+            answer2:
+              "Spreads to a long distance along the sensory nerve fiber ",
+            answer3:
+              "Amplitude is not related to the strength of the stimulus ",
+            answer4: "Always generates an action potential from the receptor",
+          },
+        },
+        qustionHolder10: {
+          qustion: "Receptor potential generates:",
+          answers: {
+            answer1:
+              "A nerve impulse at the spike initiating region of the receptor ",
+            answer2:
+              "An electrotonic current which is transmitted along sensory fibers to the CNS ",
+            answer3: "A nerve impulse at the receptive region of the receptor ",
+            answer4: "A state of hyperpolarization of the receptor membrane",
+          },
+        },
+        qustionHolder11: {
+          qustion:
+            "When stimulated by effective steady stimuli, sensory receptor is:",
+          answers: {
+            answer1:
+              "Produces an initial high rate of impulse discharge followed by decline of this rate ,  ",
+            answer2: "Continuously discharge impulses ",
+            answer3: "Stop discharging after a short time ",
+            answer4: "Differ in their response ",
+          },
+        },
+        qustionHolder12: {
+          qustion: "Slowly adapting receptors include:",
+          answers: {
+            answer1: "Free nerve endings  ",
+            answer2: "Touch receptors ",
+            answer3: "Rods and cons ",
+            answer4: "Meissner corpuscles ",
+          },
+        },
+        qustionHolder13: {
+          qustion:
+            "Slowly adapting receptors differ from rapidly adapting receptors in:",
+          answers: {
+            answer1:
+              "Generating receptor potentials as long as stimulus is applied  ",
+            answer2:
+              "Stopping to discharge after a relatively longer period of constant stimulation ",
+            answer3: "Detecting the dynamic properties of stimuli ",
+            answer4: "Detecting velocity of stimuli ",
+          },
+        },
+        qustionHolder14: {
+          qustion: "Rapidly adapting receptors are involved in:",
+          answers: {
+            answer1: "Detection of joint movements  ",
+            answer2: "Static reflex responses ",
+            answer3: "Regulation of heart rate ",
+            answer4: "Regulation of hormonal secretion ",
+          },
+        },
+        qustionHolder15: {
+          qustion: "Receptors detect stimulus intensity by:",
+          answers: {
+            answer1:
+              "Generating receptor potentials having higher magnitudes  ",
+            answer2: "Lowering the threshold for receptor stimulation ",
+            answer3:
+              "Generating nerve impulses are transmitted along sensory fibers ",
+            answer4: "Enhancing the central effects of sensory impulses ",
+          },
+        },
+        qustionHolder16: {
+          qustion: "General sensations:",
+          answers: {
+            answer1: "Include the sense of movement  ",
+            answer2: "Originate from all sensory receptors of the body ",
+            answer3: "Are mediated by somatic sensory fibers only ",
+            answer4: "Include the sense of equilibrium",
+          },
+        },
+        qustionHolder17: {
+          qustion: "Detection of the stimulus modality depends upon the:",
+          answers: {
+            answer1:
+              "Anatomical connections between the receptors the cerebral cortex  ",
+            answer2: "Location of the receptors in the body ",
+            answer3: "The magnitude of the receptor potential ",
+            answer4: "Magnitude of the stimulus",
+          },
+        },
+        qustionHolder18: {
+          qustion: "Receptors detect stimulus intensity by:",
+          answers: {
+            answer1: "Raising the magnitude of receptor potential  ",
+            answer2: "Lowering the threshold for stimulating receptors ",
+            answer3: "Raising the threshold for stimulating receptors ",
+            answer4: "Decreasing the magnitude of receptor potential ",
+          },
+        },
+        qustionHolder19: {
+          qustion: "The ability to localize the site of stimuli depends upon:",
+          answers: {
+            answer1: "Connections between the receptor and the sensory cortex ",
+            answer2: "Type of the stimulated receptor ",
+            answer3: "Rate of adaptation of the stimulated receptors ",
+            answer4: "Nature of the stimulus ",
+          },
+        },
+        qustionHolder20: {
+          qustion: "Touch receptors:",
+          answers: {
+            answer1: "Are stimulated by vibration  ",
+            answer2: "Are found only in the skin ",
+            answer3: "Are all encapsulated receptors ",
+            answer4: "Include two-element receptors ",
+          },
+        },
+        qustionHolder21: {
+          qustion: "Tactile receptors include:",
+          answers: {
+            answer1: "Ruffini nerve endings ",
+            answer2: "Organ of corti ",
+            answer3: "Rods and cons ",
+            answer4: "hair cell receptors ",
+          },
+        },
+        qustionHolder22: {
+          qustion: ". Rapidly adapting tactile receptors include:",
+          answers: {
+            answer1: "Pacinian corpuscles ",
+            answer2: "Merkel discs ",
+            answer3: "Free nerve endings ",
+            answer4: "Muscle spindle ",
+          },
+        },
+        qustionHolder23: {
+          qustion: "Fine touch is:",
+          answers: {
+            answer1: "Detected by slowly adapting touch receptors  ",
+            answer2: "Transmitted by the spinothalamic tract ",
+            answer3: "Characterized by it emotional affect ",
+            answer4: "Not involved in feeling the texture of touched objects ",
+          },
+        },
+        qustionHolder24: {
+          qustion:
+            ". Crude touch is more effective in evoking emotional response because:",
+          answers: {
+            answer1: "Its central pathway connects with the limbic system  ",
+            answer2: "Its provoking stimuli are stronger ",
+            answer3: "It is stimulated during emotional excitement ",
+            answer4: "The provoking stimuli have an emotional nature ",
+          },
+        },
+        qustionHolder25: {
+          qustion: "A more developed two-point tactile discrimination:",
+          answers: {
+            answer1: "Inversely related to the size of the receptive fields ",
+            answer2:
+              "Indicates a greater threshold distance for feeling of two points ",
+            answer3:
+              "Seen in the proximal regions of the body compared with the distal regions ",
+            answer4: "Depends upon the type of the involved touch receptor ",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Proprioceptive sensations include:",
+          answers: {
+            answer1: "Position sensation  ",
+            answer2: "Visual sensation ",
+            answer3: "Hearing sensation",
+            answer4: "Taste sensation",
+          },
+        },
+        qustionHolder27: {
+          qustion: "Proprioceptors include the following types of receptors: ",
+          answers: {
+            answer1: "Joint receptors",
+            answer2: "Rods and cons ",
+            answer3: "Vestibular receptors",
+            answer4: "Organ of corti ",
+          },
+        },
+        qustionHolder28: {
+          qustion: "Proprioceptive sensations are transmitted by: ",
+          answers: {
+            answer1: "Gracile and cuneate tract ",
+            answer2: "Lateral spinothalamic tract",
+            answer3: "Rubrospinal tract",
+            answer4: "Ventral spinothalamic tract ",
+          },
+        },
+        qustionHolder29: {
+          qustion: "Astereognosis: ",
+          answers: {
+            answer1: "Associates parietal lobe neglect",
+            answer2:
+              "Indicates inability to localize the site of touch on the body surface ",
+            answer3:
+              "Results from lesions of the secondary somatic sensory area ",
+            answer4: "Results from loss of crude touch sensation ",
+          },
+        },
+        qustionHolder30: {
+          qustion: "Parietal lobe neglect: ",
+          answers: {
+            answer1:
+              "Characterized by inability to use skeletal muscles on the opposite side of the body ",
+            answer2:
+              "Characterized by inability to use skeletal muscles on the same side of the body ",
+            answer3: "Results from damage of primary sensory cortex ",
+            answer4: "Causes loss of sensations on the same side of the body ",
+          },
+        },
+        qustionHolder31: {
+          qustion: "Pain sensation: ",
+          answers: {
+            answer1: "Evoked by strong stimulation of specific receptors ",
+            answer2:
+              "Produces reactions that block transmission of pain impulses ",
+            answer3: "Arises from small encapsulated receptors ",
+            answer4:
+              "Occurs when the stimulus causes damage of the sensory receptors ",
+          },
+        },
+        qustionHolder32: {
+          qustion: "Reaction to pain includes: ",
+          answers: {
+            answer1: " Withdrawal reflexes ",
+            answer2: " Increased gastric motility ",
+            answer3: " Euphoria ",
+            answer4: " Sleep ",
+          },
+        },
+        qustionHolder33: {
+          qustion: "Pain receptors: ",
+          answers: {
+            answer1: " Become more sensitive with prolonged stimulation ",
+            answer2: " Are stimulated by prostaglandins ",
+            answer3: " Are more numerous in viscera than other tissues ",
+            answer4: " Include different morphological types ",
+          },
+        },
+        qustionHolder34: {
+          qustion: "Pain threshold: ",
+          answers: {
+            answer1: " Is the highest intensity of stimulus that causes pain ",
+            answer2: "Is the lowest intensity of stimulus that causes pain ",
+            answer3: "Differs markedly among different individuals ",
+            answer4: "Is elevated by substance P",
+          },
+        },
+        qustionHolder35: {
+          qustion: "Fast pain differs from slow pain in: ",
+          answers: {
+            answer1: "Having a sharp quality ",
+            answer2: "Being transmitted in the dorsal column pathway ",
+            answer3: "Evoking a depressor autonomic reaction ",
+            answer4: "Arising from encapsulated pain receptors ",
+          },
+        },
+        qustionHolder36: {
+          qustion:
+            "Double pain sensation following painful stimulation of the skin is due to: ",
+          answers: {
+            answer1: " Presence of dual pain pathways ",
+            answer2: " Repetition of the painful stimulus ",
+            answer3: " Perception of pain at two different higher centers ",
+            answer4:
+              " Application of two painful stimuli simultaneously at two different sites",
+          },
+        },
+        qustionHolder37: {
+          qustion: "Cutaneous pain: ",
+          answers: {
+            answer1: "Is transmitted by Aδ sensory fibers ",
+            answer2: "Is always sharp in character ",
+            answer3: "Is always followed by hyperalgesia ",
+            answer4: "Evokes spasm of nearby muscles ",
+          },
+        },
+        qustionHolder38: {
+          qustion: "Primary cutaneous hyperalgesia: ",
+          answers: {
+            answer1: "Is due to changes in threshold of pain receptors ",
+            answer2:
+              "Develops in the normal skin region around the area of flare ",
+            answer3:
+              "Is an abnormal condition in the skin in which painful stimuli become more severe ",
+            answer4: "Is associated with throbbing type of pain ",
+          },
+        },
+        qustionHolder39: {
+          qustion: "Deep pain shows the following characteristics: ",
+          answers: {
+            answer1: "Dull aching ",
+            answer2: "Sharp ",
+            answer3: "Evokes flexor reflexes ",
+            answer4: "Localized ",
+          },
+        },
+        qustionHolder40: {
+          qustion: "Intermittent Claudications evoke: ",
+          answers: {
+            answer1: "Deep pain ",
+            answer2: "Visceral pain ",
+            answer3: "Cutaneous hyperalgesia ",
+            answer4: "Colicky pain ",
+          },
+        },
+        qustionHolder41: {
+          qustion: "Pain produced by muscle spasm results from: ",
+          answers: {
+            answer1: "Decreased oxygen supply to the muscle ",
+            answer2: "Mechanical stimulation of pain receptor by muscle spasm ",
+            answer3:
+              "Decreased release of lactic acid from the spastic muscle fibers ",
+            answer4: "Release of compounds from the spastic muscle ",
+          },
+        },
+        qustionHolder42: {
+          qustion: "Visceral pain: ",
+          answers: {
+            answer1: "Evokes depressor reactions",
+            answer2: "More common than other pain types ",
+            answer3: "Is often well localized ",
+            answer4: "Arises only from visceral wall",
+          },
+        },
+        qustionHolder43: {
+          qustion: "Stimuli which evoke true visceral pain include: ",
+          answers: {
+            answer1: "Spasm  ",
+            answer2: "Sharp cutting ",
+            answer3: "Pin prick ",
+            answer4: "Stab wound",
+          },
+        },
+        qustionHolder44: {
+          qustion: "Visceral pain is usually felt:",
+          answers: {
+            answer1: "In skin areas remote from the diseased viscera  ",
+            answer2: "Deeply in the diseased viscera ",
+            answer3: "In deep tissues close to the diseased viscera ",
+            answer4: "In skin areas that just overlie the diseased viscera ",
+          },
+        },
+        qustionHolder45: {
+          qustion:
+            "Intracranial headache could result from painful stimuli applied on:",
+          answers: {
+            answer1: "Wall of big intracranial veins  ",
+            answer2:
+              "The dura lining the inner surface of the bones of cranial vault ",
+            answer3: "The brain tissue ",
+            answer4: "Arachnoid mater ",
+          },
+        },
+        qustionHolder46: {
+          qustion: "Intracranial headache may result from:",
+          answers: {
+            answer1: "Pressure upon tentorium cerebelli",
+            answer2: "Sinusitis ",
+            answer3: "Otitis media ",
+            answer4: "Spasm of scalp muscles",
+          },
+        },
+        qustionHolder47: {
+          qustion: "Transmitters in pain control system include:",
+          answers: {
+            answer1: "Acetylcholine ",
+            answer2: "GABA ",
+            answer3: "Encephalin",
+            answer4: "Histamine ",
+          },
+        },
+        qustionHolder48: {
+          qustion: "Encephalin binds best with:",
+          answers: {
+            answer1: "Delta 'δ' opiate receptors  ",
+            answer2: "All opiate receptors with equal affinity",
+            answer3: "Kappa  'κ' piate receptors",
+            answer4: "Mute 'μ' opiate receptors",
+          },
+        },
+        qustionHolder49: {
+          qustion: "Pain control system:",
+          answers: {
+            answer1:
+              "Is activated naturally with strong emotional excitement  ",
+            answer2:
+              "Is activated whenever a painful stimulus is applied to body tissues ",
+            answer3: "Is never activated naturally ",
+            answer4: "Is activated only by administration of opiate drugs ",
+          },
+        },
+        qustionHolder50: {
+          qustion: "Encephalin blocks pain transmission by:",
+          answers: {
+            answer1:
+              "Blocking Ca++ channels in the central terminals of pain sensory fibers ",
+            answer2:
+              "Blocking the response of pain receptors to painful stimuli ",
+            answer3:
+              "Slowing transmission of pain impulses through synapses in the pain pathway ",
+            answer4:
+              "Inhibiting the response of the cortical somatic sensory area to pain signals",
+          },
+        },
+        qustionHolder51: {
+          qustion: "The spinal pain gate is:",
+          answers: {
+            answer1: "Ligand controlled  ",
+            answer2: "Opened by encephalin  ",
+            answer3: "Voltage controlled",
+            answer4: "Closed by substance P. ",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 51) {
+        var r = Math.floor(Math.random() * 51) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            nextBtn.click();
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>
