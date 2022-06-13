@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Cardiovascular system</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion:
+            "Enables continuous heart beat after cutting its nerve supply:",
+          answers: {
+            answer1: "Automaticity",
+            answer2: "Excitability",
+            answer3: "Conductivity",
+            answer4: "Contractility",
+          },
+        },
+        qustionHolder2: {
+          qustion: "The impulse that excites the left ventricle originates in:",
+          answers: {
+            answer1: "SA node",
+            answer2: "Purkinje system",
+            answer3: "Ventricle",
+            answer4: "Left bundle branch",
+          },
+        },
+        qustionHolder3: {
+          qustion: "Conduction speed is slowest in the:",
+          answers: {
+            answer1: "SA node",
+            answer2: "Atrial pathway",
+            answer3: "Purkinje system",
+            answer4: "Bundle of his",
+          },
+        },
+        qustionHolder4: {
+          qustion: "Cardiac muscle cannot be tetanized because of:",
+          answers: {
+            answer1: "Long absolute refractory period",
+            answer2: "Calcium influx during phase II",
+            answer3: "Accommodation",
+            answer4:
+              "Voltage inactivation of Na channels at membrane potentials >  80 mV",
+          },
+        },
+        qustionHolder5: {
+          qustion:
+            "Stimulation of the sympathetic nerves to the heart decreases:",
+          answers: {
+            answer1: "Refractory period",
+            answer2: "Heart rate",
+            answer3: "Force of cardiac contraction",
+            answer4: "Speed of contraction",
+          },
+        },
+        qustionHolder6: {
+          qustion:
+            "The following is a low pitched sound heard prior to first heart sound:",
+          answers: {
+            answer1: "S4",
+            answer2: "Opening snap",
+            answer3: "S3",
+            answer4: "Pericardial knock",
+          },
+        },
+        qustionHolder7: {
+          qustion: "The second heart sound is caused by:",
+          answers: {
+            answer1: "Closure of the aortic and pulmonary valves",
+            answer2: "Vibrations in the ventricular wall during systole",
+            answer3: "Ventricular filling",
+            answer4: "Closure of the mitral and tricuspid valves",
+          },
+        },
+        qustionHolder8: {
+          qustion:
+            "Greater work performance by the left ventricle than the right one is due to:",
+          answers: {
+            answer1: "Greater afterload",
+            answer2: "Greater stroke volume",
+            answer3: "Slower contraction ",
+            answer4: "Thicker wall",
+          },
+        },
+        qustionHolder9: {
+          qustion: "Starling’s law of the heart:",
+          answers: {
+            answer1:
+              "Explains increased cardiac output when the venous return is increased",
+            answer2: "Explains the increase in heart rate produced by exercise",
+            answer3: "Does not operate during exercise",
+            answer4: "Does not operate in the failing heart",
+          },
+        },
+        qustionHolder10: {
+          qustion:
+            "During severe exercise, a well-trained athlete achieve cardiac output of:",
+          answers: {
+            answer1: "35 liters",
+            answer2: "25 liters",
+            answer3: "45 liters",
+            answer4: "15 liters",
+          },
+        },
+        qustionHolder11: {
+          qustion:
+            "At any time, the greatest fraction of blood volume is present in the:",
+          answers: {
+            answer1: "Veins",
+            answer2: "Heart",
+            answer3: "Arteries",
+            answer4: "Capillaries",
+          },
+        },
+        qustionHolder12: {
+          qustion: "The term “capacitance vessels” is applied to:",
+          answers: {
+            answer1: "Veins and venules",
+            answer2: "Thoroughfare channels",
+            answer3: "Shunts",
+            answer4: "Pulmonary capillaries",
+          },
+        },
+        qustionHolder13: {
+          qustion: "Mary’s law states that:",
+          answers: {
+            answer1: "When BP increases, HR decreases and vice vers",
+            answer2: "When BP decreases, HR not affected",
+            answer3: "When BP decreases, HR decreases",
+            answer4: "When BP increases, HR increases",
+          },
+        },
+        qustionHolder14: {
+          qustion: "Heart rate is slowed by:",
+          answers: {
+            answer1: "Carotid massage",
+            answer2: "Bainbridge reflex",
+            answer3: "Deep inspiration",
+            answer4: "Increased intracranial tension",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "Stimulation of sympathetic nerves invariably reduces blood flow in the:",
+          answers: {
+            answer1: "Brain",
+            answer2: "Skin",
+            answer3: "Heart",
+            answer4: "All of the above",
+          },
+        },
+        qustionHolder16: {
+          qustion: "The least flow under sympathetic control occurs in:",
+          answers: {
+            answer1: "Brain ",
+            answer2: "Heart ",
+            answer3: "Viscera",
+            answer4: "Skin",
+          },
+        },
+        qustionHolder17: {
+          qustion: "Concerning the arterial blood pressure:",
+          answers: {
+            answer1: "It is normally about 120/80 mm Hg",
+            answer2: "Depends only on the cardiac output",
+            answer3:
+              "Is the arithmetic average of the systolic and diastolic pressures",
+            answer4: "Is due to vascular resistance of the capillaries",
+          },
+        },
+        qustionHolder18: {
+          qustion: "Concerning nervous regulation of the circulation:",
+          answers: {
+            answer1:
+              "Baroreceptors are mainly responsible for long-term regulation of BP",
+            answer2:
+              "Sudden falls of the blood pressure leads to reflex increased heart rate",
+            answer3:
+              "The baroreceptors are found in the aortic and carotid bodies",
+            answer4:
+              "The coronary blood flow is regulated by the cardiac volume receptors",
+          },
+        },
+        qustionHolder19: {
+          qustion: "Regarding the conductive system of the heart:",
+          answers: {
+            answer1:
+              "The Purkinje fibers are specialized cardiac myocytes linked by gap junctions",
+            answer2:
+              "The spread of cardiac excitation speeds up at the atrio-ventricular node",
+            answer3:
+              "The cardiac action potential is conducted through the atria via Purkinje fibers",
+            answer4:
+              "Between action potentials, the cells of the SA node have a steady resting potential",
+          },
+        },
+        qustionHolder20: {
+          qustion: "Cardiac cycle of a healthy young adult:",
+          answers: {
+            answer1:
+              "During isometric contraction phase, the volume of the ventricle does not change ",
+            answer2:
+              "During ventricular systole, all the blood in the ventricles is ejected ",
+            answer3:
+              "During systole, the pressure in the left ventricle reaches about 25 mm Hg",
+            answer4:
+              "During diastole, the pressure in the left ventricle is close to 80 mm Hg",
+          },
+        },
+        qustionHolder21: {
+          qustion: "Concerning normal heart sounds:",
+          answers: {
+            answer1:
+              "The first sound corresponds with the closure of the mitral and tricuspid valves",
+            answer2:
+              "The first heart sound occurs just before the R wave of the ECG",
+            answer3:
+              "The first heart sound is split into two components during inspiration",
+            answer4: "The second heart sound occurs during the T-wave",
+          },
+        },
+        qustionHolder22: {
+          qustion: "Concerning cardiac output:",
+          answers: {
+            answer1:
+              "Measured by dividing oxygen consumption/ venous and arterial PO2difference",
+            answer2: "It is largely determined by the end-diastolic volume",
+            answer3: "Is increased by stimulation of the vagus nerve",
+            answer4:
+              "It is increased by aldosterone released from the adrenal medulla",
+          },
+        },
+        qustionHolder23: {
+          qustion:
+            "The cardiac action potential is conducted through the atria via:",
+          answers: {
+            answer1: "Specialized conducting fibers",
+            answer2: "Bundle of hiss",
+            answer3: "Purkinje fibers",
+            answer4: "A-V bundle",
+          },
+        },
+        qustionHolder24: {
+          qustion: "The second heart sound due to:",
+          answers: {
+            answer1: "Closure of the aortic & pulmonary valves",
+            answer2: "Closure of the aortic and mitral valves",
+            answer3: "Closure of the pulmonary valves",
+            answer4: "Closure of the aortic valve",
+          },
+        },
+        qustionHolder25: {
+          qustion: "The stroke volume is:",
+          answers: {
+            answer1: "The amount of blood pumped by the each ventricle/beat",
+            answer2: "The amount of blood pumped by the left ventricle/beat",
+            answer3: "The amount of blood pumped by the right ventricle/beat",
+            answer4: "Decreased during sympathetic stimulation",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Cardiac output is increased by:",
+          answers: {
+            answer1: "Increased circulating adrenaline level",
+            answer2: "Increased circulating androgen level",
+            answer3: "Increased circulating parathormone level",
+            answer4: "Increased circulating TSH level",
+          },
+        },
+        qustionHolder27: {
+          qustion: "Concerning diameter of the arterioles:",
+          answers: {
+            answer1: "Local O2 lack causes vasodilatation",
+            answer2: "Local O2 lack causes vasoconstriction",
+            answer3: "Decreased body temperature causes vasodilatation",
+            answer4: "Adrenaline produces generalized vasoconstriction",
+          },
+        },
+        qustionHolder28: {
+          qustion: "Activation of the sympathetic nervous system causes:",
+          answers: {
+            answer1: "Vasodilatation in the sweat glands",
+            answer2: "Vasoconstriction in the sweat gland",
+            answer3: "No effects on the sweat glands",
+            answer4: "None of the above (the rest choices)",
+          },
+        },
+        qustionHolder29: {
+          qustion: "The normal ventricular ejection fraction equals:",
+          answers: {
+            answer1: "64 - 67%",
+            answer2: "33 - 35%",
+            answer3: "45 - 50%",
+            answer4: "55 - 60%",
+          },
+        },
+        qustionHolder30: {
+          qustion: "In the cardiac muscle:",
+          answers: {
+            answer1:
+              "The strength of contraction depends on the amount of Ca++ in cardiac myocytes",
+            answer2:
+              "The T-tubules store calcium less than the T-tubules in skeletal muscle",
+            answer3:
+              "Initiation of AP causes an immediate opening of slow calcium channels",
+            answer4:
+              "Cardiac muscle repolarization is caused by opening of sodium channels",
+          },
+        },
+        qustionHolder31: {
+          qustion: "The potassium permeability the highest during:",
+          answers: {
+            answer1: "Phase 3 of the ventricular muscle action potential",
+            answer2: "Phase 0 of the ventricular muscle action potential",
+            answer3: "Phase 1 of the ventricular muscle action potential",
+            answer4: "Phase 2 of the ventricular muscle action potential",
+          },
+        },
+        qustionHolder32: {
+          qustion:
+            "Immediately after the beginning of the QRS wave, the following occurs:",
+          answers: {
+            answer1: "Isovolumic contraction phase of the cardiac cycle",
+            answer2: "Atrial systole phase of the cardiac cycle",
+            answer3: "Ventricular ejection phase of the cardiac cycle",
+            answer4: "Isovolumic relaxation phase of the cardiac cycle",
+          },
+        },
+        qustionHolder33: {
+          qustion: "The following has the slowest rate of AP conduction:",
+          answers: {
+            answer1: "A-V bundle fibers",
+            answer2: "Atrial muscle",
+            answer3: "Purkinje fibers",
+            answer4: "Anterior internodal pathway",
+          },
+        },
+        qustionHolder34: {
+          qustion: "The most likely cause of spastic cardiac contraction is:",
+          answers: {
+            answer1: "Excess extracellular fluid calcium ions",
+            answer2: "Increased sympathetic activity",
+            answer3: "Decreased extracellular fluid potassium ions",
+            answer4: "Excess extracellular fluid potassium ions",
+          },
+        },
+        qustionHolder35: {
+          qustion: "At the end of ventricular isovolumic relaxation:",
+          answers: {
+            answer1: "The mitral valve opens ",
+            answer2: "The aortic valve opens ",
+            answer3: "The A-V valves close",
+            answer4: "The aortic valve closes",
+          },
+        },
+        qustionHolder36: {
+          qustion: "Associated with the first heart sound?",
+          answers: {
+            answer1: "Closure of the A-V valves",
+            answer2: "Opening of A-V valves",
+            answer3: "Closure of aortic valve",
+            answer4: "Beginning of diastole",
+          },
+        },
+        qustionHolder37: {
+          qustion: "Which condition will result in a dilated, flaccid heart?",
+          answers: {
+            answer1: "Excess potassium ions in the blood ",
+            answer2: "Increased sympathetic stimulation",
+            answer3: "Excess sodium ions in the blood ",
+            answer4: "Excess calcium ions in the blood ",
+          },
+        },
+        qustionHolder38: {
+          qustion: "The sodium permeability the highest during:",
+          answers: {
+            answer1: "Phase 0 of the ventricular AP",
+            answer2: "Phase 1 of the ventricular AP",
+            answer3: "Phase 2 of the ventricular AP",
+            answer4: "Phase 3 of the ventricular AP",
+          },
+        },
+        qustionHolder39: {
+          qustion: "Sympathetic stimulation of the heart normally causes:",
+          answers: {
+            answer1: "Increased force of contraction of the ventricles",
+            answer2: "Decreased of force of contraction of the atria",
+            answer3: "Decreased heart rate",
+            answer4: "Decreased rate of the conduction of the cardiac impulse",
+          },
+        },
+        qustionHolder40: {
+          qustion: "The highest velocity of blood flow occurs in:",
+          answers: {
+            answer1: "Aorta",
+            answer2: "Arteries",
+            answer3: "Venules",
+            answer4: "capillaries",
+          },
+        },
+        qustionHolder41: {
+          qustion:
+            "The greatest total cross-sectional area in the circulatory system is:",
+          answers: {
+            answer1: "capillaries",
+            answer2: "aorta",
+            answer3: "venules",
+            answer4: "small arteries",
+          },
+        },
+        qustionHolder42: {
+          qustion:
+            "Its decreased production most likely result in chronic hypertension:",
+          answers: {
+            answer1: "Nitric oxide",
+            answer2: "Thromboxane",
+            answer3: "Aldosterone",
+            answer4: "Angiotensin II",
+          },
+        },
+        qustionHolder43: {
+          qustion:
+            "The following often occurs in progressive hemorrhagic shock:",
+          answers: {
+            answer1: "Vasomotor center failure",
+            answer2: "Increased urine output",
+            answer3: "Tissue alkalosis ",
+            answer4: "Decreased capillary permeability",
+          },
+        },
+        qustionHolder44: {
+          qustion: "Normally associated with increased cardiac output:",
+          answers: {
+            answer1: "Atrioventricular (A_V) fistula",
+            answer2: "Polycythemia",
+            answer3: "Severe aortic regurgitation ",
+            answer4: "Increased parasympathetic stimulation",
+          },
+        },
+        qustionHolder45: {
+          qustion: "Decreased resistance to venous return occurs i:",
+          answers: {
+            answer1: "Anemia ",
+            answer2: "Increased arteriolar resistance",
+            answer3: "Increased venous resistance",
+            answer4: "Increased sympathetic output",
+          },
+        },
+        qustionHolder46: {
+          qustion: "Decreased cardiac output results from:",
+          answers: {
+            answer1: "Acute myocardial infarction",
+            answer2: "A-V fistula",
+            answer3: "Anemia",
+            answer4: "hyperthyroidism",
+          },
+        },
+        qustionHolder47: {
+          qustion: "The fourth heart sound is associated with:",
+          answers: {
+            answer1:
+              "rushing of blood into the ventricles from atrial contraction",
+            answer2: "closing of the A-V valves",
+            answer3: "closing of the pulmonary valve",
+            answer4: "opening of the A-V valves",
+          },
+        },
+        qustionHolder48: {
+          qustion: "The following is associated with the first heart sound:",
+          answers: {
+            answer1: "Closing of the A-V valves ",
+            answer2:
+              "Rushing of blood into the ventricles as a result of atrial contraction",
+            answer3: "Closing of the pulmonary valve ",
+            answer4: "Opening of the A-V valves",
+          },
+        },
+        qustionHolder49: {
+          qustion: "Associated with the third heart sound:",
+          answers: {
+            answer1:
+              "Rushing of blood into the ventricles in the early diastole",
+            answer2: "Opening of the A-V valves",
+            answer3: "Closing of the A-V valves",
+            answer4:
+              "Inrushing of blood into the ventricles as a result of atrial contraction",
+          },
+        },
+        qustionHolder50: {
+          qustion: "Cardiac output is often increased in:",
+          answers: {
+            answer1: "Septic shock",
+            answer2: "Hemorrhagic shock",
+            answer3: "Anaphylactic shock",
+            answer4: "Neurogenic shock",
+          },
+        },
+        qustionHolder51: {
+          qustion:
+            "Causes VD & increased capillary permeability during anaphylactic shock:",
+          answers: {
+            answer1: "Histamine",
+            answer2: "Bradykinin",
+            answer3: "Nitric oxide",
+            answer4: "Atrial natriuretic factor",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 51) {
+        var r = Math.floor(Math.random() * 51) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 60;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            nextBtn.click();
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>
