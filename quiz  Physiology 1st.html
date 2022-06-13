@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Respiratory</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion:
+            "Regarding the sympathetic division of the autonomic nervous system:",
+          answers: {
+            answer1:
+              "Acetylcholine is secreted by some sympathetic postganglionic fibers.",
+            answer2:
+              "Most sympathetic preganglionic fibers secrete noradrenaline (norepinephrine).",
+            answer3:
+              "Sympathetic postganglionic neurons are found in spinal segments from T1 to L2.",
+            answer4:
+              "Sympathetic chain extends from thoracic to sacral regions of the spinal cord.",
+          },
+        },
+        qustionHolder2: {
+          qustion:
+            "Regarding the parasympathetic division of the autonomic nervous system:",
+          answers: {
+            answer1:
+              "Parasympathetic Postganglionic fibers secrete ac. ch. onto their target organs",
+            answer2:
+              "Parasympathetic Preganglionic fibers are found in all cranial nerves.",
+            answer3:
+              "Parasympathetic vasoconstrictor fibers are present in the salivary glands\t.",
+            answer4:
+              "Parasympathetic Postganglionic neurons are found in spinal ganglia (T1 to L2).",
+          },
+        },
+        qustionHolder3: {
+          qustion: "Regarding the role of the autonomic innervation:",
+          answers: {
+            answer1:
+              "Stimulation of the sympathetic nerves to the eyes causes dilation of the pupils.",
+            answer2:
+              "Activation of the sympathetic system causes vasodilatation in the skin.",
+            answer3:
+              "Sympathetic activity causes vasoconstriction in the viscera and skeletal muscle.",
+            answer4: "Stimulation of the vagus nerves speed up the heart.",
+          },
+        },
+        qustionHolder4: {
+          qustion: "About autonomic functions:",
+          answers: {
+            answer1:
+              "The autonomic nerves modify the activity of the smooth muscles.",
+            answer2:
+              "The muscarinic action of ac. Ch. Is produced by parasymp. Pregang fibers.",
+            answer3:
+              "Injection of atropine leads to slowing of the heart rate.",
+            answer4:
+              "Epinephrine & norepinephrine blood concentrations are equal.",
+          },
+        },
+        qustionHolder5: {
+          qustion: "Which of the following is not an autonomic reflex:",
+          answers: {
+            answer1: "Flexion of the arm following a painful stimulus",
+            answer2: "Salivary secretion",
+            answer3: "Micturition\t",
+            answer4: "Acceleration of the heart",
+          },
+        },
+        qustionHolder6: {
+          qustion: "The origin of parasympathetic fibers is:",
+          answers: {
+            answer1: "Cranio-sacral outflow.",
+            answer2: "Thoraco-lumbar outflow.",
+            answer3: "Thoraco-sacral outflow.",
+            answer4: "Cranio-lumbar outflow.",
+          },
+        },
+        qustionHolder7: {
+          qustion:
+            "The following is not affected by the autonomic nervous system:",
+          answers: {
+            answer1: "Medulla oblongata.",
+            answer2: "Arteriolar smooth muscle.",
+            answer3: "Heart.",
+            answer4: "Visceral smooth muscles.",
+          },
+        },
+        qustionHolder8: {
+          qustion:
+            "The system that controls smooth muscle, cardiac muscle, and gland activity is:",
+          answers: {
+            answer1: "Autonomic nervous system.",
+            answer2: "Somatic nervous system.",
+            answer3: "Skeletal division.",
+            answer4: "Sensory nerve fibers.",
+          },
+        },
+        qustionHolder9: {
+          qustion: "The following is a component of the reflex arc:",
+          answers: {
+            answer1: "Effector organs.",
+            answer2:
+              "Afferent neuron conducts motor signals from periphery to the CNS.",
+            answer3:
+              "Efferent neuron conducts sensory signals from CNS to the periphery.",
+            answer4: "Acetylcholine receptor.",
+          },
+        },
+        qustionHolder10: {
+          qustion: "The autonomic ganglia are:",
+          answers: {
+            answer1: "Act as distributing centers",
+            answer2: "Five types",
+            answer3: "The site of relay of efferent neurons",
+            answer4: "Located inside the CNS",
+          },
+        },
+        qustionHolder11: {
+          qustion: "The preganglionic sympathetic nerve fibers are:",
+          answers: {
+            answer1: "Found in the greater splanchnic nerves",
+            answer2: "Present in the short ciliary nerves",
+            answer3: "Non-myelinated",
+            answer4: "Found in somatic nerves",
+          },
+        },
+        qustionHolder12: {
+          qustion: "The autonomic ganglia:",
+          answers: {
+            answer1: "Their chemical transmitter is acetylcholine",
+            answer2: "Their receptors are specifically blocked by atropine",
+            answer3: "They are types ",
+            answer4: "Act as CNS center",
+          },
+        },
+        qustionHolder13: {
+          qustion: "The sympathetic preganglionic nerve fibers:",
+          answers: {
+            answer1:
+              "Are myelinated nerve fibers belonging to B group nerve fibres",
+            answer2:
+              "Show minimal divergence (branching) in the autonomic ganglia",
+            answer3: "Originate at the autonomic ganglia",
+            answer4: "Arise from the cervical segments of the spinal cord",
+          },
+        },
+        qustionHolder14: {
+          qustion: "The sympathetic supply is responsible for",
+          answers: {
+            answer1: "Erection of hair",
+            answer2: "Constriction of pupil",
+            answer3: "Secretion of apocrine glands",
+            answer4: "Vasoconstriction of the skeletal muscle blood vessels",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "Dropping of the upper eyelid (ptosis) is caused by damage of:",
+          answers: {
+            answer1: "The sympathetic supply to the eye",
+            answer2: "The third cranial nerve",
+            answer3: "The parasympathetic supply to the eye",
+            answer4: "Lesion in lumbar 2,3 segments",
+          },
+        },
+        qustionHolder16: {
+          qustion: "Horner’s syndrome causes:",
+          answers: {
+            answer1: "Drooping of the upper eyelid",
+            answer2: "Increased sweating",
+            answer3: "Pale skin (V.C).",
+            answer4: "Dilatation of the pupil (Mydriasis)",
+          },
+        },
+        qustionHolder17: {
+          qustion: "The pelvic nerve is:",
+          answers: {
+            answer1: "The nerve of erection (nerves erigents)",
+            answer2: "Inhibitory to the wall of urinary bladder & distal colon",
+            answer3:
+              "Stimulatory to both the internal anal & urethral sphincters",
+            answer4: "Has both preganglionic & postganglionic nerve fibres",
+          },
+        },
+        qustionHolder18: {
+          qustion: "Stimulation of the greater splanchnic nerve produces:",
+          answers: {
+            answer1: "Increased blood levels of both glucose & catecholamines",
+            answer2: "V.C of the blood vessels in the erectile tissue",
+            answer3: "Inhibition of micturition",
+            answer4: "Increased motility of the stomach & upper intestine",
+          },
+        },
+        qustionHolder19: {
+          qustion: "The sympathetic nervous system:",
+          answers: {
+            answer1: "Involved in stress & emergency conditions",
+            answer2: "Its preganglionic fibres are adrenergic",
+            answer3:
+              "It has a V.D effect on the skeletal muscle blood vessels during rest",
+            answer4: "Its stimulation causes urine evacuation (micturition)",
+          },
+        },
+        qustionHolder20: {
+          qustion: "The sympathetic nervous system is:",
+          answers: {
+            answer1: "Catabolic system",
+            answer2: "Mostly cholinergic ",
+            answer3: "Involved more frequently in localized effects",
+            answer4: "Potentiates the parasympathetic functions",
+          },
+        },
+        qustionHolder21: {
+          qustion: "The parasympathetic nerves:",
+          answers: {
+            answer1: "Has anabolic effects",
+            answer2: "Are important in emergency conditions ",
+            answer3: "Play important functions in skin and skeletal muscles",
+            answer4: "Have longer postganglionic than preganglionic fibres",
+          },
+        },
+        qustionHolder22: {
+          qustion: "Stimulation of the pelvic nerve causes:",
+          answers: {
+            answer1: "V.D of the blood vessels of the erectile tissues",
+            answer2: "Stoppage of prostatic secretions",
+            answer3: "Contraction of the bronchial muscle",
+            answer4:
+              "Contraction of the internal urethral & rectal (anal) sphincters",
+          },
+        },
+        qustionHolder23: {
+          qustion: "Stimulation of the sympathetic system causes:",
+          answers: {
+            answer1: "Mostly generalized actions affecting many systems ",
+            answer2: "Contraction of the ciliary muscle for near vision",
+            answer3: "Bronchoconstriction",
+            answer4: "Decreased glycogenolysis & lipolysis",
+          },
+        },
+        qustionHolder24: {
+          qustion: "Parasympathetic stimulation produces:",
+          answers: {
+            answer1: "Contraction of the urinary bladder wall",
+            answer2: "Acceleration of the heart",
+            answer3: "V.D of the skeletal muscle blood vessels ",
+            answer4: "Dilatation of the pupil",
+          },
+        },
+        qustionHolder25: {
+          qustion: "The parasympathetic nervous system affects:",
+          answers: {
+            answer1: "Salivary glands",
+            answer2: "Sweat glands",
+            answer3: "Dilator pupillae muscle",
+            answer4: "Adrenal glands",
+          },
+        },
+        qustionHolder26: {
+          qustion: "The vagus nerve:",
+          answers: {
+            answer1:
+              "It causes increased peristaltic movements of the intestinal wall",
+            answer2: "Has direct effect on the ventricular contraction",
+            answer3: "Contains sympathetic fibres",
+            answer4: "Originates mainly from the pons",
+          },
+        },
+        qustionHolder27: {
+          qustion: "The adrenal medulla: , all the following is true except:",
+          answers: {
+            answer1: "It secrets epinephrine 80% & norepinephrine 20%",
+            answer2: "Its secretion is decreased in emergency conditions",
+            answer3:
+              "It augments and prolongs the effects of parasympathetic stimulation",
+            answer4: "It is a modified parasympathetic ganglion",
+          },
+        },
+        qustionHolder28: {
+          qustion: "All preganglionic autonomic neurons secrete:",
+          answers: {
+            answer1: "Acetylcholine",
+            answer2: "Epinephrine",
+            answer3: "Nicotine",
+            answer4: "Dopamine",
+          },
+        },
+        qustionHolder29: {
+          qustion: "Atropine injection causes",
+          answers: {
+            answer1: "Difficult micturition",
+            answer2: "Decreased heart rate",
+            answer3: "Pupilloconstriction",
+            answer4: "Dopamine",
+          },
+        },
+        qustionHolder30: {
+          qustion: "The actions of atropine can be antagonized by:",
+          answers: {
+            answer1: "Eserine",
+            answer2: "Curare",
+            answer3: "Norepinephrine",
+            answer4: "Nicotine in large dose",
+          },
+        },
+        qustionHolder31: {
+          qustion: "Integration of the autonomic functions involves:",
+          answers: {
+            answer1: "Cerebral cortex",
+            answer2: "Cerebellum",
+            answer3: "Health eyes",
+            answer4: "Somatic nerves",
+          },
+        },
+        qustionHolder32: {
+          qustion: "Injection of atropine is liable to cause:",
+          answers: {
+            answer1: "Constipation",
+            answer2: "Diarrhea",
+            answer3: "Bronchoconstriction ",
+            answer4: "Bradycardia",
+          },
+        },
+        qustionHolder33: {
+          qustion: "Action potential of nerve cells:",
+          answers: {
+            answer1:
+              "Result from a large increase in the membrane permeability to sodium ions",
+            answer2: "Can summate one with another ",
+            answer3: "May vary considerably in amplitude",
+            answer4: "Become larger as stimulus strength increases ",
+          },
+        },
+        qustionHolder34: {
+          qustion: "Velocity of action potential propagation is:",
+          answers: {
+            answer1: "Depends on the thickness of the myelin around the axon",
+            answer2: "Independent of an axon’s diameter ",
+            answer3: "Unaffected by axon demyelination",
+            answer4: "Fastest in unmyelinated axons",
+          },
+        },
+        qustionHolder35: {
+          qustion: "Concerning the neuromuscular junction:",
+          answers: {
+            answer1: "The motor nerve endings secrete acetylcholine",
+            answer2:
+              "Curare leads to prolongation of neuromuscular transmission",
+            answer3: "The motor nerve endings secrete noradrenaline",
+            answer4: "The muscle membrane possesses muscarinic receptors",
+          },
+        },
+        qustionHolder36: {
+          qustion: "Concerning the role of Ca+2  in muscle contraction:",
+          answers: {
+            answer1:
+              "A rise of Ca+in the sarcoplasm allows actin to interact with myosin",
+            answer2:
+              "The tension of a skeletal muscle fiber is partly regulated by G proteins",
+            answer3:
+              "Ca+entry is important in sustaining the contraction of skeletal muscle",
+            answer4:
+              "The mitochondria acts as a store of Ca+for contractile process",
+          },
+        },
+        qustionHolder37: {
+          qustion: "Concerning the structure of muscle tissue:",
+          answers: {
+            answer1:
+              "Initiation of skeletal muscle contraction is dependent on its nerve supply",
+            answer2: "Smooth muscle has well developed system of T-tubules",
+            answer3: "Skeletal muscle has intercalated discs inside ",
+            answer4:
+              "Skeletal muscle has the same structure as cardiac muscle ",
+          },
+        },
+        qustionHolder38: {
+          qustion: "Concerning action potential of the cardiac muscle:",
+          answers: {
+            answer1:
+              "Ca+required for contraction enters a myocyte during the plateau phase",
+            answer2: "Has the same duration as that of skeletal muscle ",
+            answer3:
+              "Occurs in response to action potential in the autonomic nerve fibers ",
+            answer4:
+              "The force of contraction is increased by circulating adrenaline",
+          },
+        },
+        qustionHolder39: {
+          qustion: "The maximal power developed by skeletal muscle:",
+          answers: {
+            answer1: "Depends on the load being moved by the muscle",
+            answer2:
+              "Occurs when the muscle is shortening at its maximum rate ",
+            answer3: "Occurs with an isometric contraction",
+            answer4: "Is independent of the initial length of the muscle ",
+          },
+        },
+        qustionHolder40: {
+          qustion: "Skeletal muscle:",
+          answers: {
+            answer1: "Has a T-tubules system while smooth muscle does not",
+            answer2: "Has not of T-tubules system while smooth muscle has ",
+            answer3: "Contains actin, myosin and troponin proteins only",
+            answer4: "Its action potential like that of cardiac muscle",
+          },
+        },
+        qustionHolder41: {
+          qustion: "All muscle cells:",
+          answers: {
+            answer1: "None of the above",
+            answer2: "Contain actin and myosin proteins ",
+            answer3: "Contain myosin and calmodulin proteins",
+            answer4: "Contain actin and calmodulin proteins",
+          },
+        },
+        qustionHolder42: {
+          qustion: "Action potential of cardiac muscle is:",
+          answers: {
+            answer1:
+              "Initiated by action potentials in the parasympathetic nerve fibers ",
+            answer2:
+              "Initiated by action potentials in the sympathetic nerve fibers ",
+            answer3: "Differ from the skeletal muscle in having plateau",
+            answer4: "The same as skeletal muscle",
+          },
+        },
+        qustionHolder43: {
+          qustion:
+            "The muscle fibers of the skeletal muscle are electrically coupled, so:",
+          answers: {
+            answer1:
+              "One nerve can control the activity of several muscle fibers",
+            answer2:
+              "One nerve can’t control the activity of several muscle fibers",
+            answer3:
+              "Multiple nerve fibers can control the activity of several muscle fibers",
+            answer4:
+              "Multiple nerve fibers can’t control the activity of several muscle fibers",
+          },
+        },
+        qustionHolder44: {
+          qustion: "Muscle contraction is:",
+          answers: {
+            answer1: "No shortening of the muscle in isometric contraction",
+            answer2: "No shortening of the muscle in isotonic contraction",
+            answer3: "Decreased by circulating adrenaline",
+            answer4: "Increased by circulating adrenaline",
+          },
+        },
+        qustionHolder45: {
+          qustion: "The mitochondria:",
+          answers: {
+            answer1: "Is the power generating unit",
+            answer2: "Contains no DNA",
+            answer3: "Surrounded by only one membrane",
+            answer4: "Acts as a store of Ca2+ for the contractile process",
+          },
+        },
+        qustionHolder46: {
+          qustion: "Most of the generated ATP in nerve cells is utilized to:",
+          answers: {
+            answer1: "Na-K ATPase",
+            answer2: "Na-Ca exchanger",
+            answer3: "H-ATPase in the cell membrane",
+            answer4: "Synthesis of proteins",
+          },
+        },
+        qustionHolder47: {
+          qustion: "Decreased K+ would be expected to result in:",
+          answers: {
+            answer1: "A more negative RMP",
+            answer2: "A decrease in firing level of neurons",
+            answer3: "No change in RMP",
+            answer4: "Increased neuronal excitability",
+          },
+        },
+        qustionHolder48: {
+          qustion: "Action potential conduction velocity is increased by:",
+          answers: {
+            answer1: "Myelination",
+            answer2: "Decreased axon diameter ",
+            answer3: "Decreased temperature",
+            answer4: "Un-myelination",
+          },
+        },
+        qustionHolder49: {
+          qustion:
+            "A suprathreshold stimulus can excite the nerve or muscle during:",
+          answers: {
+            answer1: "Relative refractory period",
+            answer2: "Overshoot",
+            answer3: "Spike potential",
+            answer4: "Absolute refractory period",
+          },
+        },
+        qustionHolder50: {
+          qustion: "Conduction block by pressure is most likely occurs in:",
+          answers: {
+            answer1: "Type A nerve fiber",
+            answer2: "Type B nerve fiber ",
+            answer3: "Type C nerve fiber",
+            answer4: "None of the above",
+          },
+        },
+        qustionHolder51: {
+          qustion: "In the skeletal muscle, thin filaments does not contain:",
+          answers: {
+            answer1: "Myosin",
+            answer2: "Tropomyosin",
+            answer3: "Actin",
+            answer4: "Troponin",
+          },
+        },
+        qustionHolder52: {
+          qustion:
+            "Conduction block by local anesthesia is most likely occurs in:",
+          answers: {
+            answer1: "Type C nerve fiber",
+            answer2: "None of the above",
+            answer3: "Type B nerve fiber",
+            answer4: "Type A nerve fiber",
+          },
+        },
+        qustionHolder53: {
+          qustion:
+            "The ATPase activity is altered to regulate skeletal muscle contraction in:",
+          answers: {
+            answer1: "Myosin protein",
+            answer2: "Actin protein",
+            answer3: "Tropomyosin protein",
+            answer4: "Troponin protein",
+          },
+        },
+        qustionHolder54: {
+          qustion:
+            "The duration of action potential in skeletal muscle fiber is:",
+          answers: {
+            answer1: "5 ms",
+            answer2: "25 ms",
+            answer3: "100 ms",
+            answer4: "250 ms",
+          },
+        },
+        qustionHolder55: {
+          qustion:
+            "The major source of calcium for contraction of skeletal muscle is:",
+          answers: {
+            answer1: "Sarcoplasmic reticulum",
+            answer2: "Cytosol",
+            answer3: "ECF",
+            answer4: "Mitochondria",
+          },
+        },
+        qustionHolder56: {
+          qustion:
+            "Excitation – contraction of skeletal muscle are coupled by:",
+          answers: {
+            answer1: "Release of Ca+into sarcoplasm",
+            answer2: "Calmodulin",
+            answer3: "Myosin",
+            answer4: "ATP",
+          },
+        },
+        qustionHolder57: {
+          qustion: "The following slows the skeletal muscle relaxation:",
+          answers: {
+            answer1: "ATP depletion",
+            answer2: "Fast myosin ATPase",
+            answer3: "Stimulation of CA-Mg ATPase",
+            answer4: "All of the above",
+          },
+        },
+        qustionHolder58: {
+          qustion: "Staircase phenomenon (Trappe) is due to:",
+          answers: {
+            answer1: "Increased availability of intracellular Ca++",
+            answer2: "Summation",
+            answer3: "Tetanus",
+            answer4: "Synthesis of stable troponic C molecules",
+          },
+        },
+        qustionHolder59: {
+          qustion:
+            "The minimum stimulus intensity produces a compound AP is equal:",
+          answers: {
+            answer1: "Rheobase ",
+            answer2: "Chronaxie",
+            answer3: "Twice rheobase",
+            answer4: "Twice chronaxie",
+          },
+        },
+        qustionHolder60: {
+          qustion:
+            "The predominant substrate used by the heart under basal conditions is:",
+          answers: {
+            answer1: "Fatty acids ",
+            answer2: "Amino acids ",
+            answer3: "Ketones",
+            answer4: "Carbohydrate",
+          },
+        },
+        qustionHolder61: {
+          qustion: "Resting membrane potential is most unstable in:",
+          answers: {
+            answer1: "Smooth muscle of the stomach",
+            answer2: "Gastrocnemius muscle",
+            answer3: "Orbicularis oculi",
+            answer4: "Muscle cells in the left ventricle",
+          },
+        },
+        qustionHolder62: {
+          qustion:
+            "A single skeletal muscle contraction is most likely terminated by:",
+          answers: {
+            answer1: "Removal of sarcoplasmic Ca++",
+            answer2: "Removal of Ca++ from the terminal of the motor neuron\t",
+            answer3: "Removal of acetylcholine from the neuromuscular junction",
+            answer4:
+              "Closure of the postsynaptic nicotinic acetylcholine receptor",
+          },
+        },
+        qustionHolder63: {
+          qustion:
+            "The following is decreased in length during muscle contraction:",
+          answers: {
+            answer1: "I band of the sarcomere",
+            answer2: "Thin filaments",
+            answer3: "Thick filaments",
+            answer4: "A band of the sarcomere",
+          },
+        },
+        qustionHolder64: {
+          qustion:
+            "Tetanic contraction of a skeletal muscle fiber results from:",
+          answers: {
+            answer1: "Cumulative increase of Ca++",
+            answer2: "Cumulative increase of ATP",
+            answer3: "Cumulative increase of K+",
+            answer4: "Cumulative increase of Na++",
+          },
+        },
+        qustionHolder65: {
+          qustion: "Increased muscle mass is primarily attributable to:",
+          answers: {
+            answer1: "Hypertrophy of individual muscle fibers",
+            answer2: "Fusion of sarcomeres between adjacent myofibrils",
+            answer3: "Increase in skeletal muscle blood supply",
+            answer4: "Increase in the number of motor neurons",
+          },
+        },
+        qustionHolder66: {
+          qustion:
+            "The following drugs is used for treatment of Myasthenia gravis:",
+          answers: {
+            answer1: "Neostigmine",
+            answer2: "Halothane",
+            answer3: "Curare",
+            answer4: "Atropine",
+          },
+        },
+        qustionHolder67: {
+          qustion:
+            "After fracture, the muscle become smaller. The most likely explanation is:",
+          answers: {
+            answer1:
+              "Temporary reduction in actin and myosin protein synthesis",
+            answer2: "Increased glycolytic activity in the affected muscle",
+            answer3:
+              "Decreased blood flow to the muscle caused by constriction from the cast",
+            answer4: "Decreased number of individual muscle fibers",
+          },
+        },
+        qustionHolder68: {
+          qustion: "The most abundant protein in blood is:",
+          answers: {
+            answer1: "Hemoglobin",
+            answer2: "Albumin",
+            answer3: "Fibrinogen",
+            answer4: "Beta-globulin",
+          },
+        },
+        qustionHolder69: {
+          qustion: "Macrocytes have a mean corpuscular volume greater than:",
+          answers: {
+            answer1: "90 fL ",
+            answer2: "100 fL",
+            answer3: "80 fL",
+            answer4: "70 fL",
+          },
+        },
+        qustionHolder70: {
+          qustion:
+            "The amount of hemoglobin contained in normocytes is approximately:",
+          answers: {
+            answer1: "20 pg ",
+            answer2: "25 pg",
+            answer3: "30 pg",
+            answer4: "35 pg",
+          },
+        },
+        qustionHolder71: {
+          qustion:
+            "The amount of hemoglobin present in 100 ml of red blood cells is defined as:",
+          answers: {
+            answer1: "MCHC",
+            answer2: "MCH",
+            answer3: "Hemoglobin index",
+            answer4: "RDW",
+          },
+        },
+        qustionHolder72: {
+          qustion:
+            "When the hemoglobin concentration is g/dL& PCV is then, MCHC is:",
+          answers: {
+            answer1: "20 g/dL ",
+            answer2: "25 g/dL ",
+            answer3: "30 g/dL ",
+            answer4: "35 g/dL ",
+          },
+        },
+        qustionHolder73: {
+          qustion:
+            "The following indices could be calculated when performing CBC manually:",
+          answers: {
+            answer1: "Mean corpuscular hemoglobin",
+            answer2: "Mean cell diameter",
+            answer3: "Mean corpuscular volume",
+            answer4: "Mean corpuscular hemoglobin concentration",
+          },
+        },
+        qustionHolder74: {
+          qustion: "Primary hemostasis refers to cessation of bleeding due to:",
+          answers: {
+            answer1: "Formation of a temporary platelet plug",
+            answer2: "Formation of a definitive clot",
+            answer3: "Clot retraction",
+            answer4: "Vasoconstriction",
+          },
+        },
+        qustionHolder75: {
+          qustion: "Platelet aggregation is stimulated by:",
+          answers: {
+            answer1: "Thromboxane A2",
+            answer2: "Protein c and S",
+            answer3: "Antihemophilic factor",
+            answer4: "Tissue plasmin",
+          },
+        },
+        qustionHolder76: {
+          qustion:
+            "Impaired adhesion of platelets to subendothelial collagen occurs in:",
+          answers: {
+            answer1: "Absence of von Willebrand factor",
+            answer2: "Absence of heparin",
+            answer3: "Absence of antithrombin III",
+            answer4: "Absence of plasmin",
+          },
+        },
+        qustionHolder77: {
+          qustion: "The following clotting factors is not vitamin K dependent?",
+          answers: {
+            answer1: "Factor V",
+            answer2: "Factor II",
+            answer3: "Factor VII",
+            answer4: "Factor IX",
+          },
+        },
+        qustionHolder78: {
+          qustion: "The extrinsic pathway is triggered bey the release of:",
+          answers: {
+            answer1: "Tissue factor",
+            answer2: "Contact factor",
+            answer3: "Factor VII",
+            answer4: "Tissue factor pathway inhibitor",
+          },
+        },
+        qustionHolder79: {
+          qustion: "The extrinsic pathway is inhibited by:",
+          answers: {
+            answer1: "Tissue factor pathway inhibitor (TFPI)",
+            answer2: "Tissue factor",
+            answer3: "Contact factor",
+            answer4: "Thromboplastin",
+          },
+        },
+        qustionHolder80: {
+          qustion: "The test that screens the extrinsic pathway integrity is:",
+          answers: {
+            answer1: "Prothrombin time (PT)",
+            answer2: "Thrombin time",
+            answer3: "Clot lysis time",
+            answer4: "Activated partial thromboplastin time (aPTT)",
+          },
+        },
+        qustionHolder81: {
+          qustion: "The enzyme that ultimately lyses fibrin is:",
+          answers: {
+            answer1: "Plasmin",
+            answer2: "TPA",
+            answer3: "Plasminogen",
+            answer4: "Urokinase",
+          },
+        },
+        qustionHolder82: {
+          qustion:
+            "Prolongation of prothrombin time does not occur when there is only:",
+          answers: {
+            answer1: "Deficiency of factor VIII",
+            answer2: "Deficiency of factor X",
+            answer3: "Deficiency of vitamin K",
+            answer4: "Deficiency of factor IX",
+          },
+        },
+        qustionHolder83: {
+          qustion:
+            "Mutations of the following is associated with hypercoagulable state: ",
+          answers: {
+            answer1: "Protein S",
+            answer2: "Clot retraction",
+            answer3: "Blood platelets",
+            answer4: "Vasoconstrictor activity",
+          },
+        },
+        qustionHolder84: {
+          qustion: "Factor V Leiden is:",
+          answers: {
+            answer1:
+              "Present in a large subset of patients with venous thromboembolism",
+            answer2: "A mutated from of factor IX",
+            answer3: "Inactivated by protein C",
+            answer4: "Present normally in healthy individuals",
+          },
+        },
+        qustionHolder85: {
+          qustion:
+            "Characterized by increased both bleeding and clotting time:",
+          answers: {
+            answer1: "Afibrinogenemia",
+            answer2: "Purpura",
+            answer3: "Hemophilia A ",
+            answer4: "Deep venous thrombosis",
+          },
+        },
+        qustionHolder86: {
+          qustion: "Red cell antigens A and B are chemically:",
+          answers: {
+            answer1: "Glycopeptides",
+            answer2: "Polypeptides",
+            answer3: "Phospholipids ",
+            answer4: "Glycosphingolipids",
+          },
+        },
+        qustionHolder87: {
+          qustion: "Red cell A and B antigens are also present in:",
+          answers: {
+            answer1: "Saliva",
+            answer2: "White blood cells",
+            answer3: "Biliary secretion",
+            answer4: "Pancreatic secretions",
+          },
+        },
+        qustionHolder88: {
+          qustion:
+            "The red blood cells of a person with the blood group B do not have:",
+          answers: {
+            answer1: "Anti B",
+            answer2: "Anti A",
+            answer3: "Anti D",
+            answer4: "Antihemophilic globulin",
+          },
+        },
+        qustionHolder89: {
+          qustion: "Most of the body iron is present in:",
+          answers: {
+            answer1: "Hemoglobin",
+            answer2: "Myoglobin",
+            answer3: "Transferrin",
+            answer4: "Ferritin",
+          },
+        },
+        qustionHolder90: {
+          qustion:
+            "The 1st pregnancy is not affected in Ph -ve mother not sensitized by Rh antigen because:",
+          answers: {
+            answer1: "Antibodies are unable to cross placenta",
+            answer2: "IgG titer low during the primary immune response",
+            answer3: "IgG is ineffective against fetal red cells ",
+            answer4:
+              "Fetal hemolysis is compensated by increased erythropoiesis",
+          },
+        },
+        qustionHolder91: {
+          qustion:
+            "ABO compatibility is important for blood transfusions because:",
+          answers: {
+            answer1: "There are 3 antigens in this system",
+            answer2: "The A and B antigens are present in all cells",
+            answer3:
+              "Lacking A or B antigens causes invariable presence of their antibody",
+            answer4: "O is a strong antigen",
+          },
+        },
+        qustionHolder92: {
+          qustion:
+            "When blood group could not be determined, urgent transfusion is done with:",
+          answers: {
+            answer1:
+              "RBC corresponding to the person red cell group and colloids",
+            answer2: "Whole blood corresponding to the person plasma group",
+            answer3: "O positive PBC, colloids and crystalloids",
+            answer4: "AB negative blood",
+          },
+        },
+        qustionHolder93: {
+          qustion: "Circulating erythropoietin originates from:",
+          answers: {
+            answer1:
+              "Interstitial cells surrounding the peritubular capillaries in the renal cortex",
+            answer2: "Perivenous hepatocytes",
+            answer3: "Kupffer cells of liver",
+            answer4: "None of the above",
+          },
+        },
+        qustionHolder94: {
+          qustion: "Osmotic fragility of red blood cells is decreased in:",
+          answers: {
+            answer1: "Hereditary spherocytosis",
+            answer2: "Sickle cell anemia",
+            answer3: "Macrocytic anemia",
+            answer4: "Normocytic normochromic anemia",
+          },
+        },
+        qustionHolder95: {
+          qustion:
+            "Hereditary spherocytosis occurs due to mutations in genes coding for:",
+          answers: {
+            answer1: "Spectrin and ankyrin",
+            answer2: "NaK ATPase",
+            answer3: "Pyruvate kinase",
+            answer4: "Glucose phosphate dehydrogenase",
+          },
+        },
+        qustionHolder96: {
+          qustion: "CO is formed as an end product of:",
+          answers: {
+            answer1: "Heme metabolism",
+            answer2: "Arginine metabolism",
+            answer3: "Oxidation of acetoacetate",
+            answer4: "All of the above (the rest)",
+          },
+        },
+        qustionHolder97: {
+          qustion: "Heme is converted to bilirubin mainly in the:",
+          answers: {
+            answer1: "Spleen",
+            answer2: "Liver",
+            answer3: "Kidneys",
+            answer4: "Bone marrow",
+          },
+        },
+        qustionHolder98: {
+          qustion: "The protein that binds extracorpuscular hemoglobin is:",
+          answers: {
+            answer1: "Haptoglobin",
+            answer2: "Hemin",
+            answer3: "Hemopexin",
+            answer4: "Haptopexin",
+          },
+        },
+        qustionHolder99: {
+          qustion:
+            "The following bands is normally absent When a serum is electrophoresed:",
+          answers: {
+            answer1: "Albumin",
+            answer2: "Fibrinogen",
+            answer3: "α2 globulin",
+            answer4: "α1 globulin",
+          },
+        },
+        qustionHolder100: {
+          qustion: "One of the following is not synthesized in the liver:",
+          answers: {
+            answer1: "α2 macroglobulin",
+            answer2: "Albumin",
+            answer3: "Angiotensinogen",
+            answer4: "IgG",
+          },
+        },
+        qustionHolder101: {
+          qustion: "The following plasma proteins are protease inhibitors:",
+          answers: {
+            answer1: "Antithrombin III",
+            answer2: "Transferrin",
+            answer3: "Globulin",
+            answer4: "Creactive protein",
+          },
+        },
+        qustionHolder102: {
+          qustion: "The following is a negative acute phase reactant:",
+          answers: {
+            answer1: "Albumin",
+            answer2: "Creactive protein",
+            answer3: "Transferrin",
+            answer4: "α2 macroglobulin",
+          },
+        },
+        qustionHolder103: {
+          qustion: "ESR is increased in:",
+          answers: {
+            answer1: "Anemia",
+            answer2: "Hypofibrinogenemia",
+            answer3: "Polycythemia",
+            answer4: "Spherocytosis",
+          },
+        },
+        qustionHolder104: {
+          qustion: "The appropriate treatment for erythroblastosis fetalis is:",
+          answers: {
+            answer1: "Exchange transfusion with Rh (D) negative blood",
+            answer2: "Exchange transfusion with Rh (D) positive blood",
+            answer3: "Immunization with Rh (D) antigen",
+            answer4: "Passive immunization with antiRh (D) immunoglobulin",
+          },
+        },
+        qustionHolder105: {
+          qustion: "The highest protein contents of lymph draining is:",
+          answers: {
+            answer1: "Liver",
+            answer2: "Skeletal muscle",
+            answer3: "Gastrointestinal tract",
+            answer4: "Choroid plexus",
+          },
+        },
+        qustionHolder106: {
+          qustion: "Fetal hemoglobin (Hb F):",
+          answers: {
+            answer1:
+              "At low PO2, Hb F gives up less oxygen to tissues than Hb A",
+            answer2:
+              "At low PO2, Hb F gives up more oxygen to tissues than Hb A",
+            answer3:
+              "The oxygen dissociation curve of HbF is shifted to the right relative to HbA",
+            answer4:
+              "In comparison to HbA, Hb F has greater affinity for 2,3-BPG",
+          },
+        },
+        qustionHolder107: {
+          qustion: "Blood viscosity:",
+          answers: {
+            answer1: "Is different at all flow velocities",
+            answer2: "Is constant at all flow velocities",
+            answer3: "Is – times as water",
+            answer4: "Is due to its WBCs components only",
+          },
+        },
+        qustionHolder108: {
+          qustion:
+            "The following transfusions will result in an immediate transfusion reaction:",
+          answers: {
+            answer1: "A Rhnegative whole blood to a B Rhnegative patient",
+            answer2: "O Rhnegative whole blood to an O Rhpositive patient",
+            answer3: "AB Rhnegative whole blood to an AB Rhpositive patient",
+            answer4: "B Rhnegative whole blood to a B Rhnegative patient",
+          },
+        },
+        qustionHolder109: {
+          qustion:
+            "Deficiency of factor IX and corrected by vitamin K occurs in:",
+          answers: {
+            answer1: "Classic hemophilia",
+            answer2: "Hepatitis B",
+            answer3: "Bile duct obstruction",
+            answer4: "Genetic deficiency in antithrombin III",
+          },
+        },
+        qustionHolder110: {
+          qustion:
+            "The following is not effective as an in vitro anticoagulant:",
+          answers: {
+            answer1: "Warfarin (Coumadin)",
+            answer2: "Sodium citrate",
+            answer3: "Heparin",
+            answer4: "Ethylenediamine tetraacetic acid (EDTA)",
+          },
+        },
+        qustionHolder111: {
+          qustion:
+            "The following used for prophylaxis of ischemic heart attack:",
+          answers: {
+            answer1: "Aspirin",
+            answer2: "Heparin",
+            answer3: "Warfarin",
+            answer4: "Streptokinase",
+          },
+        },
+        qustionHolder112: {
+          qustion:
+            "The following clotting pathway starts with tissue thromboplastin:",
+          answers: {
+            answer1: "Extrinsic pathway",
+            answer2: "Common pathway",
+            answer3: "Intrinsic pathway",
+            answer4: "Fibrin stabilization",
+          },
+        },
+        qustionHolder113: {
+          qustion:
+            "In malnutrition, the following causes excessive bleeding on injury:",
+          answers: {
+            answer1: "Vitamin K deficiency",
+            answer2: "Platelet sequestration by fatty liver",
+            answer3: "Serum bilirubin that raises neutralizing thrombin",
+            answer4: "Low serum protein levels that cause factor XIII problems",
+          },
+        },
+        qustionHolder114: {
+          qustion: "Prolonged bleeding time is best explained by:",
+          answers: {
+            answer1: "Thrombocytopenia",
+            answer2: "Hemophilia A",
+            answer3: "Hemophilia B",
+            answer4: "Coumadin use",
+          },
+        },
+        qustionHolder115: {
+          qustion: "The appropriate therapy for massive pulmonary embolism is:",
+          answers: {
+            answer1: "Heparin",
+            answer2: "Warfarin",
+            answer3: "Aspirin",
+            answer4: "Tissue plasminogen activator",
+          },
+        },
+        qustionHolder116: {
+          qustion:
+            "The primary mechanism by which heparin prevents blood coagulation is:",
+          answers: {
+            answer1: "Antithrombin III activation",
+            answer2: "Binding and inhibition of tissue factor",
+            answer3: "Binding available calcium",
+            answer4: "Inhibition of platelet activating factor",
+          },
+        },
+        qustionHolder117: {
+          qustion:
+            "The main site of RBC production during 2nd trimester of pregnancy is:",
+          answers: {
+            answer1: "Liver",
+            answer2: "Bone marrow",
+            answer3: "Lymph nodes",
+            answer4: "Yolk sac",
+          },
+        },
+        qustionHolder118: {
+          qustion:
+            "Enables continuous heart beat after cutting its nerve supply:",
+          answers: {
+            answer1: "Automaticity",
+            answer2: "Excitability",
+            answer3: "Conductivity",
+            answer4: "Contractility",
+          },
+        },
+        qustionHolder119: {
+          qustion: "The impulse that excites the left ventricle originates in:",
+          answers: {
+            answer1: "SA node",
+            answer2: "Purkinje system",
+            answer3: "Ventricle",
+            answer4: "Left bundle branch",
+          },
+        },
+        qustionHolder120: {
+          qustion: "Conduction speed is slowest in the:",
+          answers: {
+            answer1: "SA node",
+            answer2: "Atrial pathway",
+            answer3: "Purkinje system",
+            answer4: "Bundle of his",
+          },
+        },
+        qustionHolder121: {
+          qustion: "Cardiac muscle cannot be tetanized because of:",
+          answers: {
+            answer1: "Long absolute refractory period",
+            answer2: "Calcium influx during phase II",
+            answer3: "Accommodation",
+            answer4:
+              "Voltage inactivation of Na channels at membrane potentials >  80 mV",
+          },
+        },
+        qustionHolder122: {
+          qustion:
+            "Stimulation of the sympathetic nerves to the heart decreases:",
+          answers: {
+            answer1: "Refractory period",
+            answer2: "Heart rate",
+            answer3: "Force of cardiac contraction",
+            answer4: "Speed of contraction",
+          },
+        },
+        qustionHolder123: {
+          qustion:
+            "The following is a low pitched sound heard prior to first heart sound:",
+          answers: {
+            answer1: "S4",
+            answer2: "Opening snap",
+            answer3: "S3",
+            answer4: "Pericardial knock",
+          },
+        },
+        qustionHolder124: {
+          qustion: "The second heart sound is caused by:",
+          answers: {
+            answer1: "Closure of the aortic and pulmonary valves",
+            answer2: "Vibrations in the ventricular wall during systole",
+            answer3: "Ventricular filling",
+            answer4: "Closure of the mitral and tricuspid valves",
+          },
+        },
+        qustionHolder125: {
+          qustion:
+            "Greater work performance by the left ventricle than the right one is due to:",
+          answers: {
+            answer1: "Greater afterload",
+            answer2: "Greater stroke volume",
+            answer3: "Slower contraction ",
+            answer4: "Thicker wall",
+          },
+        },
+        qustionHolder126: {
+          qustion: "Starling’s law of the heart:",
+          answers: {
+            answer1:
+              "Explains increased cardiac output when the venous return is increased",
+            answer2: "Explains the increase in heart rate produced by exercise",
+            answer3: "Does not operate during exercise",
+            answer4: "Does not operate in the failing heart",
+          },
+        },
+        qustionHolder127: {
+          qustion:
+            "During severe exercise, a well-trained athlete achieve cardiac output of:",
+          answers: {
+            answer1: "35 liters",
+            answer2: "25 liters",
+            answer3: "45 liters",
+            answer4: "15 liters",
+          },
+        },
+        qustionHolder128: {
+          qustion:
+            "At any time, the greatest fraction of blood volume is present in the:",
+          answers: {
+            answer1: "Veins",
+            answer2: "Heart",
+            answer3: "Arteries",
+            answer4: "Capillaries",
+          },
+        },
+        qustionHolder129: {
+          qustion: "The term “capacitance vessels” is applied to:",
+          answers: {
+            answer1: "Veins and venules",
+            answer2: "Thoroughfare channels",
+            answer3: "Shunts",
+            answer4: "Pulmonary capillaries",
+          },
+        },
+        qustionHolder130: {
+          qustion: "Mary’s law states that:",
+          answers: {
+            answer1: "When BP increases, HR decreases and vice vers",
+            answer2: "When BP decreases, HR not affected",
+            answer3: "When BP decreases, HR decreases",
+            answer4: "When BP increases, HR increases",
+          },
+        },
+        qustionHolder131: {
+          qustion: "Heart rate is slowed by:",
+          answers: {
+            answer1: "Carotid massage",
+            answer2: "Bainbridge reflex",
+            answer3: "Deep inspiration",
+            answer4: "Increased intracranial tension",
+          },
+        },
+        qustionHolder132: {
+          qustion:
+            "Stimulation of sympathetic nerves invariably reduces blood flow in the:",
+          answers: {
+            answer1: "Brain",
+            answer2: "Skin",
+            answer3: "Heart",
+            answer4: "All of the above",
+          },
+        },
+        qustionHolder133: {
+          qustion: "The least flow under sympathetic control occurs in:",
+          answers: {
+            answer1: "Brain ",
+            answer2: "Heart ",
+            answer3: "Viscera",
+            answer4: "Skin",
+          },
+        },
+        qustionHolder134: {
+          qustion: "Concerning the arterial blood pressure:",
+          answers: {
+            answer1: "It is normally about 120/80 mm Hg",
+            answer2: "Depends only on the cardiac output",
+            answer3:
+              "Is the arithmetic average of the systolic and diastolic pressures",
+            answer4: "Is due to vascular resistance of the capillaries",
+          },
+        },
+        qustionHolder135: {
+          qustion: "Concerning nervous regulation of the circulation:",
+          answers: {
+            answer1:
+              "Baroreceptors are mainly responsible for long-term regulation of BP",
+            answer2:
+              "Sudden falls of the blood pressure leads to reflex increased heart rate",
+            answer3:
+              "The baroreceptors are found in the aortic and carotid bodies",
+            answer4:
+              "The coronary blood flow is regulated by the cardiac volume receptors",
+          },
+        },
+        qustionHolder136: {
+          qustion: "Regarding the conductive system of the heart:",
+          answers: {
+            answer1:
+              "The Purkinje fibers are specialized cardiac myocytes linked by gap junctions",
+            answer2:
+              "The spread of cardiac excitation speeds up at the atrio-ventricular node",
+            answer3:
+              "The cardiac action potential is conducted through the atria via Purkinje fibers",
+            answer4:
+              "Between action potentials, the cells of the SA node have a steady resting potential",
+          },
+        },
+        qustionHolder137: {
+          qustion: "Cardiac cycle of a healthy young adult:",
+          answers: {
+            answer1:
+              "During isometric contraction phase, the volume of the ventricle does not change ",
+            answer2:
+              "During ventricular systole, all the blood in the ventricles is ejected ",
+            answer3:
+              "During systole, the pressure in the left ventricle reaches about 25 mm Hg",
+            answer4:
+              "During diastole, the pressure in the left ventricle is close to 80 mm Hg",
+          },
+        },
+        qustionHolder138: {
+          qustion: "Concerning normal heart sounds:",
+          answers: {
+            answer1:
+              "The first sound corresponds with the closure of the mitral and tricuspid valves",
+            answer2:
+              "The first heart sound occurs just before the R wave of the ECG",
+            answer3:
+              "The first heart sound is split into two components during inspiration",
+            answer4: "The second heart sound occurs during the T-wave",
+          },
+        },
+        qustionHolder139: {
+          qustion: "Concerning cardiac output:",
+          answers: {
+            answer1:
+              "Measured by dividing oxygen consumption/ venous and arterial PO2difference",
+            answer2: "It is largely determined by the end-diastolic volume",
+            answer3: "Is increased by stimulation of the vagus nerve",
+            answer4:
+              "It is increased by aldosterone released from the adrenal medulla",
+          },
+        },
+        qustionHolder140: {
+          qustion:
+            "The cardiac action potential is conducted through the atria via:",
+          answers: {
+            answer1: "Specialized conducting fibers",
+            answer2: "Bundle of hiss",
+            answer3: "Purkinje fibers",
+            answer4: "A-V bundle",
+          },
+        },
+        qustionHolder141: {
+          qustion: "The second heart sound due to:",
+          answers: {
+            answer1: "Closure of the aortic & pulmonary valves",
+            answer2: "Closure of the aortic and mitral valves",
+            answer3: "Closure of the pulmonary valves",
+            answer4: "Closure of the aortic valve",
+          },
+        },
+        qustionHolder142: {
+          qustion: "The stroke volume is:",
+          answers: {
+            answer1: "The amount of blood pumped by the each ventricle/beat",
+            answer2: "The amount of blood pumped by the left ventricle/beat",
+            answer3: "The amount of blood pumped by the right ventricle/beat",
+            answer4: "Decreased during sympathetic stimulation",
+          },
+        },
+        qustionHolder143: {
+          qustion: "Cardiac output is increased by:",
+          answers: {
+            answer1: "Increased circulating adrenaline level",
+            answer2: "Increased circulating androgen level",
+            answer3: "Increased circulating parathormone level",
+            answer4: "Increased circulating TSH level",
+          },
+        },
+        qustionHolder144: {
+          qustion: "Concerning diameter of the arterioles:",
+          answers: {
+            answer1: "Local O2 lack causes vasodilatation",
+            answer2: "Local O2 lack causes vasoconstriction",
+            answer3: "Decreased body temperature causes vasodilatation",
+            answer4: "Adrenaline produces generalized vasoconstriction",
+          },
+        },
+        qustionHolder145: {
+          qustion: "Activation of the sympathetic nervous system causes:",
+          answers: {
+            answer1: "Vasodilatation in the sweat glands",
+            answer2: "Vasoconstriction in the sweat gland",
+            answer3: "No effects on the sweat glands",
+            answer4: "None of the above (the rest choices)",
+          },
+        },
+        qustionHolder146: {
+          qustion: "The normal ventricular ejection fraction equals:",
+          answers: {
+            answer1: "64 - 67%",
+            answer2: "33 - 35%",
+            answer3: "45 - 50%",
+            answer4: "55 - 60%",
+          },
+        },
+        qustionHolder147: {
+          qustion: "In the cardiac muscle:",
+          answers: {
+            answer1:
+              "The strength of contraction depends on the amount of Ca++ in cardiac myocytes",
+            answer2:
+              "The T-tubules store calcium less than the T-tubules in skeletal muscle",
+            answer3:
+              "Initiation of AP causes an immediate opening of slow calcium channels",
+            answer4:
+              "Cardiac muscle repolarization is caused by opening of sodium channels",
+          },
+        },
+        qustionHolder148: {
+          qustion: "The potassium permeability the highest during:",
+          answers: {
+            answer1: "Phase 3 of the ventricular muscle action potential",
+            answer2: "Phase 0 of the ventricular muscle action potential",
+            answer3: "Phase 1 of the ventricular muscle action potential",
+            answer4: "Phase 2 of the ventricular muscle action potential",
+          },
+        },
+        qustionHolder149: {
+          qustion:
+            "Immediately after the beginning of the QRS wave, the following occurs:",
+          answers: {
+            answer1: "Isovolumic contraction phase of the cardiac cycle",
+            answer2: "Atrial systole phase of the cardiac cycle",
+            answer3: "Ventricular ejection phase of the cardiac cycle",
+            answer4: "Isovolumic relaxation phase of the cardiac cycle",
+          },
+        },
+        qustionHolder150: {
+          qustion: "The following has the slowest rate of AP conduction:",
+          answers: {
+            answer1: "A-V bundle fibers",
+            answer2: "Atrial muscle",
+            answer3: "Purkinje fibers",
+            answer4: "Anterior internodal pathway",
+          },
+        },
+        qustionHolder151: {
+          qustion: "The most likely cause of spastic cardiac contraction is:",
+          answers: {
+            answer1: "Excess extracellular fluid calcium ions",
+            answer2: "Increased sympathetic activity",
+            answer3: "Decreased extracellular fluid potassium ions",
+            answer4: "Excess extracellular fluid potassium ions",
+          },
+        },
+        qustionHolder152: {
+          qustion: "At the end of ventricular isovolumic relaxation:",
+          answers: {
+            answer1: "The mitral valve opens ",
+            answer2: "The aortic valve opens ",
+            answer3: "The A-V valves close",
+            answer4: "The aortic valve closes",
+          },
+        },
+        qustionHolder153: {
+          qustion: "Associated with the first heart sound?",
+          answers: {
+            answer1: "Closure of the A-V valves",
+            answer2: "Opening of A-V valves",
+            answer3: "Closure of aortic valve",
+            answer4: "Beginning of diastole",
+          },
+        },
+        qustionHolder154: {
+          qustion: "Which condition will result in a dilated, flaccid heart?",
+          answers: {
+            answer1: "Excess potassium ions in the blood ",
+            answer2: "Increased sympathetic stimulation",
+            answer3: "Excess sodium ions in the blood ",
+            answer4: "Excess calcium ions in the blood ",
+          },
+        },
+        qustionHolder155: {
+          qustion: "The sodium permeability the highest during:",
+          answers: {
+            answer1: "Phase 0 of the ventricular AP",
+            answer2: "Phase 1 of the ventricular AP",
+            answer3: "Phase 2 of the ventricular AP",
+            answer4: "Phase 3 of the ventricular AP",
+          },
+        },
+        qustionHolder156: {
+          qustion: "Sympathetic stimulation of the heart normally causes:",
+          answers: {
+            answer1: "Increased force of contraction of the ventricles",
+            answer2: "Decreased of force of contraction of the atria",
+            answer3: "Decreased heart rate",
+            answer4: "Decreased rate of the conduction of the cardiac impulse",
+          },
+        },
+        qustionHolder157: {
+          qustion: "The highest velocity of blood flow occurs in:",
+          answers: {
+            answer1: "Aorta",
+            answer2: "Arteries",
+            answer3: "Venules",
+            answer4: "capillaries",
+          },
+        },
+        qustionHolder158: {
+          qustion:
+            "The greatest total cross-sectional area in the circulatory system is:",
+          answers: {
+            answer1: "capillaries",
+            answer2: "aorta",
+            answer3: "venules",
+            answer4: "small arteries",
+          },
+        },
+        qustionHolder159: {
+          qustion:
+            "Its decreased production most likely result in chronic hypertension:",
+          answers: {
+            answer1: "Nitric oxide",
+            answer2: "Thromboxane",
+            answer3: "Aldosterone",
+            answer4: "Angiotensin II",
+          },
+        },
+        qustionHolder160: {
+          qustion:
+            "The following often occurs in progressive hemorrhagic shock:",
+          answers: {
+            answer1: "Vasomotor center failure",
+            answer2: "Increased urine output",
+            answer3: "Tissue alkalosis ",
+            answer4: "Decreased capillary permeability",
+          },
+        },
+        qustionHolder161: {
+          qustion: "Normally associated with increased cardiac output:",
+          answers: {
+            answer1: "Atrioventricular (A_V) fistula",
+            answer2: "Polycythemia",
+            answer3: "Severe aortic regurgitation ",
+            answer4: "Increased parasympathetic stimulation",
+          },
+        },
+        qustionHolder162: {
+          qustion: "Decreased resistance to venous return occurs i:",
+          answers: {
+            answer1: "Anemia ",
+            answer2: "Increased arteriolar resistance",
+            answer3: "Increased venous resistance",
+            answer4: "Increased sympathetic output",
+          },
+        },
+        qustionHolder163: {
+          qustion: "Decreased cardiac output results from:",
+          answers: {
+            answer1: "Acute myocardial infarction",
+            answer2: "A-V fistula",
+            answer3: "Anemia",
+            answer4: "hyperthyroidism",
+          },
+        },
+        qustionHolder164: {
+          qustion: "The fourth heart sound is associated with:",
+          answers: {
+            answer1:
+              "rushing of blood into the ventricles from atrial contraction",
+            answer2: "closing of the A-V valves",
+            answer3: "closing of the pulmonary valve",
+            answer4: "opening of the A-V valves",
+          },
+        },
+        qustionHolder165: {
+          qustion: "The following is associated with the first heart sound:",
+          answers: {
+            answer1: "Closing of the A-V valves ",
+            answer2:
+              "Rushing of blood into the ventricles as a result of atrial contraction",
+            answer3: "Closing of the pulmonary valve ",
+            answer4: "Opening of the A-V valves",
+          },
+        },
+        qustionHolder166: {
+          qustion: "Associated with the third heart sound:",
+          answers: {
+            answer1:
+              "Rushing of blood into the ventricles in the early diastole",
+            answer2: "Opening of the A-V valves",
+            answer3: "Closing of the A-V valves",
+            answer4:
+              "Inrushing of blood into the ventricles as a result of atrial contraction",
+          },
+        },
+        qustionHolder167: {
+          qustion: "Cardiac output is often increased in:",
+          answers: {
+            answer1: "Septic shock",
+            answer2: "Hemorrhagic shock",
+            answer3: "Anaphylactic shock",
+            answer4: "Neurogenic shock",
+          },
+        },
+        qustionHolder168: {
+          qustion:
+            "Causes VD & increased capillary permeability during anaphylactic shock:",
+          answers: {
+            answer1: "Histamine",
+            answer2: "Bradykinin",
+            answer3: "Nitric oxide",
+            answer4: "Atrial natriuretic factor",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 168) {
+        var r = Math.floor(Math.random() * 168) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+            clearInterval(newYearCountdown);
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            clearInterval(newYearCountdown);
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

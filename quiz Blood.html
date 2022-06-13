@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Blood</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion: "The most abundant protein in blood is:",
+          answers: {
+            answer1: "Hemoglobin",
+            answer2: "Albumin",
+            answer3: "Fibrinogen",
+            answer4: "Beta-globulin",
+          },
+        },
+        qustionHolder2: {
+          qustion: "Macrocytes have a mean corpuscular volume greater than:",
+          answers: {
+            answer1: "90 fL ",
+            answer2: "100 fL",
+            answer3: "80 fL",
+            answer4: "70 fL",
+          },
+        },
+        qustionHolder3: {
+          qustion:
+            "The amount of hemoglobin contained in normocytes is approximately:",
+          answers: {
+            answer1: "20 pg ",
+            answer2: "25 pg",
+            answer3: "30 pg",
+            answer4: "35 pg",
+          },
+        },
+        qustionHolder4: {
+          qustion:
+            "The amount of hemoglobin present in 100 ml of red blood cells is defined as:",
+          answers: {
+            answer1: "MCHC",
+            answer2: "MCH",
+            answer3: "Hemoglobin index",
+            answer4: "RDW",
+          },
+        },
+        qustionHolder5: {
+          qustion:
+            "When the hemoglobin concentration is g/dL& PCV is then, MCHC is:",
+          answers: {
+            answer1: "20 g/dL ",
+            answer2: "25 g/dL ",
+            answer3: "30 g/dL ",
+            answer4: "35 g/dL ",
+          },
+        },
+        qustionHolder6: {
+          qustion:
+            "The following indices could be calculated when performing CBC manually:",
+          answers: {
+            answer1: "Mean corpuscular hemoglobin",
+            answer2: "Mean cell diameter",
+            answer3: "Mean corpuscular volume",
+            answer4: "Mean corpuscular hemoglobin concentration",
+          },
+        },
+        qustionHolder7: {
+          qustion: "Primary hemostasis refers to cessation of bleeding due to:",
+          answers: {
+            answer1: "Formation of a temporary platelet plug",
+            answer2: "Formation of a definitive clot",
+            answer3: "Clot retraction",
+            answer4: "Vasoconstriction",
+          },
+        },
+        qustionHolder8: {
+          qustion: "Platelet aggregation is stimulated by:",
+          answers: {
+            answer1: "Thromboxane A2",
+            answer2: "Protein c and S",
+            answer3: "Antihemophilic factor",
+            answer4: "Tissue plasmin",
+          },
+        },
+        qustionHolder9: {
+          qustion:
+            "Impaired adhesion of platelets to subendothelial collagen occurs in:",
+          answers: {
+            answer1: "Absence of von Willebrand factor",
+            answer2: "Absence of heparin",
+            answer3: "Absence of antithrombin III",
+            answer4: "Absence of plasmin",
+          },
+        },
+        qustionHolder10: {
+          qustion: "The following clotting factors is not vitamin K dependent?",
+          answers: {
+            answer1: "Factor V",
+            answer2: "Factor II",
+            answer3: "Factor VII",
+            answer4: "Factor IX",
+          },
+        },
+        qustionHolder11: {
+          qustion: "The extrinsic pathway is triggered bey the release of:",
+          answers: {
+            answer1: "Tissue factor",
+            answer2: "Contact factor",
+            answer3: "Factor VII",
+            answer4: "Tissue factor pathway inhibitor",
+          },
+        },
+        qustionHolder12: {
+          qustion: "The extrinsic pathway is inhibited by:",
+          answers: {
+            answer1: "Tissue factor pathway inhibitor (TFPI)",
+            answer2: "Tissue factor",
+            answer3: "Contact factor",
+            answer4: "Thromboplastin",
+          },
+        },
+        qustionHolder13: {
+          qustion: "The test that screens the extrinsic pathway integrity is:",
+          answers: {
+            answer1: "Prothrombin time (PT)",
+            answer2: "Thrombin time",
+            answer3: "Clot lysis time",
+            answer4: "Activated partial thromboplastin time (aPTT)",
+          },
+        },
+        qustionHolder14: {
+          qustion: "The enzyme that ultimately lyses fibrin is:",
+          answers: {
+            answer1: "Plasmin",
+            answer2: "TPA",
+            answer3: "Plasminogen",
+            answer4: "Urokinase",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "Prolongation of prothrombin time does not occur when there is only:",
+          answers: {
+            answer1: "Deficiency of factor VIII",
+            answer2: "Deficiency of factor X",
+            answer3: "Deficiency of vitamin K",
+            answer4: "Deficiency of factor IX",
+          },
+        },
+        qustionHolder16: {
+          qustion:
+            "Mutations of the following is associated with hypercoagulable state: ",
+          answers: {
+            answer1: "Protein S",
+            answer2: "Clot retraction",
+            answer3: "Blood platelets",
+            answer4: "Vasoconstrictor activity",
+          },
+        },
+        qustionHolder17: {
+          qustion: "Factor V Leiden is:",
+          answers: {
+            answer1:
+              "Present in a large subset of patients with venous thromboembolism",
+            answer2: "A mutated from of factor IX",
+            answer3: "Inactivated by protein C",
+            answer4: "Present normally in healthy individuals",
+          },
+        },
+        qustionHolder18: {
+          qustion:
+            "Characterized by increased both bleeding and clotting time:",
+          answers: {
+            answer1: "Afibrinogenemia",
+            answer2: "Purpura",
+            answer3: "Hemophilia A ",
+            answer4: "Deep venous thrombosis",
+          },
+        },
+        qustionHolder19: {
+          qustion: "Red cell antigens A and B are chemically:",
+          answers: {
+            answer1: "Glycopeptides",
+            answer2: "Polypeptides",
+            answer3: "Phospholipids ",
+            answer4: "Glycosphingolipids",
+          },
+        },
+        qustionHolder20: {
+          qustion: "Red cell A and B antigens are also present in:",
+          answers: {
+            answer1: "Saliva",
+            answer2: "White blood cells",
+            answer3: "Biliary secretion",
+            answer4: "Pancreatic secretions",
+          },
+        },
+        qustionHolder21: {
+          qustion:
+            "The red blood cells of a person with the blood group B do not have:",
+          answers: {
+            answer1: "Anti B",
+            answer2: "Anti A",
+            answer3: "Anti D",
+            answer4: "Antihemophilic globulin",
+          },
+        },
+        qustionHolder22: {
+          qustion: "Most of the body iron is present in:",
+          answers: {
+            answer1: "Hemoglobin",
+            answer2: "Myoglobin",
+            answer3: "Transferrin",
+            answer4: "Ferritin",
+          },
+        },
+        qustionHolder23: {
+          qustion:
+            "The 1st pregnancy is not affected in Ph -ve mother not sensitized by Rh antigen because:",
+          answers: {
+            answer1: "Antibodies are unable to cross placenta",
+            answer2: "IgG titer low during the primary immune response",
+            answer3: "IgG is ineffective against fetal red cells ",
+            answer4:
+              "Fetal hemolysis is compensated by increased erythropoiesis",
+          },
+        },
+        qustionHolder24: {
+          qustion:
+            "ABO compatibility is important for blood transfusions because:",
+          answers: {
+            answer1: "There are 3 antigens in this system",
+            answer2: "The A and B antigens are present in all cells",
+            answer3:
+              "Lacking A or B antigens causes invariable presence of their antibody",
+            answer4: "O is a strong antigen",
+          },
+        },
+        qustionHolder25: {
+          qustion:
+            "When blood group could not be determined, urgent transfusion is done with:",
+          answers: {
+            answer1:
+              "RBC corresponding to the person red cell group and colloids",
+            answer2: "Whole blood corresponding to the person plasma group",
+            answer3: "O positive PBC, colloids and crystalloids",
+            answer4: "AB negative blood",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Circulating erythropoietin originates from:",
+          answers: {
+            answer1:
+              "Interstitial cells surrounding the peritubular capillaries in the renal cortex",
+            answer2: "Perivenous hepatocytes",
+            answer3: "Kupffer cells of liver",
+            answer4: "None of the above",
+          },
+        },
+        qustionHolder27: {
+          qustion: "Osmotic fragility of red blood cells is decreased in:",
+          answers: {
+            answer1: "Hereditary spherocytosis",
+            answer2: "Sickle cell anemia",
+            answer3: "Macrocytic anemia",
+            answer4: "Normocytic normochromic anemia",
+          },
+        },
+        qustionHolder28: {
+          qustion:
+            "Hereditary spherocytosis occurs due to mutations in genes coding for:",
+          answers: {
+            answer1: "Spectrin and ankyrin",
+            answer2: "NaK ATPase",
+            answer3: "Pyruvate kinase",
+            answer4: "Glucose phosphate dehydrogenase",
+          },
+        },
+        qustionHolder29: {
+          qustion: "CO is formed as an end product of:",
+          answers: {
+            answer1: "Heme metabolism",
+            answer2: "Arginine metabolism",
+            answer3: "Oxidation of acetoacetate",
+            answer4: "All of the above (the rest)",
+          },
+        },
+        qustionHolder30: {
+          qustion: "Heme is converted to bilirubin mainly in the:",
+          answers: {
+            answer1: "Spleen",
+            answer2: "Liver",
+            answer3: "Kidneys",
+            answer4: "Bone marrow",
+          },
+        },
+        qustionHolder31: {
+          qustion: "The protein that binds extracorpuscular hemoglobin is:",
+          answers: {
+            answer1: "Haptoglobin",
+            answer2: "Hemin",
+            answer3: "Hemopexin",
+            answer4: "Haptopexin",
+          },
+        },
+        qustionHolder32: {
+          qustion:
+            "The following bands is normally absent When a serum is electrophoresed:",
+          answers: {
+            answer1: "Albumin",
+            answer2: "Fibrinogen",
+            answer3: "α2 globulin",
+            answer4: "α1 globulin",
+          },
+        },
+        qustionHolder33: {
+          qustion: "One of the following is not synthesized in the liver:",
+          answers: {
+            answer1: "α2 macroglobulin",
+            answer2: "Albumin",
+            answer3: "Angiotensinogen",
+            answer4: "IgG",
+          },
+        },
+        qustionHolder34: {
+          qustion: "The following plasma proteins are protease inhibitors:",
+          answers: {
+            answer1: "Antithrombin III",
+            answer2: "Transferrin",
+            answer3: "Globulin",
+            answer4: "Creactive protein",
+          },
+        },
+        qustionHolder35: {
+          qustion: "The following is a negative acute phase reactant:",
+          answers: {
+            answer1: "Albumin",
+            answer2: "Creactive protein",
+            answer3: "Transferrin",
+            answer4: "α2 macroglobulin",
+          },
+        },
+        qustionHolder36: {
+          qustion: "ESR is increased in:",
+          answers: {
+            answer1: "Anemia",
+            answer2: "Hypofibrinogenemia",
+            answer3: "Polycythemia",
+            answer4: "Spherocytosis",
+          },
+        },
+        qustionHolder37: {
+          qustion: "The appropriate treatment for erythroblastosis fetalis is:",
+          answers: {
+            answer1: "Exchange transfusion with Rh (D) negative blood",
+            answer2: "Exchange transfusion with Rh (D) positive blood",
+            answer3: "Immunization with Rh (D) antigen",
+            answer4: "Passive immunization with antiRh (D) immunoglobulin",
+          },
+        },
+        qustionHolder38: {
+          qustion: "The highest protein contents of lymph draining is:",
+          answers: {
+            answer1: "Liver",
+            answer2: "Skeletal muscle",
+            answer3: "Gastrointestinal tract",
+            answer4: "Choroid plexus",
+          },
+        },
+        qustionHolder39: {
+          qustion: "Fetal hemoglobin (Hb F):",
+          answers: {
+            answer1:
+              "At low PO2, Hb F gives up less oxygen to tissues than Hb A",
+            answer2:
+              "At low PO2, Hb F gives up more oxygen to tissues than Hb A",
+            answer3:
+              "The oxygen dissociation curve of HbF is shifted to the right relative to HbA",
+            answer4:
+              "In comparison to HbA, Hb F has greater affinity for 2,3-BPG",
+          },
+        },
+        qustionHolder40: {
+          qustion: "Blood viscosity:",
+          answers: {
+            answer1: "Is different at all flow velocities",
+            answer2: "Is constant at all flow velocities",
+            answer3: "Is – times as water",
+            answer4: "Is due to its WBCs components only",
+          },
+        },
+        qustionHolder41: {
+          qustion:
+            "The following transfusions will result in an immediate transfusion reaction:",
+          answers: {
+            answer1: "A Rhnegative whole blood to a B Rhnegative patient",
+            answer2: "O Rhnegative whole blood to an O Rhpositive patient",
+            answer3: "AB Rhnegative whole blood to an AB Rhpositive patient",
+            answer4: "B Rhnegative whole blood to a B Rhnegative patient",
+          },
+        },
+        qustionHolder42: {
+          qustion:
+            "Deficiency of factor IX and corrected by vitamin K occurs in:",
+          answers: {
+            answer1: "Classic hemophilia",
+            answer2: "Hepatitis B",
+            answer3: "Bile duct obstruction",
+            answer4: "Genetic deficiency in antithrombin III",
+          },
+        },
+        qustionHolder43: {
+          qustion:
+            "The following is not effective as an in vitro anticoagulant:",
+          answers: {
+            answer1: "Warfarin (Coumadin)",
+            answer2: "Sodium citrate",
+            answer3: "Heparin",
+            answer4: "Ethylenediamine tetraacetic acid (EDTA)",
+          },
+        },
+        qustionHolder44: {
+          qustion:
+            "The following used for prophylaxis of ischemic heart attack:",
+          answers: {
+            answer1: "Aspirin",
+            answer2: "Heparin",
+            answer3: "Warfarin",
+            answer4: "Streptokinase",
+          },
+        },
+        qustionHolder45: {
+          qustion:
+            "The following clotting pathway starts with tissue thromboplastin:",
+          answers: {
+            answer1: "Extrinsic pathway",
+            answer2: "Common pathway",
+            answer3: "Intrinsic pathway",
+            answer4: "Fibrin stabilization",
+          },
+        },
+        qustionHolder46: {
+          qustion:
+            "In malnutrition, the following causes excessive bleeding on injury:",
+          answers: {
+            answer1: "Vitamin K deficiency",
+            answer2: "Platelet sequestration by fatty liver",
+            answer3: "Serum bilirubin that raises neutralizing thrombin",
+            answer4: "Low serum protein levels that cause factor XIII problems",
+          },
+        },
+        qustionHolder47: {
+          qustion: "Prolonged bleeding time is best explained by:",
+          answers: {
+            answer1: "Thrombocytopenia",
+            answer2: "Hemophilia A",
+            answer3: "Hemophilia B",
+            answer4: "Coumadin use",
+          },
+        },
+        qustionHolder48: {
+          qustion: "The appropriate therapy for massive pulmonary embolism is:",
+          answers: {
+            answer1: "Heparin",
+            answer2: "Warfarin",
+            answer3: "Aspirin",
+            answer4: "Tissue plasminogen activator",
+          },
+        },
+        qustionHolder49: {
+          qustion:
+            "The primary mechanism by which heparin prevents blood coagulation is:",
+          answers: {
+            answer1: "Antithrombin III activation",
+            answer2: "Binding and inhibition of tissue factor",
+            answer3: "Binding available calcium",
+            answer4: "Inhibition of platelet activating factor",
+          },
+        },
+        qustionHolder50: {
+          qustion:
+            "The main site of RBC production during 2nd trimester of pregnancy is:",
+          answers: {
+            answer1: "Liver",
+            answer2: "Bone marrow",
+            answer3: "Lymph nodes",
+            answer4: "Yolk sac",
+          },
+        },
+      };
+
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 50) {
+        var r = Math.floor(Math.random() * 50) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+            clearInterval(newYearCountdown);
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            clearInterval(newYearCountdown);
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

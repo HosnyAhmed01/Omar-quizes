@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Respiratory</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion: "Action potential of nerve cells:",
+          answers: {
+            answer1:
+              "Result from a large increase in the membrane permeability to sodium ions",
+            answer2: "Can summate one with another ",
+            answer3: "May vary considerably in amplitude",
+            answer4: "Become larger as stimulus strength increases ",
+          },
+        },
+        qustionHolder2: {
+          qustion: "Velocity of action potential propagation is:",
+          answers: {
+            answer1: "Depends on the thickness of the myelin around the axon",
+            answer2: "Independent of an axon’s diameter ",
+            answer3: "Unaffected by axon demyelination",
+            answer4: "Fastest in unmyelinated axons",
+          },
+        },
+        qustionHolder3: {
+          qustion: "Concerning the neuromuscular junction:",
+          answers: {
+            answer1: "The motor nerve endings secrete acetylcholine",
+            answer2:
+              "Curare leads to prolongation of neuromuscular transmission",
+            answer3: "The motor nerve endings secrete noradrenaline",
+            answer4: "The muscle membrane possesses muscarinic receptors",
+          },
+        },
+        qustionHolder4: {
+          qustion: "Concerning the role of Ca+2  in muscle contraction:",
+          answers: {
+            answer1:
+              "A rise of Ca+in the sarcoplasm allows actin to interact with myosin",
+            answer2:
+              "The tension of a skeletal muscle fiber is partly regulated by G proteins",
+            answer3:
+              "Ca+entry is important in sustaining the contraction of skeletal muscle",
+            answer4:
+              "The mitochondria acts as a store of Ca+for contractile process",
+          },
+        },
+        qustionHolder5: {
+          qustion: "Concerning the structure of muscle tissue:",
+          answers: {
+            answer1:
+              "Initiation of skeletal muscle contraction is dependent on its nerve supply",
+            answer2: "Smooth muscle has well developed system of T-tubules",
+            answer3: "Skeletal muscle has intercalated discs inside ",
+            answer4:
+              "Skeletal muscle has the same structure as cardiac muscle ",
+          },
+        },
+        qustionHolder6: {
+          qustion: "Concerning action potential of the cardiac muscle:",
+          answers: {
+            answer1:
+              "Ca+required for contraction enters a myocyte during the plateau phase",
+            answer2: "Has the same duration as that of skeletal muscle ",
+            answer3:
+              "Occurs in response to action potential in the autonomic nerve fibers ",
+            answer4:
+              "The force of contraction is increased by circulating adrenaline",
+          },
+        },
+        qustionHolder7: {
+          qustion: "The maximal power developed by skeletal muscle:",
+          answers: {
+            answer1: "Depends on the load being moved by the muscle",
+            answer2:
+              "Occurs when the muscle is shortening at its maximum rate ",
+            answer3: "Occurs with an isometric contraction",
+            answer4: "Is independent of the initial length of the muscle ",
+          },
+        },
+        qustionHolder8: {
+          qustion: "Skeletal muscle:",
+          answers: {
+            answer1: "Has a T-tubules system while smooth muscle does not",
+            answer2: "Has not of T-tubules system while smooth muscle has ",
+            answer3: "Contains actin, myosin and troponin proteins only",
+            answer4: "Its action potential like that of cardiac muscle",
+          },
+        },
+        qustionHolder9: {
+          qustion: "All muscle cells:",
+          answers: {
+            answer1: "None of the above",
+            answer2: "Contain actin and myosin proteins ",
+            answer3: "Contain myosin and calmodulin proteins",
+            answer4: "Contain actin and calmodulin proteins",
+          },
+        },
+        qustionHolder10: {
+          qustion: "Action potential of cardiac muscle is:",
+          answers: {
+            answer1:
+              "Initiated by action potentials in the parasympathetic nerve fibers ",
+            answer2:
+              "Initiated by action potentials in the sympathetic nerve fibers ",
+            answer3: "Differ from the skeletal muscle in having plateau",
+            answer4: "The same as skeletal muscle",
+          },
+        },
+        qustionHolder11: {
+          qustion:
+            "The muscle fibers of the skeletal muscle are electrically coupled, so:",
+          answers: {
+            answer1:
+              "One nerve can control the activity of several muscle fibers",
+            answer2:
+              "One nerve can’t control the activity of several muscle fibers",
+            answer3:
+              "Multiple nerve fibers can control the activity of several muscle fibers",
+            answer4:
+              "Multiple nerve fibers can’t control the activity of several muscle fibers",
+          },
+        },
+        qustionHolder12: {
+          qustion: "Muscle contraction is:",
+          answers: {
+            answer1: "No shortening of the muscle in isometric contraction",
+            answer2: "No shortening of the muscle in isotonic contraction",
+            answer3: "Decreased by circulating adrenaline",
+            answer4: "Increased by circulating adrenaline",
+          },
+        },
+        qustionHolder13: {
+          qustion: "The mitochondria:",
+          answers: {
+            answer1: "Is the power generating unit",
+            answer2: "Contains no DNA",
+            answer3: "Surrounded by only one membrane",
+            answer4: "Acts as a store of Ca2+ for the contractile process",
+          },
+        },
+        qustionHolder14: {
+          qustion: "Most of the generated ATP in nerve cells is utilized to:",
+          answers: {
+            answer1: "Na-K ATPase",
+            answer2: "Na-Ca exchanger",
+            answer3: "H-ATPase in the cell membrane",
+            answer4: "Synthesis of proteins",
+          },
+        },
+        qustionHolder15: {
+          qustion: "Decreased K+ would be expected to result in:",
+          answers: {
+            answer1: "A more negative RMP",
+            answer2: "A decrease in firing level of neurons",
+            answer3: "No change in RMP",
+            answer4: "Increased neuronal excitability",
+          },
+        },
+        qustionHolder16: {
+          qustion: "Action potential conduction velocity is increased by:",
+          answers: {
+            answer1: "Myelination",
+            answer2: "Decreased axon diameter ",
+            answer3: "Decreased temperature",
+            answer4: "Un-myelination",
+          },
+        },
+        qustionHolder17: {
+          qustion:
+            "A suprathreshold stimulus can excite the nerve or muscle during:",
+          answers: {
+            answer1: "Relative refractory period",
+            answer2: "Overshoot",
+            answer3: "Spike potential",
+            answer4: "Absolute refractory period",
+          },
+        },
+        qustionHolder18: {
+          qustion: "Conduction block by pressure is most likely occurs in:",
+          answers: {
+            answer1: "Type A nerve fiber",
+            answer2: "Type B nerve fiber ",
+            answer3: "Type C nerve fiber",
+            answer4: "None of the above",
+          },
+        },
+        qustionHolder19: {
+          qustion: "In the skeletal muscle, thin filaments does not contain:",
+          answers: {
+            answer1: "Myosin",
+            answer2: "Tropomyosin",
+            answer3: "Actin",
+            answer4: "Troponin",
+          },
+        },
+        qustionHolder20: {
+          qustion:
+            "Conduction block by local anesthesia is most likely occurs in:",
+          answers: {
+            answer1: "Type C nerve fiber",
+            answer2: "None of the above",
+            answer3: "Type B nerve fiber",
+            answer4: "Type A nerve fiber",
+          },
+        },
+        qustionHolder21: {
+          qustion:
+            "The ATPase activity is altered to regulate skeletal muscle contraction in:",
+          answers: {
+            answer1: "Myosin protein",
+            answer2: "Actin protein",
+            answer3: "Tropomyosin protein",
+            answer4: "Troponin protein",
+          },
+        },
+        qustionHolder22: {
+          qustion:
+            "The duration of action potential in skeletal muscle fiber is:",
+          answers: {
+            answer1: "5 ms",
+            answer2: "25 ms",
+            answer3: "100 ms",
+            answer4: "250 ms",
+          },
+        },
+        qustionHolder23: {
+          qustion:
+            "The major source of calcium for contraction of skeletal muscle is:",
+          answers: {
+            answer1: "Sarcoplasmic reticulum",
+            answer2: "Cytosol",
+            answer3: "ECF",
+            answer4: "Mitochondria",
+          },
+        },
+        qustionHolder24: {
+          qustion:
+            "Excitation – contraction of skeletal muscle are coupled by:",
+          answers: {
+            answer1: "Release of Ca+into sarcoplasm",
+            answer2: "Calmodulin",
+            answer3: "Myosin",
+            answer4: "ATP",
+          },
+        },
+        qustionHolder25: {
+          qustion: "The following slows the skeletal muscle relaxation:",
+          answers: {
+            answer1: "ATP depletion",
+            answer2: "Fast myosin ATPase",
+            answer3: "Stimulation of CA-Mg ATPase",
+            answer4: "All of the above",
+          },
+        },
+        qustionHolder26: {
+          qustion: "Staircase phenomenon (Trappe) is due to:",
+          answers: {
+            answer1: "Increased availability of intracellular Ca++",
+            answer2: "Summation",
+            answer3: "Tetanus",
+            answer4: "Synthesis of stable troponic C molecules",
+          },
+        },
+        qustionHolder27: {
+          qustion:
+            "The minimum stimulus intensity produces a compound AP is equal:",
+          answers: {
+            answer1: "Rheobase ",
+            answer2: "Chronaxie",
+            answer3: "Twice rheobase",
+            answer4: "Twice chronaxie",
+          },
+        },
+        qustionHolder28: {
+          qustion:
+            "The predominant substrate used by the heart under basal conditions is:",
+          answers: {
+            answer1: "Fatty acids ",
+            answer2: "Amino acids ",
+            answer3: "Ketones",
+            answer4: "Carbohydrate",
+          },
+        },
+        qustionHolder29: {
+          qustion: "Resting membrane potential is most unstable in:",
+          answers: {
+            answer1: "Smooth muscle of the stomach",
+            answer2: "Gastrocnemius muscle",
+            answer3: "Orbicularis oculi",
+            answer4: "Muscle cells in the left ventricle",
+          },
+        },
+        qustionHolder30: {
+          qustion:
+            "A single skeletal muscle contraction is most likely terminated by:",
+          answers: {
+            answer1: "Removal of sarcoplasmic Ca++",
+            answer2: "Removal of Ca++ from the terminal of the motor neuron\t",
+            answer3: "Removal of acetylcholine from the neuromuscular junction",
+            answer4:
+              "Closure of the postsynaptic nicotinic acetylcholine receptor",
+          },
+        },
+        qustionHolder31: {
+          qustion:
+            "The following is decreased in length during muscle contraction:",
+          answers: {
+            answer1: "I band of the sarcomere",
+            answer2: "Thin filaments",
+            answer3: "Thick filaments",
+            answer4: "A band of the sarcomere",
+          },
+        },
+        qustionHolder32: {
+          qustion:
+            "Tetanic contraction of a skeletal muscle fiber results from:",
+          answers: {
+            answer1: "Cumulative increase of Ca++",
+            answer2: "Cumulative increase of ATP",
+            answer3: "Cumulative increase of K+",
+            answer4: "Cumulative increase of Na++",
+          },
+        },
+        qustionHolder33: {
+          qustion: "Increased muscle mass is primarily attributable to:",
+          answers: {
+            answer1: "Hypertrophy of individual muscle fibers",
+            answer2: "Fusion of sarcomeres between adjacent myofibrils",
+            answer3: "Increase in skeletal muscle blood supply",
+            answer4: "Increase in the number of motor neurons",
+          },
+        },
+        qustionHolder34: {
+          qustion:
+            "The following drugs is used for treatment of Myasthenia gravis:",
+          answers: {
+            answer1: "Neostigmine",
+            answer2: "Halothane",
+            answer3: "Curare",
+            answer4: "Atropine",
+          },
+        },
+        qustionHolder35: {
+          qustion:
+            "After fracture, the muscle become smaller. The most likely explanation is:",
+          answers: {
+            answer1:
+              "Temporary reduction in actin and myosin protein synthesis",
+            answer2: "Increased glycolytic activity in the affected muscle",
+            answer3:
+              "Decreased blood flow to the muscle caused by constriction from the cast",
+            answer4: "Decreased number of individual muscle fibers",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 35) {
+        var r = Math.floor(Math.random() * 35) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+            clearInterval(newYearCountdown);
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            clearInterval(newYearCountdown);
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

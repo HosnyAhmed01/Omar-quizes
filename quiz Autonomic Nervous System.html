@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz Respiratory</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container .congrats {
+        background-color: #03a9f4;
+        width: 400px;
+        margin: 50px auto;
+        font-size: large;
+        color: #fff;
+        font-weight: bold;
+      }
+      .container > div {
+        background-color: #eee;
+        margin-top: 10px;
+        padding: 10px;
+        margin-top: 50px;
+      }
+      .container > div .qus {
+        font-size: large;
+        color: #f44336;
+        padding: 10px;
+      }
+      .container > div .qus + div {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container p {
+        padding: 10px 45px;
+        border-top: 3px solid #fff;
+        position: relative;
+        width: 100%;
+      }
+      .container p::before,
+      .container .active::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+      }
+      .container p:not(.active, .wrong, .right):hover::after,
+      .container .active::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: #673ab7a1;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
+
+      .container .active::before {
+        content: "";
+        background-color: #673ab7;
+      }
+      .container .wrong::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #f44336;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .container .right::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #4caf50;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .btncontainer {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .submit {
+        background-color: #4caf50;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+        display: none;
+      }
+      .button {
+        background-color: #9c27b0;
+        padding: 10px 20px;
+        color: #fff;
+        font-weight: bold;
+        font-size: medium;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+      .container .count-down {
+        position: fixed;
+        top: 200px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #673ab7;
+        color: #fff;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="master.css" /> -->
+  </head>
+  <body>
+    <div class="container">hello</div>
+
+    <div class="btncontainer">
+      <div class="button">start</div>
+      <div class="submit">submit</div>
+    </div>
+
+    <script>
+      let finalObject = {
+        qustionHolder1: {
+          qustion:
+            "Regarding the sympathetic division of the autonomic nervous system:",
+          answers: {
+            answer1:
+              "Acetylcholine is secreted by some sympathetic postganglionic fibers.",
+            answer2:
+              "Most sympathetic preganglionic fibers secrete noradrenaline (norepinephrine).",
+            answer3:
+              "Sympathetic postganglionic neurons are found in spinal segments from T1 to L2.",
+            answer4:
+              "Sympathetic chain extends from thoracic to sacral regions of the spinal cord.",
+          },
+        },
+        qustionHolder2: {
+          qustion:
+            "Regarding the parasympathetic division of the autonomic nervous system:",
+          answers: {
+            answer1:
+              "Parasympathetic Postganglionic fibers secrete ac. ch. onto their target organs",
+            answer2:
+              "Parasympathetic Preganglionic fibers are found in all cranial nerves.",
+            answer3:
+              "Parasympathetic vasoconstrictor fibers are present in the salivary glands\t.",
+            answer4:
+              "Parasympathetic Postganglionic neurons are found in spinal ganglia (T1 to L2).",
+          },
+        },
+        qustionHolder3: {
+          qustion: "Regarding the role of the autonomic innervation:",
+          answers: {
+            answer1:
+              "Stimulation of the sympathetic nerves to the eyes causes dilation of the pupils.",
+            answer2:
+              "Activation of the sympathetic system causes vasodilatation in the skin.",
+            answer3:
+              "Sympathetic activity causes vasoconstriction in the viscera and skeletal muscle.",
+            answer4: "Stimulation of the vagus nerves speed up the heart.",
+          },
+        },
+        qustionHolder4: {
+          qustion: "About autonomic functions:",
+          answers: {
+            answer1:
+              "The autonomic nerves modify the activity of the smooth muscles.",
+            answer2:
+              "The muscarinic action of ac. Ch. Is produced by parasymp. Pregang fibers.",
+            answer3:
+              "Injection of atropine leads to slowing of the heart rate.",
+            answer4:
+              "Epinephrine & norepinephrine blood concentrations are equal.",
+          },
+        },
+        qustionHolder5: {
+          qustion: "Which of the following is not an autonomic reflex:",
+          answers: {
+            answer1: "Flexion of the arm following a painful stimulus",
+            answer2: "Salivary secretion",
+            answer3: "Micturition\t",
+            answer4: "Acceleration of the heart",
+          },
+        },
+        qustionHolder6: {
+          qustion: "The origin of parasympathetic fibers is:",
+          answers: {
+            answer1: "Cranio-sacral outflow.",
+            answer2: "Thoraco-lumbar outflow.",
+            answer3: "Thoraco-sacral outflow.",
+            answer4: "Cranio-lumbar outflow.",
+          },
+        },
+        qustionHolder7: {
+          qustion:
+            "The following is not affected by the autonomic nervous system:",
+          answers: {
+            answer1: "Medulla oblongata.",
+            answer2: "Arteriolar smooth muscle.",
+            answer3: "Heart.",
+            answer4: "Visceral smooth muscles.",
+          },
+        },
+        qustionHolder8: {
+          qustion:
+            "The system that controls smooth muscle, cardiac muscle, and gland activity is:",
+          answers: {
+            answer1: "Autonomic nervous system.",
+            answer2: "Somatic nervous system.",
+            answer3: "Skeletal division.",
+            answer4: "Sensory nerve fibers.",
+          },
+        },
+        qustionHolder9: {
+          qustion: "The following is a component of the reflex arc:",
+          answers: {
+            answer1: "Effector organs.",
+            answer2:
+              "Afferent neuron conducts motor signals from periphery to the CNS.",
+            answer3:
+              "Efferent neuron conducts sensory signals from CNS to the periphery.",
+            answer4: "Acetylcholine receptor.",
+          },
+        },
+        qustionHolder10: {
+          qustion: "The autonomic ganglia are:",
+          answers: {
+            answer1: "Act as distributing centers",
+            answer2: "Five types",
+            answer3: "The site of relay of efferent neurons",
+            answer4: "Located inside the CNS",
+          },
+        },
+        qustionHolder11: {
+          qustion: "The preganglionic sympathetic nerve fibers are:",
+          answers: {
+            answer1: "Found in the greater splanchnic nerves",
+            answer2: "Present in the short ciliary nerves",
+            answer3: "Non-myelinated",
+            answer4: "Found in somatic nerves",
+          },
+        },
+        qustionHolder12: {
+          qustion: "The autonomic ganglia:",
+          answers: {
+            answer1: "Their chemical transmitter is acetylcholine",
+            answer2: "Their receptors are specifically blocked by atropine",
+            answer3: "They are types ",
+            answer4: "Act as CNS center",
+          },
+        },
+        qustionHolder13: {
+          qustion: "The sympathetic preganglionic nerve fibers:",
+          answers: {
+            answer1:
+              "Are myelinated nerve fibers belonging to B group nerve fibres",
+            answer2:
+              "Show minimal divergence (branching) in the autonomic ganglia",
+            answer3: "Originate at the autonomic ganglia",
+            answer4: "Arise from the cervical segments of the spinal cord",
+          },
+        },
+        qustionHolder14: {
+          qustion: "The sympathetic supply is responsible for",
+          answers: {
+            answer1: "Erection of hair",
+            answer2: "Constriction of pupil",
+            answer3: "Secretion of apocrine glands",
+            answer4: "Vasoconstriction of the skeletal muscle blood vessels",
+          },
+        },
+        qustionHolder15: {
+          qustion:
+            "Dropping of the upper eyelid (ptosis) is caused by damage of:",
+          answers: {
+            answer1: "The sympathetic supply to the eye",
+            answer2: "The third cranial nerve",
+            answer3: "The parasympathetic supply to the eye",
+            answer4: "Lesion in lumbar 2,3 segments",
+          },
+        },
+        qustionHolder16: {
+          qustion: "Horner’s syndrome causes:",
+          answers: {
+            answer1: "Drooping of the upper eyelid",
+            answer2: "Increased sweating",
+            answer3: "Pale skin (V.C).",
+            answer4: "Dilatation of the pupil (Mydriasis)",
+          },
+        },
+        qustionHolder17: {
+          qustion: "The pelvic nerve is:",
+          answers: {
+            answer1: "The nerve of erection (nerves erigents)",
+            answer2: "Inhibitory to the wall of urinary bladder & distal colon",
+            answer3:
+              "Stimulatory to both the internal anal & urethral sphincters",
+            answer4: "Has both preganglionic & postganglionic nerve fibres",
+          },
+        },
+        qustionHolder18: {
+          qustion: "Stimulation of the greater splanchnic nerve produces:",
+          answers: {
+            answer1: "Increased blood levels of both glucose & catecholamines",
+            answer2: "V.C of the blood vessels in the erectile tissue",
+            answer3: "Inhibition of micturition",
+            answer4: "Increased motility of the stomach & upper intestine",
+          },
+        },
+        qustionHolder19: {
+          qustion: "The sympathetic nervous system:",
+          answers: {
+            answer1: "Involved in stress & emergency conditions",
+            answer2: "Its preganglionic fibres are adrenergic",
+            answer3:
+              "It has a V.D effect on the skeletal muscle blood vessels during rest",
+            answer4: "Its stimulation causes urine evacuation (micturition)",
+          },
+        },
+        qustionHolder20: {
+          qustion: "The sympathetic nervous system is:",
+          answers: {
+            answer1: "Catabolic system",
+            answer2: "Mostly cholinergic ",
+            answer3: "Involved more frequently in localized effects",
+            answer4: "Potentiates the parasympathetic functions",
+          },
+        },
+        qustionHolder21: {
+          qustion: "The parasympathetic nerves:",
+          answers: {
+            answer1: "Has anabolic effects",
+            answer2: "Are important in emergency conditions ",
+            answer3: "Play important functions in skin and skeletal muscles",
+            answer4: "Have longer postganglionic than preganglionic fibres",
+          },
+        },
+        qustionHolder22: {
+          qustion: "Stimulation of the pelvic nerve causes:",
+          answers: {
+            answer1: "V.D of the blood vessels of the erectile tissues",
+            answer2: "Stoppage of prostatic secretions",
+            answer3: "Contraction of the bronchial muscle",
+            answer4:
+              "Contraction of the internal urethral & rectal (anal) sphincters",
+          },
+        },
+        qustionHolder23: {
+          qustion: "Stimulation of the sympathetic system causes:",
+          answers: {
+            answer1: "Mostly generalized actions affecting many systems ",
+            answer2: "Contraction of the ciliary muscle for near vision",
+            answer3: "Bronchoconstriction",
+            answer4: "Decreased glycogenolysis & lipolysis",
+          },
+        },
+        qustionHolder24: {
+          qustion: "Parasympathetic stimulation produces:",
+          answers: {
+            answer1: "Contraction of the urinary bladder wall",
+            answer2: "Acceleration of the heart",
+            answer3: "V.D of the skeletal muscle blood vessels ",
+            answer4: "Dilatation of the pupil",
+          },
+        },
+        qustionHolder25: {
+          qustion: "The parasympathetic nervous system affects:",
+          answers: {
+            answer1: "Salivary glands",
+            answer2: "Sweat glands",
+            answer3: "Dilator pupillae muscle",
+            answer4: "Adrenal glands",
+          },
+        },
+        qustionHolder26: {
+          qustion: "The vagus nerve:",
+          answers: {
+            answer1:
+              "It causes increased peristaltic movements of the intestinal wall",
+            answer2: "Has direct effect on the ventricular contraction",
+            answer3: "Contains sympathetic fibres",
+            answer4: "Originates mainly from the pons",
+          },
+        },
+        qustionHolder27: {
+          qustion: "The adrenal medulla: , all the following is true except:",
+          answers: {
+            answer1: "It secrets epinephrine 80% & norepinephrine 20%",
+            answer2: "Its secretion is decreased in emergency conditions",
+            answer3:
+              "It augments and prolongs the effects of parasympathetic stimulation",
+            answer4: "It is a modified parasympathetic ganglion",
+          },
+        },
+        qustionHolder28: {
+          qustion: "All preganglionic autonomic neurons secrete:",
+          answers: {
+            answer1: "Acetylcholine",
+            answer2: "Epinephrine",
+            answer3: "Nicotine",
+            answer4: "Dopamine",
+          },
+        },
+        qustionHolder29: {
+          qustion: "Atropine injection causes",
+          answers: {
+            answer1: "Difficult micturition",
+            answer2: "Decreased heart rate",
+            answer3: "Pupilloconstriction",
+            answer4: "Dopamine",
+          },
+        },
+        qustionHolder30: {
+          qustion: "The actions of atropine can be antagonized by:",
+          answers: {
+            answer1: "Eserine",
+            answer2: "Curare",
+            answer3: "Norepinephrine",
+            answer4: "Nicotine in large dose",
+          },
+        },
+        qustionHolder31: {
+          qustion: "Integration of the autonomic functions involves:",
+          answers: {
+            answer1: "Cerebral cortex",
+            answer2: "Cerebellum",
+            answer3: "Health eyes",
+            answer4: "Somatic nerves",
+          },
+        },
+        qustionHolder32: {
+          qustion: "Injection of atropine is liable to cause:",
+          answers: {
+            answer1: "Constipation",
+            answer2: "Diarrhea",
+            answer3: "Bronchoconstriction ",
+            answer4: "Bradycardia",
+          },
+        },
+      };
+      let nextBtn = document.querySelector(".button");
+      let container = document.querySelector(".container");
+
+      var arr = [];
+      while (arr.length < 32) {
+        var r = Math.floor(Math.random() * 32) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+
+      let counter = 0;
+      nextBtn.addEventListener("click", () => {
+        container.innerHTML = "";
+        nextBtn.style.display = "none";
+        let countDownDiv = document.createElement("div");
+        countDownDiv.classList.add("count-down");
+        countDownDiv.textContent = 10;
+
+        container.appendChild(countDownDiv);
+
+        var newYearCountdown = setInterval(function () {
+          countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
+          if (countDownDiv.textContent == 0) {
+            submitBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+            clearInterval(newYearCountdown);
+          }
+        }, 1000);
+
+        if (counter === arr.length) {
+          let congrats = document.createElement("div");
+          congrats.classList.add("congrats");
+          congrats.textContent =
+            "congtats you Got " + myMark + " form " + arr.length;
+          container.appendChild(congrats);
+        }
+        for (let i = 1; i < 2; i++) {
+          let myDiv = document.createElement("div");
+
+          let qusDiv = document.createElement("div");
+
+          let ansewersDiv = document.createElement("div");
+
+          var arr2 = [];
+          while (arr2.length < 5) {
+            var r = Math.floor(Math.random() * 5) + 1;
+            if (arr2.indexOf(r) === -1) arr2.push(r);
+          }
+
+          qusDiv.classList.add("qus");
+          qusDiv.innerHTML =
+            finalObject["qustionHolder" + arr[counter]]["qustion"];
+
+          let seconderyCounter = 0;
+          for (let y = 1; y < 5; y++) {
+            let myParagraph = document.createElement("p");
+            myParagraph.innerHTML =
+              finalObject["qustionHolder" + arr[counter]]["answers"][
+                "answer" + y
+              ];
+            if (y === 1) {
+              myParagraph.classList.add("rightAnswer");
+            }
+            ansewersDiv.appendChild(myParagraph);
+            myParagraph.style.order = arr2[seconderyCounter];
+            seconderyCounter++;
+          }
+
+          myDiv.appendChild(qusDiv);
+          myDiv.appendChild(ansewersDiv);
+          container.appendChild(myDiv);
+          counter++;
+        }
+
+        let firstAnswers = document.querySelectorAll(
+          ".container div:nth-of-type(2) div p"
+        );
+
+        firstAnswers.forEach((ele) => {
+          ele.onclick = function () {
+            firstAnswers.forEach((ele) => {
+              ele.classList.remove("active");
+            });
+            this.classList.add("active");
+            submitBtn.click();
+            clearInterval(newYearCountdown);
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
+          };
+        });
+      });
+
+      let submitBtn = document.querySelector(".submit");
+      let myMark = 0;
+      submitBtn.addEventListener("click", () => {
+        let paragraphs = document.querySelectorAll("div p");
+
+        paragraphs.forEach((ele) => {
+          if (
+            ele.classList.contains("active") &&
+            ele.classList.contains("rightAnswer")
+          ) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+            myMark++;
+          } else if (ele.classList.contains("active")) {
+            ele.style.color = "#f44336";
+            ele.style.border = "3px solid #f44336";
+            ele.classList.add("wrong");
+          } else if (ele.classList.contains("rightAnswer")) {
+            ele.style.color = "#4caf50";
+            ele.style.border = "3px solid #4caf50";
+            ele.classList.add("right");
+          }
+        });
+      });
+      let countDownDiv = document.querySelector(".count-down");
+    </script>
+  </body>
+</html>

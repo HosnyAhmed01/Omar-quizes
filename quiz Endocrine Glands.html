@@ -519,7 +519,9 @@
           countDownDiv.textContent -= 1;
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
-            nextBtn.click();
+            setTimeout(() => {
+              nextBtn.click();
+            }, 1750);
             clearInterval(newYearCountdown);
           }
         }, 1000);
