@@ -439,9 +439,11 @@
 
         var newYearCountdown = setInterval(function () {
           countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
             nextBtn.click();
+            clearInterval(newYearCountdown);
           }
         }, 1000);
 
@@ -501,6 +503,7 @@
             });
             this.classList.add("active");
             submitBtn.click();
+            clearInterval(newYearCountdown);
             setTimeout(() => {
               nextBtn.click();
             }, 1750);
