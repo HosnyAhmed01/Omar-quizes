@@ -500,8 +500,8 @@
       let container = document.querySelector(".container");
 
       var arr = [];
-      while (arr.length < 37) {
-        var r = Math.floor(Math.random() * 37) + 1;
+      while (arr.length < 27) {
+        var r = Math.floor(Math.random() * 27) + 1;
         if (arr.indexOf(r) === -1) arr.push(r);
       }
 
@@ -517,6 +517,7 @@
 
         var newYearCountdown = setInterval(function () {
           countDownDiv.textContent -= 1;
+          console.log(countDownDiv.textContent);
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
             setTimeout(() => {
@@ -548,6 +549,9 @@
 
           qusDiv.classList.add("qus");
           qusDiv.innerHTML =
+            counter +
+            1 +
+            " " +
             finalObject["qustionHolder" + arr[counter]]["qustion"];
 
           let seconderyCounter = 0;

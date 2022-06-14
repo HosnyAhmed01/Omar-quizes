@@ -1798,8 +1798,8 @@
       let container = document.querySelector(".container");
 
       var arr = [];
-      while (arr.length < 168) {
-        var r = Math.floor(Math.random() * 168) + 1;
+      while (arr.length < 27) {
+        var r = Math.floor(Math.random() * 27) + 1;
         if (arr.indexOf(r) === -1) arr.push(r);
       }
 
@@ -1847,6 +1847,8 @@
 
           qusDiv.classList.add("qus");
           qusDiv.innerHTML =
+            counter +
+            1 +
             finalObject["qustionHolder" + arr[counter]]["qustion"];
 
           let seconderyCounter = 0;
