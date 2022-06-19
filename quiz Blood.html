@@ -144,493 +144,288 @@
     </div>
 
     <script>
+      // qustion obj
       let finalObject = {
         qustionHolder1: {
-          qustion: "The most abundant protein in blood is:",
+          qustion:
+            "The following is positive in a healthy individual breathing spontaneously:",
           answers: {
-            answer1: "Hemoglobin",
-            answer2: "Albumin",
-            answer3: "Fibrinogen",
-            answer4: "Beta-globulin",
+            answer1: "Alveolar pressure during expiration ",
+            answer2: "Alveolar pressure during inspiration ",
+            answer3: "Intrapleural pressure during expiration ",
+            answer4: "Intrapleural pressure during inspiration",
           },
         },
         qustionHolder2: {
-          qustion: "Macrocytes have a mean corpuscular volume greater than:",
+          qustion:
+            "The maximal amount of gas that can be exhaled after a full inspiration is:",
           answers: {
-            answer1: "90 fL ",
-            answer2: "100 fL",
-            answer3: "80 fL",
-            answer4: "70 fL",
+            answer1: "Vital capacity ",
+            answer2: "Expiratory reserve volume ",
+            answer3: "Functional residual capacity ",
+            answer4: "Total lung capacity ",
           },
         },
         qustionHolder3: {
           qustion:
-            "The amount of hemoglobin contained in normocytes is approximately:",
+            "The volume moved in and out of the lungs in 1 minute by voluntary effort is:",
           answers: {
-            answer1: "20 pg ",
-            answer2: "25 pg",
-            answer3: "30 pg",
-            answer4: "35 pg",
+            answer1: "Maximal voluntary ventilation ",
+            answer2: "Respiratory minute volume ",
+            answer3: "Minute ventilation",
+            answer4: "Vital capacity ",
           },
         },
         qustionHolder4: {
           qustion:
-            "The amount of hemoglobin present in 100 ml of red blood cells is defined as:",
+            "The following muscle does not contract during forced expiration:",
           answers: {
-            answer1: "MCHC",
-            answer2: "MCH",
-            answer3: "Hemoglobin index",
-            answer4: "RDW",
+            answer1: "External intercostals ",
+            answer2: "Internal intercostals ",
+            answer3: "Rectus abdominis ",
+            answer4: "Transversus abdominus ",
           },
         },
         qustionHolder5: {
-          qustion:
-            "When the hemoglobin concentration is g/dL& PCV is then, MCHC is:",
+          qustion: "During resuscitation, the oxygen concentration is:",
           answers: {
-            answer1: "20 g/dL ",
-            answer2: "25 g/dL ",
-            answer3: "30 g/dL ",
-            answer4: "35 g/dL ",
+            answer1: "28% ",
+            answer2: "21% ",
+            answer3: "35% ",
+            answer4: "16% ",
           },
         },
         qustionHolder6: {
-          qustion:
-            "The following indices could be calculated when performing CBC manually:",
+          qustion: "The following can not be determined by spirometry:",
           answers: {
-            answer1: "Mean corpuscular hemoglobin",
-            answer2: "Mean cell diameter",
-            answer3: "Mean corpuscular volume",
-            answer4: "Mean corpuscular hemoglobin concentration",
+            answer1: "Functional residual capacity",
+            answer2: "Vital capacity ",
+            answer3: "Inspiratory capacity ",
+            answer4: "Expiratory reserve volume ",
           },
         },
         qustionHolder7: {
-          qustion: "Primary hemostasis refers to cessation of bleeding due to:",
+          qustion: "Functional residual capacity can be determined using:",
           answers: {
-            answer1: "Formation of a temporary platelet plug",
-            answer2: "Formation of a definitive clot",
-            answer3: "Clot retraction",
-            answer4: "Vasoconstriction",
+            answer1: "Helium dilution method",
+            answer2: "Routine spirometry ",
+            answer3: "Computerized spirometry ",
+            answer4: "All of the above ",
           },
         },
         qustionHolder8: {
-          qustion: "Platelet aggregation is stimulated by:",
+          qustion: "Anatomical dead space is determined using:",
           answers: {
-            answer1: "Thromboxane A2",
-            answer2: "Protein c and S",
-            answer3: "Antihemophilic factor",
-            answer4: "Tissue plasmin",
+            answer1: "Singlebreath nitrogen curve ",
+            answer2: "Whole body plethysmography ",
+            answer3: "Spirometry ",
+            answer4: "Single-breath CO method ",
           },
         },
         qustionHolder9: {
           qustion:
-            "Impaired adhesion of platelets to subendothelial collagen occurs in:",
+            "Physiological dead space ventilation is decreased in during:",
           answers: {
-            answer1: "Absence of von Willebrand factor",
-            answer2: "Absence of heparin",
-            answer3: "Absence of antithrombin III",
-            answer4: "Absence of plasmin",
+            answer1: "Neck flexion",
+            answer2: "Upright position compared to supine position ",
+            answer3: "Positive pressure ventilation ",
+            answer4: "Emphysema ",
           },
         },
         qustionHolder10: {
-          qustion: "The following clotting factors is not vitamin K dependent?",
+          qustion: "During tidal inspiration , air flow velocity is least in:",
           answers: {
-            answer1: "Factor V",
-            answer2: "Factor II",
-            answer3: "Factor VII",
-            answer4: "Factor IX",
+            answer1: "Bronchioles",
+            answer2: "Nasopharynx ",
+            answer3: "Trachea ",
+            answer4: "Major bronchi ",
           },
         },
         qustionHolder11: {
-          qustion: "The extrinsic pathway is triggered bey the release of:",
+          qustion: "The major area of airway resistance during breathing is:",
           answers: {
-            answer1: "Tissue factor",
-            answer2: "Contact factor",
-            answer3: "Factor VII",
-            answer4: "Tissue factor pathway inhibitor",
+            answer1: "Intermediatesized bronchi",
+            answer2: "Oropharynx ",
+            answer3: "Trachea and large bronchi ",
+            answer4: "Bronchioles < 2mm in diameter",
           },
         },
         qustionHolder12: {
-          qustion: "The extrinsic pathway is inhibited by:",
+          qustion: "Intrapleural pressure is normally negative because:",
           answers: {
-            answer1: "Tissue factor pathway inhibitor (TFPI)",
-            answer2: "Tissue factor",
-            answer3: "Contact factor",
-            answer4: "Thromboplastin",
+            answer1: "Chest wall and lungs recoil in opposite directions ",
+            answer2: "Intrapulmonary pressure is always negative ",
+            answer3: "Surfactant prevents lung collapse",
+            answer4: "Transpulmonary pressure determines the negativity ",
           },
         },
         qustionHolder13: {
-          qustion: "The test that screens the extrinsic pathway integrity is:",
+          qustion: "Intrapleural pressure is positive during:",
           answers: {
-            answer1: "Prothrombin time (PT)",
-            answer2: "Thrombin time",
-            answer3: "Clot lysis time",
-            answer4: "Activated partial thromboplastin time (aPTT)",
+            answer1: "Forced expiration",
+            answer2: "Deep inspiration ",
+            answer3: "Tidal expiration",
+            answer4: "Tidal inspiration ",
           },
         },
         qustionHolder14: {
-          qustion: "The enzyme that ultimately lyses fibrin is:",
+          qustion: "The major constituent of surfactant is:",
           answers: {
-            answer1: "Plasmin",
-            answer2: "TPA",
-            answer3: "Plasminogen",
-            answer4: "Urokinase",
+            answer1: "Dipalmitoyl phosphatidyl choline ",
+            answer2: "Neutral lipid ",
+            answer3: "Phosphatidylglycerol ",
+            answer4: "Surfactant proteins A & D. ",
           },
         },
         qustionHolder15: {
-          qustion:
-            "Prolongation of prothrombin time does not occur when there is only:",
+          qustion: "Alveolar surfactant:",
           answers: {
-            answer1: "Deficiency of factor VIII",
-            answer2: "Deficiency of factor X",
-            answer3: "Deficiency of vitamin K",
-            answer4: "Deficiency of factor IX",
+            answer1: "Reduces surface tension of alveoli ",
+            answer2: "Enhances alveolar collapse ",
+            answer3:
+              "Increases the movement of fluid from pulmonary capillaries into interstitium ",
+            answer4:
+              "Increases the movement of fluid from interstitium into pulmonary capillaries ",
           },
         },
         qustionHolder16: {
-          qustion:
-            "Mutations of the following is associated with hypercoagulable state: ",
+          qustion: "The following produces bronchodilation:",
           answers: {
-            answer1: "Protein S",
-            answer2: "Clot retraction",
-            answer3: "Blood platelets",
-            answer4: "Vasoconstrictor activity",
+            answer1: "Epinephrine ",
+            answer2: "Histamine ",
+            answer3: "Leukotriene C₁ ",
+            answer4: "Platelet activating factor ",
           },
         },
         qustionHolder17: {
-          qustion: "Factor V Leiden is:",
+          qustion: "Bronchodilation is mediated by activation of:",
           answers: {
-            answer1:
-              "Present in a large subset of patients with venous thromboembolism",
-            answer2: "A mutated from of factor IX",
-            answer3: "Inactivated by protein C",
-            answer4: "Present normally in healthy individuals",
+            answer1: "B₂ adrenoceptors ",
+            answer2: "a₂ receptors ",
+            answer3: "a1 receptors ",
+            answer4: "M₂ receptors",
           },
         },
         qustionHolder18: {
-          qustion:
-            "Characterized by increased both bleeding and clotting time:",
+          qustion: "The following produces bronchoconstriction? ",
           answers: {
-            answer1: "Afibrinogenemia",
-            answer2: "Purpura",
-            answer3: "Hemophilia A ",
-            answer4: "Deep venous thrombosis",
+            answer1: "Platelet activating factor ",
+            answer2: "Vasoactive intestinal peptide (VIP) ",
+            answer3: "B₂ adrenoceptors ",
+            answer4: "Epinephrine ",
           },
         },
         qustionHolder19: {
-          qustion: "Red cell antigens A and B are chemically:",
+          qustion:
+            "In bronchial asthma, the most sensitive index of small airways resistance is:",
           answers: {
-            answer1: "Glycopeptides",
-            answer2: "Polypeptides",
-            answer3: "Phospholipids ",
-            answer4: "Glycosphingolipids",
+            answer1: "Maximum miexpiratory flow rate ",
+            answer2: "Vital capacity ",
+            answer3: "C – FEV1/ FVC ",
+            answer4: "Peak expiratory flow rate ",
           },
         },
         qustionHolder20: {
-          qustion: "Red cell A and B antigens are also present in:",
+          qustion: "In advanced emphysema, there is:",
           answers: {
-            answer1: "Saliva",
-            answer2: "White blood cells",
-            answer3: "Biliary secretion",
-            answer4: "Pancreatic secretions",
+            answer1: "Increased FRC ",
+            answer2: "Decreased RV ",
+            answer3: "Increased VC ",
+            answer4: "Decreased TLC ",
           },
         },
         qustionHolder21: {
-          qustion:
-            "The red blood cells of a person with the blood group B do not have:",
+          qustion: "In restrictive lung disease , breathing type is typically:",
           answers: {
-            answer1: "Anti B",
-            answer2: "Anti A",
-            answer3: "Anti D",
-            answer4: "Antihemophilic globulin",
+            answer1: "Rapid and shallow ",
+            answer2: "Slow and shallow ",
+            answer3: "Slow and deep ",
+            answer4: "Rapid and deep ",
           },
         },
         qustionHolder22: {
-          qustion: "Most of the body iron is present in:",
+          qustion:
+            "Activated to potent vasoconstrictor during its passage through the lungs:",
           answers: {
-            answer1: "Hemoglobin",
-            answer2: "Myoglobin",
-            answer3: "Transferrin",
-            answer4: "Ferritin",
+            answer1: "Angiotensin I.",
+            answer2: "Prostaglandin I.",
+            answer3: "Serotonin ",
+            answer4: "Histamine ",
           },
         },
         qustionHolder23: {
-          qustion:
-            "The 1st pregnancy is not affected in Ph -ve mother not sensitized by Rh antigen because:",
+          qustion: "Apneusis occurs typically after:",
           answers: {
-            answer1: "Antibodies are unable to cross placenta",
-            answer2: "IgG titer low during the primary immune response",
-            answer3: "IgG is ineffective against fetal red cells ",
-            answer4:
-              "Fetal hemolysis is compensated by increased erythropoiesis",
+            answer1: "Damage to phrenic motor neurons ",
+            answer2: "Damage to pneumotaxic center",
+            answer3: "Lesions of pneumotaxic center and vagotomy ",
+            answer4: "Denervation of peripheral chemoreceptors ",
           },
         },
         qustionHolder24: {
           qustion:
-            "ABO compatibility is important for blood transfusions because:",
+            "Normally, the major stimulus for spontaneous respiration is: ",
           answers: {
-            answer1: "There are 3 antigens in this system",
-            answer2: "The A and B antigens are present in all cells",
-            answer3:
-              "Lacking A or B antigens causes invariable presence of their antibody",
-            answer4: "O is a strong antigen",
+            answer1: "A. CO₂",
+            answer2: "D. HCO",
+            answer3: "C. Lactate ",
+            answer4: "Fall of PO₂ ",
           },
         },
         qustionHolder25: {
-          qustion:
-            "When blood group could not be determined, urgent transfusion is done with:",
+          qustion: "Medullary chemoreceptors are chiefly stimulated by:",
           answers: {
-            answer1:
-              "RBC corresponding to the person red cell group and colloids",
-            answer2: "Whole blood corresponding to the person plasma group",
-            answer3: "O positive PBC, colloids and crystalloids",
-            answer4: "AB negative blood",
+            answer1: "Increased H+ in the brain interstitial fluid ",
+            answer2: "Decreased PCO₂ ",
+            answer3: "All of the above ",
+            answer4: "Fall of PO2",
           },
         },
         qustionHolder26: {
-          qustion: "Circulating erythropoietin originates from:",
+          qustion: "Following removal of both carotid bodies:",
           answers: {
-            answer1:
-              "Interstitial cells surrounding the peritubular capillaries in the renal cortex",
-            answer2: "Perivenous hepatocytes",
-            answer3: "Kupffer cells of liver",
-            answer4: "None of the above",
+            answer1: "Breath holding time is increased",
+            answer2: "Ventilatory response to hypoxia is increased ",
+            answer3: "Ventilatory response to CO₂ is increased ",
+            answer4: "Breath holding time is decreased ",
           },
         },
         qustionHolder27: {
-          qustion: "Osmotic fragility of red blood cells is decreased in:",
+          qustion: "J receptors are located in:",
           answers: {
-            answer1: "Hereditary spherocytosis",
-            answer2: "Sickle cell anemia",
-            answer3: "Macrocytic anemia",
-            answer4: "Normocytic normochromic anemia",
+            answer1: "Pulmonary interstitium",
+            answer2: "Alveoli ",
+            answer3: "Bronchial mucosa ",
+            answer4: "Roof of the fourth ventricle ",
           },
         },
         qustionHolder28: {
-          qustion:
-            "Hereditary spherocytosis occurs due to mutations in genes coding for:",
+          qustion: "Stimulation of J receptors results in:",
           answers: {
-            answer1: "Spectrin and ankyrin",
-            answer2: "NaK ATPase",
-            answer3: "Pyruvate kinase",
-            answer4: "Glucose phosphate dehydrogenase",
+            answer1: "Hyperpnea ",
+            answer2: "Apnea ",
+            answer3: "Tachypnea ",
+            answer4: "Apenea followed by tachypnea",
           },
         },
         qustionHolder29: {
-          qustion: "CO is formed as an end product of:",
-          answers: {
-            answer1: "Heme metabolism",
-            answer2: "Arginine metabolism",
-            answer3: "Oxidation of acetoacetate",
-            answer4: "All of the above (the rest)",
-          },
-        },
-        qustionHolder30: {
-          qustion: "Heme is converted to bilirubin mainly in the:",
-          answers: {
-            answer1: "Spleen",
-            answer2: "Liver",
-            answer3: "Kidneys",
-            answer4: "Bone marrow",
-          },
-        },
-        qustionHolder31: {
-          qustion: "The protein that binds extracorpuscular hemoglobin is:",
-          answers: {
-            answer1: "Haptoglobin",
-            answer2: "Hemin",
-            answer3: "Hemopexin",
-            answer4: "Haptopexin",
-          },
-        },
-        qustionHolder32: {
           qustion:
-            "The following bands is normally absent When a serum is electrophoresed:",
+            "The following is the least important in the regulation of breathing at rest:",
           answers: {
-            answer1: "Albumin",
-            answer2: "Fibrinogen",
-            answer3: "α2 globulin",
-            answer4: "α1 globulin",
-          },
-        },
-        qustionHolder33: {
-          qustion: "One of the following is not synthesized in the liver:",
-          answers: {
-            answer1: "α2 macroglobulin",
-            answer2: "Albumin",
-            answer3: "Angiotensinogen",
-            answer4: "IgG",
-          },
-        },
-        qustionHolder34: {
-          qustion: "The following plasma proteins are protease inhibitors:",
-          answers: {
-            answer1: "Antithrombin III",
-            answer2: "Transferrin",
-            answer3: "Globulin",
-            answer4: "Creactive protein",
-          },
-        },
-        qustionHolder35: {
-          qustion: "The following is a negative acute phase reactant:",
-          answers: {
-            answer1: "Albumin",
-            answer2: "Creactive protein",
-            answer3: "Transferrin",
-            answer4: "α2 macroglobulin",
-          },
-        },
-        qustionHolder36: {
-          qustion: "ESR is increased in:",
-          answers: {
-            answer1: "Anemia",
-            answer2: "Hypofibrinogenemia",
-            answer3: "Polycythemia",
-            answer4: "Spherocytosis",
-          },
-        },
-        qustionHolder37: {
-          qustion: "The appropriate treatment for erythroblastosis fetalis is:",
-          answers: {
-            answer1: "Exchange transfusion with Rh (D) negative blood",
-            answer2: "Exchange transfusion with Rh (D) positive blood",
-            answer3: "Immunization with Rh (D) antigen",
-            answer4: "Passive immunization with antiRh (D) immunoglobulin",
-          },
-        },
-        qustionHolder38: {
-          qustion: "The highest protein contents of lymph draining is:",
-          answers: {
-            answer1: "Liver",
-            answer2: "Skeletal muscle",
-            answer3: "Gastrointestinal tract",
-            answer4: "Choroid plexus",
-          },
-        },
-        qustionHolder39: {
-          qustion: "Fetal hemoglobin (Hb F):",
-          answers: {
-            answer1:
-              "At low PO2, Hb F gives up less oxygen to tissues than Hb A",
-            answer2:
-              "At low PO2, Hb F gives up more oxygen to tissues than Hb A",
-            answer3:
-              "The oxygen dissociation curve of HbF is shifted to the right relative to HbA",
-            answer4:
-              "In comparison to HbA, Hb F has greater affinity for 2,3-BPG",
-          },
-        },
-        qustionHolder40: {
-          qustion: "Blood viscosity:",
-          answers: {
-            answer1: "Is different at all flow velocities",
-            answer2: "Is constant at all flow velocities",
-            answer3: "Is – times as water",
-            answer4: "Is due to its WBCs components only",
-          },
-        },
-        qustionHolder41: {
-          qustion:
-            "The following transfusions will result in an immediate transfusion reaction:",
-          answers: {
-            answer1: "A Rhnegative whole blood to a B Rhnegative patient",
-            answer2: "O Rhnegative whole blood to an O Rhpositive patient",
-            answer3: "AB Rhnegative whole blood to an AB Rhpositive patient",
-            answer4: "B Rhnegative whole blood to a B Rhnegative patient",
-          },
-        },
-        qustionHolder42: {
-          qustion:
-            "Deficiency of factor IX and corrected by vitamin K occurs in:",
-          answers: {
-            answer1: "Classic hemophilia",
-            answer2: "Hepatitis B",
-            answer3: "Bile duct obstruction",
-            answer4: "Genetic deficiency in antithrombin III",
-          },
-        },
-        qustionHolder43: {
-          qustion:
-            "The following is not effective as an in vitro anticoagulant:",
-          answers: {
-            answer1: "Warfarin (Coumadin)",
-            answer2: "Sodium citrate",
-            answer3: "Heparin",
-            answer4: "Ethylenediamine tetraacetic acid (EDTA)",
-          },
-        },
-        qustionHolder44: {
-          qustion:
-            "The following used for prophylaxis of ischemic heart attack:",
-          answers: {
-            answer1: "Aspirin",
-            answer2: "Heparin",
-            answer3: "Warfarin",
-            answer4: "Streptokinase",
-          },
-        },
-        qustionHolder45: {
-          qustion:
-            "The following clotting pathway starts with tissue thromboplastin:",
-          answers: {
-            answer1: "Extrinsic pathway",
-            answer2: "Common pathway",
-            answer3: "Intrinsic pathway",
-            answer4: "Fibrin stabilization",
-          },
-        },
-        qustionHolder46: {
-          qustion:
-            "In malnutrition, the following causes excessive bleeding on injury:",
-          answers: {
-            answer1: "Vitamin K deficiency",
-            answer2: "Platelet sequestration by fatty liver",
-            answer3: "Serum bilirubin that raises neutralizing thrombin",
-            answer4: "Low serum protein levels that cause factor XIII problems",
-          },
-        },
-        qustionHolder47: {
-          qustion: "Prolonged bleeding time is best explained by:",
-          answers: {
-            answer1: "Thrombocytopenia",
-            answer2: "Hemophilia A",
-            answer3: "Hemophilia B",
-            answer4: "Coumadin use",
-          },
-        },
-        qustionHolder48: {
-          qustion: "The appropriate therapy for massive pulmonary embolism is:",
-          answers: {
-            answer1: "Heparin",
-            answer2: "Warfarin",
-            answer3: "Aspirin",
-            answer4: "Tissue plasminogen activator",
-          },
-        },
-        qustionHolder49: {
-          qustion:
-            "The primary mechanism by which heparin prevents blood coagulation is:",
-          answers: {
-            answer1: "Antithrombin III activation",
-            answer2: "Binding and inhibition of tissue factor",
-            answer3: "Binding available calcium",
-            answer4: "Inhibition of platelet activating factor",
-          },
-        },
-        qustionHolder50: {
-          qustion:
-            "The main site of RBC production during 2nd trimester of pregnancy is:",
-          answers: {
-            answer1: "Liver",
-            answer2: "Bone marrow",
-            answer3: "Lymph nodes",
-            answer4: "Yolk sac",
+            answer1: "Hering-Breuer reflexes",
+            answer2: "Medullary chemoreceptors ",
+            answer3: "Carotid and aortic bodies ",
+            answer4: "None of the above",
           },
         },
       };
 
+      // global varibles
       let nextBtn = document.querySelector(".button");
       let container = document.querySelector(".container");
+      let countDownDiv = document.querySelector(".count-down");
 
+      // make unique random number
       var arr = [];
       while (arr.length < 27) {
         var r = Math.floor(Math.random() * 27) + 1;
@@ -638,7 +433,9 @@
       }
 
       let counter = 0;
-      nextBtn.addEventListener("click", () => {
+      nextBtn.addEventListener("click", function Next() {
+        nextBtn.dataset.clicked = "false";
+
         container.innerHTML = "";
         nextBtn.style.display = "none";
         let countDownDiv = document.createElement("div");
@@ -647,15 +444,19 @@
 
         container.appendChild(countDownDiv);
 
-        var newYearCountdown = setInterval(function () {
+        var qustionCountDown = setInterval(function () {
           countDownDiv.textContent -= 1;
           console.log(countDownDiv.textContent);
+
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
-            clearInterval(newYearCountdown);
+
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              clearInterval(qustionCountDown);
+            }
           }
         }, 1000);
 
@@ -665,14 +466,18 @@
           congrats.textContent =
             "congtats you Got " + myMark + " form " + arr.length;
           container.appendChild(congrats);
+          countDownDiv.remove();
         }
+
         for (let i = 1; i < 2; i++) {
+          // div holder
           let myDiv = document.createElement("div");
 
           let qusDiv = document.createElement("div");
 
           let ansewersDiv = document.createElement("div");
 
+          // unquie random number
           var arr2 = [];
           while (arr2.length < 5) {
             var r = Math.floor(Math.random() * 5) + 1;
@@ -680,6 +485,8 @@
           }
 
           qusDiv.classList.add("qus");
+
+          // Make the Qustion
           qusDiv.innerHTML =
             counter +
             1 +
@@ -688,6 +495,7 @@
 
           let seconderyCounter = 0;
           for (let y = 1; y < 5; y++) {
+            // Make the Answers
             let myParagraph = document.createElement("p");
             myParagraph.innerHTML =
               finalObject["qustionHolder" + arr[counter]]["answers"][
@@ -696,8 +504,8 @@
             if (y === 1) {
               myParagraph.classList.add("rightAnswer");
             }
-            ansewersDiv.appendChild(myParagraph);
             myParagraph.style.order = arr2[seconderyCounter];
+            ansewersDiv.appendChild(myParagraph);
             seconderyCounter++;
           }
 
@@ -717,11 +525,15 @@
               ele.classList.remove("active");
             });
             this.classList.add("active");
-            submitBtn.click();
-            clearInterval(newYearCountdown);
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              submitBtn.click();
+            }
+            nextBtn.dataset.clicked = "true";
+
+            clearInterval(qustionCountDown);
           };
         });
       });
@@ -751,7 +563,6 @@
           }
         });
       });
-      let countDownDiv = document.querySelector(".count-down");
     </script>
   </body>
 </html>

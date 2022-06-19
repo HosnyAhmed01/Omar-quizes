@@ -144,511 +144,288 @@
     </div>
 
     <script>
+      // qustion obj
       let finalObject = {
         qustionHolder1: {
           qustion:
-            "Enables continuous heart beat after cutting its nerve supply:",
+            "The following is positive in a healthy individual breathing spontaneously:",
           answers: {
-            answer1: "Automaticity",
-            answer2: "Excitability",
-            answer3: "Conductivity",
-            answer4: "Contractility",
+            answer1: "Alveolar pressure during expiration ",
+            answer2: "Alveolar pressure during inspiration ",
+            answer3: "Intrapleural pressure during expiration ",
+            answer4: "Intrapleural pressure during inspiration",
           },
         },
         qustionHolder2: {
-          qustion: "The impulse that excites the left ventricle originates in:",
+          qustion:
+            "The maximal amount of gas that can be exhaled after a full inspiration is:",
           answers: {
-            answer1: "SA node",
-            answer2: "Purkinje system",
-            answer3: "Ventricle",
-            answer4: "Left bundle branch",
+            answer1: "Vital capacity ",
+            answer2: "Expiratory reserve volume ",
+            answer3: "Functional residual capacity ",
+            answer4: "Total lung capacity ",
           },
         },
         qustionHolder3: {
-          qustion: "Conduction speed is slowest in the:",
+          qustion:
+            "The volume moved in and out of the lungs in 1 minute by voluntary effort is:",
           answers: {
-            answer1: "SA node",
-            answer2: "Atrial pathway",
-            answer3: "Purkinje system",
-            answer4: "Bundle of his",
+            answer1: "Maximal voluntary ventilation ",
+            answer2: "Respiratory minute volume ",
+            answer3: "Minute ventilation",
+            answer4: "Vital capacity ",
           },
         },
         qustionHolder4: {
-          qustion: "Cardiac muscle cannot be tetanized because of:",
+          qustion:
+            "The following muscle does not contract during forced expiration:",
           answers: {
-            answer1: "Long absolute refractory period",
-            answer2: "Calcium influx during phase II",
-            answer3: "Accommodation",
-            answer4:
-              "Voltage inactivation of Na channels at membrane potentials >  80 mV",
+            answer1: "External intercostals ",
+            answer2: "Internal intercostals ",
+            answer3: "Rectus abdominis ",
+            answer4: "Transversus abdominus ",
           },
         },
         qustionHolder5: {
-          qustion:
-            "Stimulation of the sympathetic nerves to the heart decreases:",
+          qustion: "During resuscitation, the oxygen concentration is:",
           answers: {
-            answer1: "Refractory period",
-            answer2: "Heart rate",
-            answer3: "Force of cardiac contraction",
-            answer4: "Speed of contraction",
+            answer1: "28% ",
+            answer2: "21% ",
+            answer3: "35% ",
+            answer4: "16% ",
           },
         },
         qustionHolder6: {
-          qustion:
-            "The following is a low pitched sound heard prior to first heart sound:",
+          qustion: "The following can not be determined by spirometry:",
           answers: {
-            answer1: "S4",
-            answer2: "Opening snap",
-            answer3: "S3",
-            answer4: "Pericardial knock",
+            answer1: "Functional residual capacity",
+            answer2: "Vital capacity ",
+            answer3: "Inspiratory capacity ",
+            answer4: "Expiratory reserve volume ",
           },
         },
         qustionHolder7: {
-          qustion: "The second heart sound is caused by:",
+          qustion: "Functional residual capacity can be determined using:",
           answers: {
-            answer1: "Closure of the aortic and pulmonary valves",
-            answer2: "Vibrations in the ventricular wall during systole",
-            answer3: "Ventricular filling",
-            answer4: "Closure of the mitral and tricuspid valves",
+            answer1: "Helium dilution method",
+            answer2: "Routine spirometry ",
+            answer3: "Computerized spirometry ",
+            answer4: "All of the above ",
           },
         },
         qustionHolder8: {
-          qustion:
-            "Greater work performance by the left ventricle than the right one is due to:",
+          qustion: "Anatomical dead space is determined using:",
           answers: {
-            answer1: "Greater afterload",
-            answer2: "Greater stroke volume",
-            answer3: "Slower contraction ",
-            answer4: "Thicker wall",
+            answer1: "Singlebreath nitrogen curve ",
+            answer2: "Whole body plethysmography ",
+            answer3: "Spirometry ",
+            answer4: "Single-breath CO method ",
           },
         },
         qustionHolder9: {
-          qustion: "Starling’s law of the heart:",
+          qustion:
+            "Physiological dead space ventilation is decreased in during:",
           answers: {
-            answer1:
-              "Explains increased cardiac output when the venous return is increased",
-            answer2: "Explains the increase in heart rate produced by exercise",
-            answer3: "Does not operate during exercise",
-            answer4: "Does not operate in the failing heart",
+            answer1: "Neck flexion",
+            answer2: "Upright position compared to supine position ",
+            answer3: "Positive pressure ventilation ",
+            answer4: "Emphysema ",
           },
         },
         qustionHolder10: {
-          qustion:
-            "During severe exercise, a well-trained athlete achieve cardiac output of:",
+          qustion: "During tidal inspiration , air flow velocity is least in:",
           answers: {
-            answer1: "35 liters",
-            answer2: "25 liters",
-            answer3: "45 liters",
-            answer4: "15 liters",
+            answer1: "Bronchioles",
+            answer2: "Nasopharynx ",
+            answer3: "Trachea ",
+            answer4: "Major bronchi ",
           },
         },
         qustionHolder11: {
-          qustion:
-            "At any time, the greatest fraction of blood volume is present in the:",
+          qustion: "The major area of airway resistance during breathing is:",
           answers: {
-            answer1: "Veins",
-            answer2: "Heart",
-            answer3: "Arteries",
-            answer4: "Capillaries",
+            answer1: "Intermediatesized bronchi",
+            answer2: "Oropharynx ",
+            answer3: "Trachea and large bronchi ",
+            answer4: "Bronchioles < 2mm in diameter",
           },
         },
         qustionHolder12: {
-          qustion: "The term “capacitance vessels” is applied to:",
+          qustion: "Intrapleural pressure is normally negative because:",
           answers: {
-            answer1: "Veins and venules",
-            answer2: "Thoroughfare channels",
-            answer3: "Shunts",
-            answer4: "Pulmonary capillaries",
+            answer1: "Chest wall and lungs recoil in opposite directions ",
+            answer2: "Intrapulmonary pressure is always negative ",
+            answer3: "Surfactant prevents lung collapse",
+            answer4: "Transpulmonary pressure determines the negativity ",
           },
         },
         qustionHolder13: {
-          qustion: "Mary’s law states that:",
+          qustion: "Intrapleural pressure is positive during:",
           answers: {
-            answer1: "When BP increases, HR decreases and vice vers",
-            answer2: "When BP decreases, HR not affected",
-            answer3: "When BP decreases, HR decreases",
-            answer4: "When BP increases, HR increases",
+            answer1: "Forced expiration",
+            answer2: "Deep inspiration ",
+            answer3: "Tidal expiration",
+            answer4: "Tidal inspiration ",
           },
         },
         qustionHolder14: {
-          qustion: "Heart rate is slowed by:",
+          qustion: "The major constituent of surfactant is:",
           answers: {
-            answer1: "Carotid massage",
-            answer2: "Bainbridge reflex",
-            answer3: "Deep inspiration",
-            answer4: "Increased intracranial tension",
+            answer1: "Dipalmitoyl phosphatidyl choline ",
+            answer2: "Neutral lipid ",
+            answer3: "Phosphatidylglycerol ",
+            answer4: "Surfactant proteins A & D. ",
           },
         },
         qustionHolder15: {
-          qustion:
-            "Stimulation of sympathetic nerves invariably reduces blood flow in the:",
+          qustion: "Alveolar surfactant:",
           answers: {
-            answer1: "Brain",
-            answer2: "Skin",
-            answer3: "Heart",
-            answer4: "All of the above",
+            answer1: "Reduces surface tension of alveoli ",
+            answer2: "Enhances alveolar collapse ",
+            answer3:
+              "Increases the movement of fluid from pulmonary capillaries into interstitium ",
+            answer4:
+              "Increases the movement of fluid from interstitium into pulmonary capillaries ",
           },
         },
         qustionHolder16: {
-          qustion: "The least flow under sympathetic control occurs in:",
+          qustion: "The following produces bronchodilation:",
           answers: {
-            answer1: "Brain ",
-            answer2: "Heart ",
-            answer3: "Viscera",
-            answer4: "Skin",
+            answer1: "Epinephrine ",
+            answer2: "Histamine ",
+            answer3: "Leukotriene C₁ ",
+            answer4: "Platelet activating factor ",
           },
         },
         qustionHolder17: {
-          qustion: "Concerning the arterial blood pressure:",
+          qustion: "Bronchodilation is mediated by activation of:",
           answers: {
-            answer1: "It is normally about 120/80 mm Hg",
-            answer2: "Depends only on the cardiac output",
-            answer3:
-              "Is the arithmetic average of the systolic and diastolic pressures",
-            answer4: "Is due to vascular resistance of the capillaries",
+            answer1: "B₂ adrenoceptors ",
+            answer2: "a₂ receptors ",
+            answer3: "a1 receptors ",
+            answer4: "M₂ receptors",
           },
         },
         qustionHolder18: {
-          qustion: "Concerning nervous regulation of the circulation:",
+          qustion: "The following produces bronchoconstriction? ",
           answers: {
-            answer1:
-              "Baroreceptors are mainly responsible for long-term regulation of BP",
-            answer2:
-              "Sudden falls of the blood pressure leads to reflex increased heart rate",
-            answer3:
-              "The baroreceptors are found in the aortic and carotid bodies",
-            answer4:
-              "The coronary blood flow is regulated by the cardiac volume receptors",
+            answer1: "Platelet activating factor ",
+            answer2: "Vasoactive intestinal peptide (VIP) ",
+            answer3: "B₂ adrenoceptors ",
+            answer4: "Epinephrine ",
           },
         },
         qustionHolder19: {
-          qustion: "Regarding the conductive system of the heart:",
+          qustion:
+            "In bronchial asthma, the most sensitive index of small airways resistance is:",
           answers: {
-            answer1:
-              "The Purkinje fibers are specialized cardiac myocytes linked by gap junctions",
-            answer2:
-              "The spread of cardiac excitation speeds up at the atrio-ventricular node",
-            answer3:
-              "The cardiac action potential is conducted through the atria via Purkinje fibers",
-            answer4:
-              "Between action potentials, the cells of the SA node have a steady resting potential",
+            answer1: "Maximum miexpiratory flow rate ",
+            answer2: "Vital capacity ",
+            answer3: "C – FEV1/ FVC ",
+            answer4: "Peak expiratory flow rate ",
           },
         },
         qustionHolder20: {
-          qustion: "Cardiac cycle of a healthy young adult:",
+          qustion: "In advanced emphysema, there is:",
           answers: {
-            answer1:
-              "During isometric contraction phase, the volume of the ventricle does not change ",
-            answer2:
-              "During ventricular systole, all the blood in the ventricles is ejected ",
-            answer3:
-              "During systole, the pressure in the left ventricle reaches about 25 mm Hg",
-            answer4:
-              "During diastole, the pressure in the left ventricle is close to 80 mm Hg",
+            answer1: "Increased FRC ",
+            answer2: "Decreased RV ",
+            answer3: "Increased VC ",
+            answer4: "Decreased TLC ",
           },
         },
         qustionHolder21: {
-          qustion: "Concerning normal heart sounds:",
+          qustion: "In restrictive lung disease , breathing type is typically:",
           answers: {
-            answer1:
-              "The first sound corresponds with the closure of the mitral and tricuspid valves",
-            answer2:
-              "The first heart sound occurs just before the R wave of the ECG",
-            answer3:
-              "The first heart sound is split into two components during inspiration",
-            answer4: "The second heart sound occurs during the T-wave",
+            answer1: "Rapid and shallow ",
+            answer2: "Slow and shallow ",
+            answer3: "Slow and deep ",
+            answer4: "Rapid and deep ",
           },
         },
         qustionHolder22: {
-          qustion: "Concerning cardiac output:",
+          qustion:
+            "Activated to potent vasoconstrictor during its passage through the lungs:",
           answers: {
-            answer1:
-              "Measured by dividing oxygen consumption/ venous and arterial PO2difference",
-            answer2: "It is largely determined by the end-diastolic volume",
-            answer3: "Is increased by stimulation of the vagus nerve",
-            answer4:
-              "It is increased by aldosterone released from the adrenal medulla",
+            answer1: "Angiotensin I.",
+            answer2: "Prostaglandin I.",
+            answer3: "Serotonin ",
+            answer4: "Histamine ",
           },
         },
         qustionHolder23: {
-          qustion:
-            "The cardiac action potential is conducted through the atria via:",
+          qustion: "Apneusis occurs typically after:",
           answers: {
-            answer1: "Specialized conducting fibers",
-            answer2: "Bundle of hiss",
-            answer3: "Purkinje fibers",
-            answer4: "A-V bundle",
+            answer1: "Damage to phrenic motor neurons ",
+            answer2: "Damage to pneumotaxic center",
+            answer3: "Lesions of pneumotaxic center and vagotomy ",
+            answer4: "Denervation of peripheral chemoreceptors ",
           },
         },
         qustionHolder24: {
-          qustion: "The second heart sound due to:",
+          qustion:
+            "Normally, the major stimulus for spontaneous respiration is: ",
           answers: {
-            answer1: "Closure of the aortic & pulmonary valves",
-            answer2: "Closure of the aortic and mitral valves",
-            answer3: "Closure of the pulmonary valves",
-            answer4: "Closure of the aortic valve",
+            answer1: "A. CO₂",
+            answer2: "D. HCO",
+            answer3: "C. Lactate ",
+            answer4: "Fall of PO₂ ",
           },
         },
         qustionHolder25: {
-          qustion: "The stroke volume is:",
+          qustion: "Medullary chemoreceptors are chiefly stimulated by:",
           answers: {
-            answer1: "The amount of blood pumped by the each ventricle/beat",
-            answer2: "The amount of blood pumped by the left ventricle/beat",
-            answer3: "The amount of blood pumped by the right ventricle/beat",
-            answer4: "Decreased during sympathetic stimulation",
+            answer1: "Increased H+ in the brain interstitial fluid ",
+            answer2: "Decreased PCO₂ ",
+            answer3: "All of the above ",
+            answer4: "Fall of PO2",
           },
         },
         qustionHolder26: {
-          qustion: "Cardiac output is increased by:",
+          qustion: "Following removal of both carotid bodies:",
           answers: {
-            answer1: "Increased circulating adrenaline level",
-            answer2: "Increased circulating androgen level",
-            answer3: "Increased circulating parathormone level",
-            answer4: "Increased circulating TSH level",
+            answer1: "Breath holding time is increased",
+            answer2: "Ventilatory response to hypoxia is increased ",
+            answer3: "Ventilatory response to CO₂ is increased ",
+            answer4: "Breath holding time is decreased ",
           },
         },
         qustionHolder27: {
-          qustion: "Concerning diameter of the arterioles:",
+          qustion: "J receptors are located in:",
           answers: {
-            answer1: "Local O2 lack causes vasodilatation",
-            answer2: "Local O2 lack causes vasoconstriction",
-            answer3: "Decreased body temperature causes vasodilatation",
-            answer4: "Adrenaline produces generalized vasoconstriction",
+            answer1: "Pulmonary interstitium",
+            answer2: "Alveoli ",
+            answer3: "Bronchial mucosa ",
+            answer4: "Roof of the fourth ventricle ",
           },
         },
         qustionHolder28: {
-          qustion: "Activation of the sympathetic nervous system causes:",
+          qustion: "Stimulation of J receptors results in:",
           answers: {
-            answer1: "Vasodilatation in the sweat glands",
-            answer2: "Vasoconstriction in the sweat gland",
-            answer3: "No effects on the sweat glands",
-            answer4: "None of the above (the rest choices)",
+            answer1: "Hyperpnea ",
+            answer2: "Apnea ",
+            answer3: "Tachypnea ",
+            answer4: "Apenea followed by tachypnea",
           },
         },
         qustionHolder29: {
-          qustion: "The normal ventricular ejection fraction equals:",
-          answers: {
-            answer1: "64 - 67%",
-            answer2: "33 - 35%",
-            answer3: "45 - 50%",
-            answer4: "55 - 60%",
-          },
-        },
-        qustionHolder30: {
-          qustion: "In the cardiac muscle:",
-          answers: {
-            answer1:
-              "The strength of contraction depends on the amount of Ca++ in cardiac myocytes",
-            answer2:
-              "The T-tubules store calcium less than the T-tubules in skeletal muscle",
-            answer3:
-              "Initiation of AP causes an immediate opening of slow calcium channels",
-            answer4:
-              "Cardiac muscle repolarization is caused by opening of sodium channels",
-          },
-        },
-        qustionHolder31: {
-          qustion: "The potassium permeability the highest during:",
-          answers: {
-            answer1: "Phase 3 of the ventricular muscle action potential",
-            answer2: "Phase 0 of the ventricular muscle action potential",
-            answer3: "Phase 1 of the ventricular muscle action potential",
-            answer4: "Phase 2 of the ventricular muscle action potential",
-          },
-        },
-        qustionHolder32: {
           qustion:
-            "Immediately after the beginning of the QRS wave, the following occurs:",
+            "The following is the least important in the regulation of breathing at rest:",
           answers: {
-            answer1: "Isovolumic contraction phase of the cardiac cycle",
-            answer2: "Atrial systole phase of the cardiac cycle",
-            answer3: "Ventricular ejection phase of the cardiac cycle",
-            answer4: "Isovolumic relaxation phase of the cardiac cycle",
-          },
-        },
-        qustionHolder33: {
-          qustion: "The following has the slowest rate of AP conduction:",
-          answers: {
-            answer1: "A-V bundle fibers",
-            answer2: "Atrial muscle",
-            answer3: "Purkinje fibers",
-            answer4: "Anterior internodal pathway",
-          },
-        },
-        qustionHolder34: {
-          qustion: "The most likely cause of spastic cardiac contraction is:",
-          answers: {
-            answer1: "Excess extracellular fluid calcium ions",
-            answer2: "Increased sympathetic activity",
-            answer3: "Decreased extracellular fluid potassium ions",
-            answer4: "Excess extracellular fluid potassium ions",
-          },
-        },
-        qustionHolder35: {
-          qustion: "At the end of ventricular isovolumic relaxation:",
-          answers: {
-            answer1: "The mitral valve opens ",
-            answer2: "The aortic valve opens ",
-            answer3: "The A-V valves close",
-            answer4: "The aortic valve closes",
-          },
-        },
-        qustionHolder36: {
-          qustion: "Associated with the first heart sound?",
-          answers: {
-            answer1: "Closure of the A-V valves",
-            answer2: "Opening of A-V valves",
-            answer3: "Closure of aortic valve",
-            answer4: "Beginning of diastole",
-          },
-        },
-        qustionHolder37: {
-          qustion: "Which condition will result in a dilated, flaccid heart?",
-          answers: {
-            answer1: "Excess potassium ions in the blood ",
-            answer2: "Increased sympathetic stimulation",
-            answer3: "Excess sodium ions in the blood ",
-            answer4: "Excess calcium ions in the blood ",
-          },
-        },
-        qustionHolder38: {
-          qustion: "The sodium permeability the highest during:",
-          answers: {
-            answer1: "Phase 0 of the ventricular AP",
-            answer2: "Phase 1 of the ventricular AP",
-            answer3: "Phase 2 of the ventricular AP",
-            answer4: "Phase 3 of the ventricular AP",
-          },
-        },
-        qustionHolder39: {
-          qustion: "Sympathetic stimulation of the heart normally causes:",
-          answers: {
-            answer1: "Increased force of contraction of the ventricles",
-            answer2: "Decreased of force of contraction of the atria",
-            answer3: "Decreased heart rate",
-            answer4: "Decreased rate of the conduction of the cardiac impulse",
-          },
-        },
-        qustionHolder40: {
-          qustion: "The highest velocity of blood flow occurs in:",
-          answers: {
-            answer1: "Aorta",
-            answer2: "Arteries",
-            answer3: "Venules",
-            answer4: "capillaries",
-          },
-        },
-        qustionHolder41: {
-          qustion:
-            "The greatest total cross-sectional area in the circulatory system is:",
-          answers: {
-            answer1: "capillaries",
-            answer2: "aorta",
-            answer3: "venules",
-            answer4: "small arteries",
-          },
-        },
-        qustionHolder42: {
-          qustion:
-            "Its decreased production most likely result in chronic hypertension:",
-          answers: {
-            answer1: "Nitric oxide",
-            answer2: "Thromboxane",
-            answer3: "Aldosterone",
-            answer4: "Angiotensin II",
-          },
-        },
-        qustionHolder43: {
-          qustion:
-            "The following often occurs in progressive hemorrhagic shock:",
-          answers: {
-            answer1: "Vasomotor center failure",
-            answer2: "Increased urine output",
-            answer3: "Tissue alkalosis ",
-            answer4: "Decreased capillary permeability",
-          },
-        },
-        qustionHolder44: {
-          qustion: "Normally associated with increased cardiac output:",
-          answers: {
-            answer1: "Atrioventricular (A_V) fistula",
-            answer2: "Polycythemia",
-            answer3: "Severe aortic regurgitation ",
-            answer4: "Increased parasympathetic stimulation",
-          },
-        },
-        qustionHolder45: {
-          qustion: "Decreased resistance to venous return occurs i:",
-          answers: {
-            answer1: "Anemia ",
-            answer2: "Increased arteriolar resistance",
-            answer3: "Increased venous resistance",
-            answer4: "Increased sympathetic output",
-          },
-        },
-        qustionHolder46: {
-          qustion: "Decreased cardiac output results from:",
-          answers: {
-            answer1: "Acute myocardial infarction",
-            answer2: "A-V fistula",
-            answer3: "Anemia",
-            answer4: "hyperthyroidism",
-          },
-        },
-        qustionHolder47: {
-          qustion: "The fourth heart sound is associated with:",
-          answers: {
-            answer1:
-              "rushing of blood into the ventricles from atrial contraction",
-            answer2: "closing of the A-V valves",
-            answer3: "closing of the pulmonary valve",
-            answer4: "opening of the A-V valves",
-          },
-        },
-        qustionHolder48: {
-          qustion: "The following is associated with the first heart sound:",
-          answers: {
-            answer1: "Closing of the A-V valves ",
-            answer2:
-              "Rushing of blood into the ventricles as a result of atrial contraction",
-            answer3: "Closing of the pulmonary valve ",
-            answer4: "Opening of the A-V valves",
-          },
-        },
-        qustionHolder49: {
-          qustion: "Associated with the third heart sound:",
-          answers: {
-            answer1:
-              "Rushing of blood into the ventricles in the early diastole",
-            answer2: "Opening of the A-V valves",
-            answer3: "Closing of the A-V valves",
-            answer4:
-              "Inrushing of blood into the ventricles as a result of atrial contraction",
-          },
-        },
-        qustionHolder50: {
-          qustion: "Cardiac output is often increased in:",
-          answers: {
-            answer1: "Septic shock",
-            answer2: "Hemorrhagic shock",
-            answer3: "Anaphylactic shock",
-            answer4: "Neurogenic shock",
-          },
-        },
-        qustionHolder51: {
-          qustion:
-            "Causes VD & increased capillary permeability during anaphylactic shock:",
-          answers: {
-            answer1: "Histamine",
-            answer2: "Bradykinin",
-            answer3: "Nitric oxide",
-            answer4: "Atrial natriuretic factor",
+            answer1: "Hering-Breuer reflexes",
+            answer2: "Medullary chemoreceptors ",
+            answer3: "Carotid and aortic bodies ",
+            answer4: "None of the above",
           },
         },
       };
+
+      // global varibles
       let nextBtn = document.querySelector(".button");
       let container = document.querySelector(".container");
+      let countDownDiv = document.querySelector(".count-down");
 
+      // make unique random number
       var arr = [];
       while (arr.length < 27) {
         var r = Math.floor(Math.random() * 27) + 1;
@@ -656,7 +433,9 @@
       }
 
       let counter = 0;
-      nextBtn.addEventListener("click", () => {
+      nextBtn.addEventListener("click", function Next() {
+        nextBtn.dataset.clicked = "false";
+
         container.innerHTML = "";
         nextBtn.style.display = "none";
         let countDownDiv = document.createElement("div");
@@ -665,15 +444,19 @@
 
         container.appendChild(countDownDiv);
 
-        var newYearCountdown = setInterval(function () {
+        var qustionCountDown = setInterval(function () {
           countDownDiv.textContent -= 1;
           console.log(countDownDiv.textContent);
+
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
-            clearInterval(newYearCountdown);
+
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              clearInterval(qustionCountDown);
+            }
           }
         }, 1000);
 
@@ -683,14 +466,18 @@
           congrats.textContent =
             "congtats you Got " + myMark + " form " + arr.length;
           container.appendChild(congrats);
+          countDownDiv.remove();
         }
+
         for (let i = 1; i < 2; i++) {
+          // div holder
           let myDiv = document.createElement("div");
 
           let qusDiv = document.createElement("div");
 
           let ansewersDiv = document.createElement("div");
 
+          // unquie random number
           var arr2 = [];
           while (arr2.length < 5) {
             var r = Math.floor(Math.random() * 5) + 1;
@@ -698,6 +485,8 @@
           }
 
           qusDiv.classList.add("qus");
+
+          // Make the Qustion
           qusDiv.innerHTML =
             counter +
             1 +
@@ -706,6 +495,7 @@
 
           let seconderyCounter = 0;
           for (let y = 1; y < 5; y++) {
+            // Make the Answers
             let myParagraph = document.createElement("p");
             myParagraph.innerHTML =
               finalObject["qustionHolder" + arr[counter]]["answers"][
@@ -714,8 +504,8 @@
             if (y === 1) {
               myParagraph.classList.add("rightAnswer");
             }
-            ansewersDiv.appendChild(myParagraph);
             myParagraph.style.order = arr2[seconderyCounter];
+            ansewersDiv.appendChild(myParagraph);
             seconderyCounter++;
           }
 
@@ -735,11 +525,15 @@
               ele.classList.remove("active");
             });
             this.classList.add("active");
-            submitBtn.click();
-            clearInterval(newYearCountdown);
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              submitBtn.click();
+            }
+            nextBtn.dataset.clicked = "true";
+
+            clearInterval(qustionCountDown);
           };
         });
       });
@@ -769,7 +563,6 @@
           }
         });
       });
-      let countDownDiv = document.querySelector(".count-down");
     </script>
   </body>
 </html>

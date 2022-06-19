@@ -144,507 +144,288 @@
     </div>
 
     <script>
+      // qustion obj
       let finalObject = {
         qustionHolder1: {
-          qustion: "The central nervous system includes:",
+          qustion:
+            "The following is positive in a healthy individual breathing spontaneously:",
           answers: {
-            answer1: "Medulla oblongata  ",
-            answer2: "Adrenal medulla ",
-            answer3: "Autonomic ganglia ",
-            answer4: "Peripheral nerves ",
+            answer1: "Alveolar pressure during expiration ",
+            answer2: "Alveolar pressure during inspiration ",
+            answer3: "Intrapleural pressure during expiration ",
+            answer4: "Intrapleural pressure during inspiration",
           },
         },
         qustionHolder2: {
           qustion:
-            "The CNS is connected with the peripheral nervous system by:",
+            "The maximal amount of gas that can be exhaled after a full inspiration is:",
           answers: {
-            answer1: "Preganglionic autonomic fibers ",
-            answer2: "postganglionic autonomic fibers ",
-            answer3: "Motor fibers only ",
-            answer4: "Sensory fibers only ",
+            answer1: "Vital capacity ",
+            answer2: "Expiratory reserve volume ",
+            answer3: "Functional residual capacity ",
+            answer4: "Total lung capacity ",
           },
         },
         qustionHolder3: {
-          qustion: "The sensory system is involved in:",
+          qustion:
+            "The volume moved in and out of the lungs in 1 minute by voluntary effort is:",
           answers: {
-            answer1: "Initiation of reflex movements  ",
-            answer2: "PTH secretion ",
-            answer3: "Initiation of voluntary movements ",
-            answer4: "Regulation of calcium level other types of receptors in ",
+            answer1: "Maximal voluntary ventilation ",
+            answer2: "Respiratory minute volume ",
+            answer3: "Minute ventilation",
+            answer4: "Vital capacity ",
           },
         },
         qustionHolder4: {
-          qustion: "The two-element sensory receptors differ from ",
+          qustion:
+            "The following muscle does not contract during forced expiration:",
           answers: {
-            answer1: "Specialized cells at sensory nerve terminals  ",
-            answer2: "Being more numerous ",
-            answer3: "More widely spread in the body ",
-            answer4: "Being more sensitive ",
+            answer1: "External intercostals ",
+            answer2: "Internal intercostals ",
+            answer3: "Rectus abdominis ",
+            answer4: "Transversus abdominus ",
           },
         },
         qustionHolder5: {
-          qustion:
-            "Sensory receptors are classified functionally according to:",
+          qustion: "During resuscitation, the oxygen concentration is:",
           answers: {
-            answer1: "The nature of tissues in which they are found  ",
-            answer2: "Their location in the body ",
-            answer3: "The nature of response produced by its activation",
-            answer4: "Their connection with the effector organ ",
+            answer1: "28% ",
+            answer2: "21% ",
+            answer3: "35% ",
+            answer4: "16% ",
           },
         },
         qustionHolder6: {
-          qustion: "Most sensory receptors:",
+          qustion: "The following can not be determined by spirometry:",
           answers: {
-            answer1: "Are stimulated only by specific stimuli  ",
-            answer2: "Are stimulated by different types of stimuli ",
-            answer3: "Possess a high threshold for their specific stimuli",
-            answer4: "Are stimulated by overstimulation of other receptors ",
+            answer1: "Functional residual capacity",
+            answer2: "Vital capacity ",
+            answer3: "Inspiratory capacity ",
+            answer4: "Expiratory reserve volume ",
           },
         },
         qustionHolder7: {
-          qustion: "A specific stimulus produces a receptor potential by:",
+          qustion: "Functional residual capacity can be determined using:",
           answers: {
-            answer1: "Inhibiting Na + influx into receptor ",
-            answer2: "Enhancing Na + influx into receptor ",
-            answer3: "Inhibiting K + efflux from receptor ",
-            answer4: "Enhancing K + efflux from receptor  ",
+            answer1: "Helium dilution method",
+            answer2: "Routine spirometry ",
+            answer3: "Computerized spirometry ",
+            answer4: "All of the above ",
           },
         },
         qustionHolder8: {
-          qustion: "Receptor potential initiated by an adequate stimulus:",
+          qustion: "Anatomical dead space is determined using:",
           answers: {
-            answer1: "Could initiate an action potential  ",
-            answer2: "Develops always at it full magnitudes ",
-            answer3: "Undergoes spatial summation only ",
-            answer4: "Undergoes temporal summation only",
+            answer1: "Singlebreath nitrogen curve ",
+            answer2: "Whole body plethysmography ",
+            answer3: "Spirometry ",
+            answer4: "Single-breath CO method ",
           },
         },
         qustionHolder9: {
-          qustion: "Once initiated, the receptor potential:",
+          qustion:
+            "Physiological dead space ventilation is decreased in during:",
           answers: {
-            answer1:
-              "Stays for a variable period depending on the type c Central Nervous System of the receptor",
-            answer2:
-              "Spreads to a long distance along the sensory nerve fiber ",
-            answer3:
-              "Amplitude is not related to the strength of the stimulus ",
-            answer4: "Always generates an action potential from the receptor",
+            answer1: "Neck flexion",
+            answer2: "Upright position compared to supine position ",
+            answer3: "Positive pressure ventilation ",
+            answer4: "Emphysema ",
           },
         },
         qustionHolder10: {
-          qustion: "Receptor potential generates:",
+          qustion: "During tidal inspiration , air flow velocity is least in:",
           answers: {
-            answer1:
-              "A nerve impulse at the spike initiating region of the receptor ",
-            answer2:
-              "An electrotonic current which is transmitted along sensory fibers to the CNS ",
-            answer3: "A nerve impulse at the receptive region of the receptor ",
-            answer4: "A state of hyperpolarization of the receptor membrane",
+            answer1: "Bronchioles",
+            answer2: "Nasopharynx ",
+            answer3: "Trachea ",
+            answer4: "Major bronchi ",
           },
         },
         qustionHolder11: {
-          qustion:
-            "When stimulated by effective steady stimuli, sensory receptor is:",
+          qustion: "The major area of airway resistance during breathing is:",
           answers: {
-            answer1:
-              "Produces an initial high rate of impulse discharge followed by decline of this rate ,  ",
-            answer2: "Continuously discharge impulses ",
-            answer3: "Stop discharging after a short time ",
-            answer4: "Differ in their response ",
+            answer1: "Intermediatesized bronchi",
+            answer2: "Oropharynx ",
+            answer3: "Trachea and large bronchi ",
+            answer4: "Bronchioles < 2mm in diameter",
           },
         },
         qustionHolder12: {
-          qustion: "Slowly adapting receptors include:",
+          qustion: "Intrapleural pressure is normally negative because:",
           answers: {
-            answer1: "Free nerve endings  ",
-            answer2: "Touch receptors ",
-            answer3: "Rods and cons ",
-            answer4: "Meissner corpuscles ",
+            answer1: "Chest wall and lungs recoil in opposite directions ",
+            answer2: "Intrapulmonary pressure is always negative ",
+            answer3: "Surfactant prevents lung collapse",
+            answer4: "Transpulmonary pressure determines the negativity ",
           },
         },
         qustionHolder13: {
-          qustion:
-            "Slowly adapting receptors differ from rapidly adapting receptors in:",
+          qustion: "Intrapleural pressure is positive during:",
           answers: {
-            answer1:
-              "Generating receptor potentials as long as stimulus is applied  ",
-            answer2:
-              "Stopping to discharge after a relatively longer period of constant stimulation ",
-            answer3: "Detecting the dynamic properties of stimuli ",
-            answer4: "Detecting velocity of stimuli ",
+            answer1: "Forced expiration",
+            answer2: "Deep inspiration ",
+            answer3: "Tidal expiration",
+            answer4: "Tidal inspiration ",
           },
         },
         qustionHolder14: {
-          qustion: "Rapidly adapting receptors are involved in:",
+          qustion: "The major constituent of surfactant is:",
           answers: {
-            answer1: "Detection of joint movements  ",
-            answer2: "Static reflex responses ",
-            answer3: "Regulation of heart rate ",
-            answer4: "Regulation of hormonal secretion ",
+            answer1: "Dipalmitoyl phosphatidyl choline ",
+            answer2: "Neutral lipid ",
+            answer3: "Phosphatidylglycerol ",
+            answer4: "Surfactant proteins A & D. ",
           },
         },
         qustionHolder15: {
-          qustion: "Receptors detect stimulus intensity by:",
+          qustion: "Alveolar surfactant:",
           answers: {
-            answer1:
-              "Generating receptor potentials having higher magnitudes  ",
-            answer2: "Lowering the threshold for receptor stimulation ",
+            answer1: "Reduces surface tension of alveoli ",
+            answer2: "Enhances alveolar collapse ",
             answer3:
-              "Generating nerve impulses are transmitted along sensory fibers ",
-            answer4: "Enhancing the central effects of sensory impulses ",
+              "Increases the movement of fluid from pulmonary capillaries into interstitium ",
+            answer4:
+              "Increases the movement of fluid from interstitium into pulmonary capillaries ",
           },
         },
         qustionHolder16: {
-          qustion: "General sensations:",
+          qustion: "The following produces bronchodilation:",
           answers: {
-            answer1: "Include the sense of movement  ",
-            answer2: "Originate from all sensory receptors of the body ",
-            answer3: "Are mediated by somatic sensory fibers only ",
-            answer4: "Include the sense of equilibrium",
+            answer1: "Epinephrine ",
+            answer2: "Histamine ",
+            answer3: "Leukotriene C₁ ",
+            answer4: "Platelet activating factor ",
           },
         },
         qustionHolder17: {
-          qustion: "Detection of the stimulus modality depends upon the:",
+          qustion: "Bronchodilation is mediated by activation of:",
           answers: {
-            answer1:
-              "Anatomical connections between the receptors the cerebral cortex  ",
-            answer2: "Location of the receptors in the body ",
-            answer3: "The magnitude of the receptor potential ",
-            answer4: "Magnitude of the stimulus",
+            answer1: "B₂ adrenoceptors ",
+            answer2: "a₂ receptors ",
+            answer3: "a1 receptors ",
+            answer4: "M₂ receptors",
           },
         },
         qustionHolder18: {
-          qustion: "Receptors detect stimulus intensity by:",
+          qustion: "The following produces bronchoconstriction? ",
           answers: {
-            answer1: "Raising the magnitude of receptor potential  ",
-            answer2: "Lowering the threshold for stimulating receptors ",
-            answer3: "Raising the threshold for stimulating receptors ",
-            answer4: "Decreasing the magnitude of receptor potential ",
+            answer1: "Platelet activating factor ",
+            answer2: "Vasoactive intestinal peptide (VIP) ",
+            answer3: "B₂ adrenoceptors ",
+            answer4: "Epinephrine ",
           },
         },
         qustionHolder19: {
-          qustion: "The ability to localize the site of stimuli depends upon:",
+          qustion:
+            "In bronchial asthma, the most sensitive index of small airways resistance is:",
           answers: {
-            answer1: "Connections between the receptor and the sensory cortex ",
-            answer2: "Type of the stimulated receptor ",
-            answer3: "Rate of adaptation of the stimulated receptors ",
-            answer4: "Nature of the stimulus ",
+            answer1: "Maximum miexpiratory flow rate ",
+            answer2: "Vital capacity ",
+            answer3: "C – FEV1/ FVC ",
+            answer4: "Peak expiratory flow rate ",
           },
         },
         qustionHolder20: {
-          qustion: "Touch receptors:",
+          qustion: "In advanced emphysema, there is:",
           answers: {
-            answer1: "Are stimulated by vibration  ",
-            answer2: "Are found only in the skin ",
-            answer3: "Are all encapsulated receptors ",
-            answer4: "Include two-element receptors ",
+            answer1: "Increased FRC ",
+            answer2: "Decreased RV ",
+            answer3: "Increased VC ",
+            answer4: "Decreased TLC ",
           },
         },
         qustionHolder21: {
-          qustion: "Tactile receptors include:",
+          qustion: "In restrictive lung disease , breathing type is typically:",
           answers: {
-            answer1: "Ruffini nerve endings ",
-            answer2: "Organ of corti ",
-            answer3: "Rods and cons ",
-            answer4: "hair cell receptors ",
+            answer1: "Rapid and shallow ",
+            answer2: "Slow and shallow ",
+            answer3: "Slow and deep ",
+            answer4: "Rapid and deep ",
           },
         },
         qustionHolder22: {
-          qustion: ". Rapidly adapting tactile receptors include:",
+          qustion:
+            "Activated to potent vasoconstrictor during its passage through the lungs:",
           answers: {
-            answer1: "Pacinian corpuscles ",
-            answer2: "Merkel discs ",
-            answer3: "Free nerve endings ",
-            answer4: "Muscle spindle ",
+            answer1: "Angiotensin I.",
+            answer2: "Prostaglandin I.",
+            answer3: "Serotonin ",
+            answer4: "Histamine ",
           },
         },
         qustionHolder23: {
-          qustion: "Fine touch is:",
+          qustion: "Apneusis occurs typically after:",
           answers: {
-            answer1: "Detected by slowly adapting touch receptors  ",
-            answer2: "Transmitted by the spinothalamic tract ",
-            answer3: "Characterized by it emotional affect ",
-            answer4: "Not involved in feeling the texture of touched objects ",
+            answer1: "Damage to phrenic motor neurons ",
+            answer2: "Damage to pneumotaxic center",
+            answer3: "Lesions of pneumotaxic center and vagotomy ",
+            answer4: "Denervation of peripheral chemoreceptors ",
           },
         },
         qustionHolder24: {
           qustion:
-            ". Crude touch is more effective in evoking emotional response because:",
+            "Normally, the major stimulus for spontaneous respiration is: ",
           answers: {
-            answer1: "Its central pathway connects with the limbic system  ",
-            answer2: "Its provoking stimuli are stronger ",
-            answer3: "It is stimulated during emotional excitement ",
-            answer4: "The provoking stimuli have an emotional nature ",
+            answer1: "A. CO₂",
+            answer2: "D. HCO",
+            answer3: "C. Lactate ",
+            answer4: "Fall of PO₂ ",
           },
         },
         qustionHolder25: {
-          qustion: "A more developed two-point tactile discrimination:",
+          qustion: "Medullary chemoreceptors are chiefly stimulated by:",
           answers: {
-            answer1: "Inversely related to the size of the receptive fields ",
-            answer2:
-              "Indicates a greater threshold distance for feeling of two points ",
-            answer3:
-              "Seen in the proximal regions of the body compared with the distal regions ",
-            answer4: "Depends upon the type of the involved touch receptor ",
+            answer1: "Increased H+ in the brain interstitial fluid ",
+            answer2: "Decreased PCO₂ ",
+            answer3: "All of the above ",
+            answer4: "Fall of PO2",
           },
         },
         qustionHolder26: {
-          qustion: "Proprioceptive sensations include:",
+          qustion: "Following removal of both carotid bodies:",
           answers: {
-            answer1: "Position sensation  ",
-            answer2: "Visual sensation ",
-            answer3: "Hearing sensation",
-            answer4: "Taste sensation",
+            answer1: "Breath holding time is increased",
+            answer2: "Ventilatory response to hypoxia is increased ",
+            answer3: "Ventilatory response to CO₂ is increased ",
+            answer4: "Breath holding time is decreased ",
           },
         },
         qustionHolder27: {
-          qustion: "Proprioceptors include the following types of receptors: ",
+          qustion: "J receptors are located in:",
           answers: {
-            answer1: "Joint receptors",
-            answer2: "Rods and cons ",
-            answer3: "Vestibular receptors",
-            answer4: "Organ of corti ",
+            answer1: "Pulmonary interstitium",
+            answer2: "Alveoli ",
+            answer3: "Bronchial mucosa ",
+            answer4: "Roof of the fourth ventricle ",
           },
         },
         qustionHolder28: {
-          qustion: "Proprioceptive sensations are transmitted by: ",
+          qustion: "Stimulation of J receptors results in:",
           answers: {
-            answer1: "Gracile and cuneate tract ",
-            answer2: "Lateral spinothalamic tract",
-            answer3: "Rubrospinal tract",
-            answer4: "Ventral spinothalamic tract ",
+            answer1: "Hyperpnea ",
+            answer2: "Apnea ",
+            answer3: "Tachypnea ",
+            answer4: "Apenea followed by tachypnea",
           },
         },
         qustionHolder29: {
-          qustion: "Astereognosis: ",
-          answers: {
-            answer1: "Associates parietal lobe neglect",
-            answer2:
-              "Indicates inability to localize the site of touch on the body surface ",
-            answer3:
-              "Results from lesions of the secondary somatic sensory area ",
-            answer4: "Results from loss of crude touch sensation ",
-          },
-        },
-        qustionHolder30: {
-          qustion: "Parietal lobe neglect: ",
-          answers: {
-            answer1:
-              "Characterized by inability to use skeletal muscles on the opposite side of the body ",
-            answer2:
-              "Characterized by inability to use skeletal muscles on the same side of the body ",
-            answer3: "Results from damage of primary sensory cortex ",
-            answer4: "Causes loss of sensations on the same side of the body ",
-          },
-        },
-        qustionHolder31: {
-          qustion: "Pain sensation: ",
-          answers: {
-            answer1: "Evoked by strong stimulation of specific receptors ",
-            answer2:
-              "Produces reactions that block transmission of pain impulses ",
-            answer3: "Arises from small encapsulated receptors ",
-            answer4:
-              "Occurs when the stimulus causes damage of the sensory receptors ",
-          },
-        },
-        qustionHolder32: {
-          qustion: "Reaction to pain includes: ",
-          answers: {
-            answer1: " Withdrawal reflexes ",
-            answer2: " Increased gastric motility ",
-            answer3: " Euphoria ",
-            answer4: " Sleep ",
-          },
-        },
-        qustionHolder33: {
-          qustion: "Pain receptors: ",
-          answers: {
-            answer1: " Become more sensitive with prolonged stimulation ",
-            answer2: " Are stimulated by prostaglandins ",
-            answer3: " Are more numerous in viscera than other tissues ",
-            answer4: " Include different morphological types ",
-          },
-        },
-        qustionHolder34: {
-          qustion: "Pain threshold: ",
-          answers: {
-            answer1: " Is the highest intensity of stimulus that causes pain ",
-            answer2: "Is the lowest intensity of stimulus that causes pain ",
-            answer3: "Differs markedly among different individuals ",
-            answer4: "Is elevated by substance P",
-          },
-        },
-        qustionHolder35: {
-          qustion: "Fast pain differs from slow pain in: ",
-          answers: {
-            answer1: "Having a sharp quality ",
-            answer2: "Being transmitted in the dorsal column pathway ",
-            answer3: "Evoking a depressor autonomic reaction ",
-            answer4: "Arising from encapsulated pain receptors ",
-          },
-        },
-        qustionHolder36: {
           qustion:
-            "Double pain sensation following painful stimulation of the skin is due to: ",
+            "The following is the least important in the regulation of breathing at rest:",
           answers: {
-            answer1: " Presence of dual pain pathways ",
-            answer2: " Repetition of the painful stimulus ",
-            answer3: " Perception of pain at two different higher centers ",
-            answer4:
-              " Application of two painful stimuli simultaneously at two different sites",
-          },
-        },
-        qustionHolder37: {
-          qustion: "Cutaneous pain: ",
-          answers: {
-            answer1: "Is transmitted by Aδ sensory fibers ",
-            answer2: "Is always sharp in character ",
-            answer3: "Is always followed by hyperalgesia ",
-            answer4: "Evokes spasm of nearby muscles ",
-          },
-        },
-        qustionHolder38: {
-          qustion: "Primary cutaneous hyperalgesia: ",
-          answers: {
-            answer1: "Is due to changes in threshold of pain receptors ",
-            answer2:
-              "Develops in the normal skin region around the area of flare ",
-            answer3:
-              "Is an abnormal condition in the skin in which painful stimuli become more severe ",
-            answer4: "Is associated with throbbing type of pain ",
-          },
-        },
-        qustionHolder39: {
-          qustion: "Deep pain shows the following characteristics: ",
-          answers: {
-            answer1: "Dull aching ",
-            answer2: "Sharp ",
-            answer3: "Evokes flexor reflexes ",
-            answer4: "Localized ",
-          },
-        },
-        qustionHolder40: {
-          qustion: "Intermittent Claudications evoke: ",
-          answers: {
-            answer1: "Deep pain ",
-            answer2: "Visceral pain ",
-            answer3: "Cutaneous hyperalgesia ",
-            answer4: "Colicky pain ",
-          },
-        },
-        qustionHolder41: {
-          qustion: "Pain produced by muscle spasm results from: ",
-          answers: {
-            answer1: "Decreased oxygen supply to the muscle ",
-            answer2: "Mechanical stimulation of pain receptor by muscle spasm ",
-            answer3:
-              "Decreased release of lactic acid from the spastic muscle fibers ",
-            answer4: "Release of compounds from the spastic muscle ",
-          },
-        },
-        qustionHolder42: {
-          qustion: "Visceral pain: ",
-          answers: {
-            answer1: "Evokes depressor reactions",
-            answer2: "More common than other pain types ",
-            answer3: "Is often well localized ",
-            answer4: "Arises only from visceral wall",
-          },
-        },
-        qustionHolder43: {
-          qustion: "Stimuli which evoke true visceral pain include: ",
-          answers: {
-            answer1: "Spasm  ",
-            answer2: "Sharp cutting ",
-            answer3: "Pin prick ",
-            answer4: "Stab wound",
-          },
-        },
-        qustionHolder44: {
-          qustion: "Visceral pain is usually felt:",
-          answers: {
-            answer1: "In skin areas remote from the diseased viscera  ",
-            answer2: "Deeply in the diseased viscera ",
-            answer3: "In deep tissues close to the diseased viscera ",
-            answer4: "In skin areas that just overlie the diseased viscera ",
-          },
-        },
-        qustionHolder45: {
-          qustion:
-            "Intracranial headache could result from painful stimuli applied on:",
-          answers: {
-            answer1: "Wall of big intracranial veins  ",
-            answer2:
-              "The dura lining the inner surface of the bones of cranial vault ",
-            answer3: "The brain tissue ",
-            answer4: "Arachnoid mater ",
-          },
-        },
-        qustionHolder46: {
-          qustion: "Intracranial headache may result from:",
-          answers: {
-            answer1: "Pressure upon tentorium cerebelli",
-            answer2: "Sinusitis ",
-            answer3: "Otitis media ",
-            answer4: "Spasm of scalp muscles",
-          },
-        },
-        qustionHolder47: {
-          qustion: "Transmitters in pain control system include:",
-          answers: {
-            answer1: "Acetylcholine ",
-            answer2: "GABA ",
-            answer3: "Encephalin",
-            answer4: "Histamine ",
-          },
-        },
-        qustionHolder48: {
-          qustion: "Encephalin binds best with:",
-          answers: {
-            answer1: "Delta 'δ' opiate receptors  ",
-            answer2: "All opiate receptors with equal affinity",
-            answer3: "Kappa  'κ' piate receptors",
-            answer4: "Mute 'μ' opiate receptors",
-          },
-        },
-        qustionHolder49: {
-          qustion: "Pain control system:",
-          answers: {
-            answer1:
-              "Is activated naturally with strong emotional excitement  ",
-            answer2:
-              "Is activated whenever a painful stimulus is applied to body tissues ",
-            answer3: "Is never activated naturally ",
-            answer4: "Is activated only by administration of opiate drugs ",
-          },
-        },
-        qustionHolder50: {
-          qustion: "Encephalin blocks pain transmission by:",
-          answers: {
-            answer1:
-              "Blocking Ca++ channels in the central terminals of pain sensory fibers ",
-            answer2:
-              "Blocking the response of pain receptors to painful stimuli ",
-            answer3:
-              "Slowing transmission of pain impulses through synapses in the pain pathway ",
-            answer4:
-              "Inhibiting the response of the cortical somatic sensory area to pain signals",
-          },
-        },
-        qustionHolder51: {
-          qustion: "The spinal pain gate is:",
-          answers: {
-            answer1: "Ligand controlled  ",
-            answer2: "Opened by encephalin  ",
-            answer3: "Voltage controlled",
-            answer4: "Closed by substance P. ",
+            answer1: "Hering-Breuer reflexes",
+            answer2: "Medullary chemoreceptors ",
+            answer3: "Carotid and aortic bodies ",
+            answer4: "None of the above",
           },
         },
       };
+
+      // global varibles
       let nextBtn = document.querySelector(".button");
       let container = document.querySelector(".container");
+      let countDownDiv = document.querySelector(".count-down");
 
+      // make unique random number
       var arr = [];
       while (arr.length < 27) {
         var r = Math.floor(Math.random() * 27) + 1;
@@ -652,7 +433,9 @@
       }
 
       let counter = 0;
-      nextBtn.addEventListener("click", () => {
+      nextBtn.addEventListener("click", function Next() {
+        nextBtn.dataset.clicked = "false";
+
         container.innerHTML = "";
         nextBtn.style.display = "none";
         let countDownDiv = document.createElement("div");
@@ -661,15 +444,19 @@
 
         container.appendChild(countDownDiv);
 
-        var newYearCountdown = setInterval(function () {
+        var qustionCountDown = setInterval(function () {
           countDownDiv.textContent -= 1;
           console.log(countDownDiv.textContent);
+
           if (countDownDiv.textContent == 0) {
             submitBtn.click();
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
-            clearInterval(newYearCountdown);
+
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              clearInterval(qustionCountDown);
+            }
           }
         }, 1000);
 
@@ -679,14 +466,18 @@
           congrats.textContent =
             "congtats you Got " + myMark + " form " + arr.length;
           container.appendChild(congrats);
+          countDownDiv.remove();
         }
+
         for (let i = 1; i < 2; i++) {
+          // div holder
           let myDiv = document.createElement("div");
 
           let qusDiv = document.createElement("div");
 
           let ansewersDiv = document.createElement("div");
 
+          // unquie random number
           var arr2 = [];
           while (arr2.length < 5) {
             var r = Math.floor(Math.random() * 5) + 1;
@@ -694,6 +485,8 @@
           }
 
           qusDiv.classList.add("qus");
+
+          // Make the Qustion
           qusDiv.innerHTML =
             counter +
             1 +
@@ -702,6 +495,7 @@
 
           let seconderyCounter = 0;
           for (let y = 1; y < 5; y++) {
+            // Make the Answers
             let myParagraph = document.createElement("p");
             myParagraph.innerHTML =
               finalObject["qustionHolder" + arr[counter]]["answers"][
@@ -710,8 +504,8 @@
             if (y === 1) {
               myParagraph.classList.add("rightAnswer");
             }
-            ansewersDiv.appendChild(myParagraph);
             myParagraph.style.order = arr2[seconderyCounter];
+            ansewersDiv.appendChild(myParagraph);
             seconderyCounter++;
           }
 
@@ -731,11 +525,15 @@
               ele.classList.remove("active");
             });
             this.classList.add("active");
-            submitBtn.click();
-            clearInterval(newYearCountdown);
-            setTimeout(() => {
-              nextBtn.click();
-            }, 1750);
+            if (nextBtn.dataset.clicked == "false") {
+              setTimeout(() => {
+                nextBtn.click();
+              }, 1750);
+              submitBtn.click();
+            }
+            nextBtn.dataset.clicked = "true";
+
+            clearInterval(qustionCountDown);
           };
         });
       });
@@ -765,7 +563,6 @@
           }
         });
       });
-      let countDownDiv = document.querySelector(".count-down");
     </script>
   </body>
 </html>
